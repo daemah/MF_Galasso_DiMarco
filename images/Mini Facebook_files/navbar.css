@@ -1,0 +1,115 @@
+.side-nav{
+  float: left;
+  position: fixed;
+  z-index: 1000;
+
+}
+
+#logo{
+width: 80px;
+height: 80px;
+margin: auto;
+border: 1px solid rgb(0, 0, 0);
+border-radius: 50%;
+text-align: center;
+margin-bottom: 10px;
+}
+
+#login{
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  margin-top: 50px;
+  margin-bottom: 20px;
+  margin-left: 3px;
+  border: none;
+  font-size: 15px;
+  padding: 5px 12px;
+  border-radius: 16px;
+  border: 1px solid rgb(0, 0, 0)
+}
+
+#signin{
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  margin-bottom: 20px;
+  border: none;
+  font-size: 15px;
+  padding: 5px 12px;
+  border-radius: 16px;
+  border: 1px solid rgb(0, 0, 0)
+}
+
+#login:hover {
+  background-color: #ffffff; /* Green */
+  color: rgb(138, 138, 138);
+}
+
+#signin:hover {
+background-color: #ffffff; /* Green */
+color: rgb(138, 138, 138);;
+}
+
+
+.avatar {
+  vertical-align: middle;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+}
+
+.avatar-logo {
+vertical-align: middle;
+width: 80px;
+height: 80px;
+border-radius: 50%;
+}
+
+#home{
+  width: 55px;
+  height: 55px;
+  margin: auto;
+  margin-top: 30px;
+  border: 1px solid white;
+  border-radius: 50%;
+
+}
+
+#home:hover {
+  opacity: 0.5;
+}
+
+
+#profile{
+  width: 55px;
+  height: 55px;
+  margin: auto;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 50%;
+}
+
+#profile:hover {
+  opacity: 0.5;
+}
+
+#text-profile{
+text-align: center;
+}
+
+#text-home{
+text-align: center;
+margin-bottom: 5px;
+}
+
+
+#text-logo{
+margin-top: 5px;
+text-align: center;
+}
+
+#text{
+color: rgb(0, 0, 0);
+}
+
+
+
+

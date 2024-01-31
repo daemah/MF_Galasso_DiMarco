@@ -1,0 +1,25 @@
+.people-nearby .nearby-user{
+  padding: 20px;
+  border-top: 0.5px solid #a9a9a9;
+  margin-bottom: 20px;
+}
+
+img.profile-photo-lg{
+  float:left;
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+}
+
+.col-md-7{
+  float:left;
+  margin-left: 4.5rem;
+  font-size: 1.7rem;
+}
+
+.col-md-3{
+  float:left;
+   margin-left: 4.5rem;
+  margin-top:2.4rem;
+}
+

@@ -1,0 +1,70 @@
+.posts-content{
+    margin-top:20px;  
+}
+.ui-w-40 {
+    width: 55px !important;
+    height: 55px;
+    border-radius: 50%;
+}
+
+.media.mb-3{
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 0px 1px black;
+    padding: 5px;
+    background-color: #e3e3e366;
+}
+
+#name{
+    font-size: 1.5rem;
+    margin-left: 3%;
+}
+
+#luogo{
+    text-align: center;
+    box-shadow: 0px 0px 0.5px black;
+}
+
+.default-style .ui-bordered {
+    border: 1px solid rgba(24,28,33,0.06);
+}
+.ui-bg-cover {
+    background-color: transparent;
+    background-position: center center;
+    /*background-size: cover;*/
+}
+
+.ui-rect, .ui-rect-30, .ui-rect-60, .ui-rect-67, .ui-rect-75 {
+    position: relative !important;
+    display: block !important;
+    /*padding-top: 100% !important;*/
+    width: 100% !important;
+}
+.d-flex, .d-inline-flex, .media, .media>:not(.media-body), .jumbotron, .card {
+    -ms-flex-negative: 1;
+    flex-shrink: 1;
+}
+.bg-dark {
+    background-color: rgba(24,28,33,0.9) !important;
+}
+
+.ui-rect-content {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+}
+.default-style .ui-bordered {
+    border: 1px solid rgba(24,28,33,0.06);
+}
+
+.d-block{
+    width:fit-content;
+}
+
+.card-body{
+    padding: 20px;
+    box-shadow: 0px 0px 0.5px black;
+    margin-bottom: 40px;
+}

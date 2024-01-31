@@ -1,0 +1,15 @@
+.people-nearby .nearby-user{
+    padding: 20px;
+    border-top: 0.5px solid #a9a9a9;
+    margin-bottom: 20px;
+  }
+  
+  img.profile-photo-lg{
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+  }
+  
+  
+  
+  
