@@ -5,8 +5,10 @@
     include_once "../common/connection.php";
     include_once "../common/funzioni.php";
     require "../common/header.php"
-    
+    /* sdfsdf */ 
     ?>
+
+
         <body>
         <div><?php require "../common/navbar.php";?></div>
             <link href="../styles/post.css" rel="stylesheet">
