@@ -5,8 +5,9 @@ include_once "../common/funzioni.php";
 
 	$email = $_POST["email"];
 	$pwd = $_POST["pass"];
+	$md5pwd = md5($pwd);
 
-	$ris = isUser($cid,$email,$pwd);
+	$ris = isUser($cid,$email,$md5pwd);
 
 	if ($ris["status"]=='ko')
 	{

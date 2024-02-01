@@ -486,6 +486,7 @@ function signIn($cid,$email,$pwd, $nickname)
 	
 	$email = trim($email);
 	$pwd= trim($pwd);
+	$md5pwd = md5($pwd);
 
 	if (empty($email) || empty($pwd))
 	{
@@ -493,7 +494,7 @@ function signIn($cid,$email,$pwd, $nickname)
 		$msg = "Uno dei parametri non &egrave; specificato</br>";
 	}
 
-	elseif( filter_var($email, FILTER_VALIDATE_EMAIL) === false )
+	elseif( filter_var($email, FILTER_VALIDATE_EMAIL) == false )
 	{
 		$errore = true;
 		$msg .= "L'email inserita non rispetta il formato</br>";
@@ -533,7 +534,8 @@ function signIn($cid,$email,$pwd, $nickname)
 
 	if (!$errore)
 	{
-		$sql= "INSERT INTO utente(email,password, nickname) VALUES('$email','$pwd', '$nickname');";
+		
+		$sql= "INSERT INTO utente(email,password, nickname) VALUES('$email','$md5pwd', '$nickname');";
 		$res=$cid->query($sql);
 		if ($res==1)
 		{
