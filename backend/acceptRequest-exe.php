@@ -1,4 +1,4 @@
-<?php 
+<?php # ciao come stai
 session_start(); 
 include_once "../common/connection.php";
 include_once "../common/funzioni.php";
