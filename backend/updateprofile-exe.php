@@ -10,7 +10,6 @@ $lname = $_POST["lname"];
 $sex = $_POST["sex"];
 $dateb = $_POST["dateb"];
 
-
 $ris = updateProfile($cid, $email, $nickname, $name, $lname, $sex, $dateb);
     
     if ($ris["status"]=='ok')

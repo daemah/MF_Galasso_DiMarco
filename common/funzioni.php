@@ -369,9 +369,7 @@ function updateProfile($cid,$email,$nickname,$name,$lname,$sex,$dateb)
 		$ris_cityr = controllaCampo($cid,$sql);
 		array_push($risposte,$ris_cityr);
 
-		$sql = updateCampo($cityr,'citta_residenza',$email);
-		$ris_cityr = controllaCampo($cid,$sql);
-		array_push($risposte,$ris_cityr);
+
 		
 
 		foreach ($risposte as $ris){
