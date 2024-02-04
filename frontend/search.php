@@ -78,7 +78,7 @@ if(isset($_SESSION['email'])){
                                 <?php } else {?>
                                 <div class="col-md-3 col-sm-3">
                                     <button class="btn profile-edit-btn" onclick="location.href='../backend/unfollow-exe.php?utente=<?php echo $utente ?>'">Unfollow</button>
-                                    <div class="text-muted small"><?php echo "Richiesta inviata il: ", $data_richiesta, "e accettata il giorno: ", $data_accettazione ?></div>
+                                    <div class="text-muted small"><?php echo "Richiesta inviata il: ", $data_richiesta, " e accettata il giorno: ", $data_accettazione ?></div>
                                 </div>    
                                 <?php }}?>
                                 
