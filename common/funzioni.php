@@ -1,5 +1,17 @@
 <?php
 /* Funzioni relative alla gestione degli utenti */
+
+function generateCode() {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $code = '';
+
+    for ($i = 0; $i < 10; $i++) {
+        $code .= $characters[rand(0, strlen($characters) - 1)];
+    }
+
+    return $code;
+}
+
 function isUser($cid,$email,$pwd)
 {
 	$risultato= array("msg"=>"","status"=>"ok");
@@ -258,6 +270,7 @@ function updateCampo($var,$dbvar,$email)
 	}
 	return $sql;
 }
+
 function controllaCampo($cid,$sql)
 {
 	$res = $cid->query($sql);
@@ -309,17 +322,14 @@ function updateProfile($cid,$email,$nickname,$name,$lname,$sex,$dateb)
 		$msg .= "Il cognome non può contenere alcun carattere speciale</br>";
 	}
 
-
 	if (!$errore){
 
 		$risposte = array();
 		$sql = updateCampo($nickname,'nickname',$email);
-		#debug_to_console($sql);
 		$ris_nickname= controllaCampo($cid,$sql);
 		array_push($risposte,$ris_nickname);
 
 		$sql = updateCampo($name,'nome',$email);
-		#debug_to_console($sql);
 		$ris_name= controllaCampo($cid,$sql);
 		array_push($risposte,$ris_name);
 
@@ -356,9 +366,13 @@ function updateProfile($cid,$email,$nickname,$name,$lname,$sex,$dateb)
 		array_push($risposte,$ris_regionr);
 
 		$sql = updateCampo($cityr,'citta_residenza',$email);
-		$ris_cityr= controllaCampo($cid,$sql);
+		$ris_cityr = controllaCampo($cid,$sql);
 		array_push($risposte,$ris_cityr);
-	
+
+		$sql = updateCampo($cityr,'citta_residenza',$email);
+		$ris_cityr = controllaCampo($cid,$sql);
+		array_push($risposte,$ris_cityr);
+		
 
 		foreach ($risposte as $ris){
 			if ($ris["status"]=="ko"){
