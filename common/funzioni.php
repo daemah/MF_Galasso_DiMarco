@@ -248,6 +248,33 @@ function getFotoProfilo($cid, $email)
 	return $defaul_path;
 }
 
+function getDataAccettazione($cid, $utente, $email)
+{
+	$sql = "SELECT data_accettazione FROM chiede_amicizia WHERE utente_ricevente = '$utente' and utente_richiedente = '$email';";
+    $res=$cid->query($sql);
+    $row = $res->fetch_assoc();
+	
+    if($row != NULL){
+		$data_accettazione = $row["data_accettazione"];
+		return $data_accettazione;
+    } else {
+	return 0;}
+}				
+
+function getDataRichiesta($cid, $utente, $email)
+{
+	$sql = "SELECT data_richiesta FROM chiede_amicizia WHERE utente_ricevente = '$utente' and utente_richiedente = '$email';";
+    $res=$cid->query($sql);
+    $row = $res->fetch_assoc();
+	
+    if($row != NULL){
+		$data_richiesta = $row["data_richiesta"];
+        return $data_richiesta;
+    } else{
+	return 0;}
+	
+}			
+
 ####### FUNZIONI UPDATE ##########
 function updateCampo($var,$dbvar,$email)
 {
