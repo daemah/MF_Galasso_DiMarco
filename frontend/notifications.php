@@ -49,12 +49,7 @@ if(isset($_SESSION['email'])){
                                         <h5><a href="profile.php?utente=<?php echo $richiesta ?>" class="profile-link"><?php echo getNickname($cid, $richiesta); ?></a></h5>
                                     </div>
                                     <?php
-                                        $sql = "SELECT data_accettazione, data_richiesta FROM chiede_amicizia WHERE utente_ricevente = '$email' and utente_richiedente = '$richiesta';";
-                                        $res=$cid->query($sql);
-                                        $row = $res->fetch_assoc();
-                                        $data_accettazione = $row["data_accettazione"];
-                                        $data_richiesta = $row["data_richiesta"];
-                                        
+                                        $data_accettazione = getDataAccettazione($cid, $email, $richiesta);    
                                         if (empty($data_accettazione)){
                                         ?>
                                         <div class="col-md-3 col-sm-3">
@@ -63,6 +58,7 @@ if(isset($_SESSION['email'])){
                                         <?php } else { ?>
                                         <div class="col-md-3 col-sm-3">
                                             <button class="btn profile-edit-btn" >Richiesta Accettata</button>
+                                            <div class="text-muted small"><?php echo "Richiesta accettata il: ", $data_accettazione ?></div>
                                         </div>
                                         <?php }?>
 
