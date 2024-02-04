@@ -63,7 +63,6 @@ if(isset($_SESSION['email'])){
                                 <?php
                                 if ($utente != $email){
                                 $data_accettazione = getDataAccettazione($cid, $utente, $email);
-                                print_r($data_richiesta);
                                 $data_richiesta = getDataRichiesta($cid, $utente, $email);
 
                                 if ($data_richiesta==0) {
