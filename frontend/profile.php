@@ -137,16 +137,12 @@ if(isset($_SESSION['email'])){
 
                         <h1 class="profile-user-name"><?php echo(getNickname($cid, $utente)); ?></h1>
                         <?php
-                        $sql = "SELECT data_accettazione, data_richiesta FROM chiede_amicizia WHERE utente_ricevente = '$utente' and utente_richiedente = '$email';";
-                        $res=$cid->query($sql);
-                        $row = $res->fetch_assoc();
-                        $data_accettazione = $row["data_accettazione"];
-                        $data_richiesta = $row["data_richiesta"];
-                        
-                        if (empty($data_richiesta)){
+                        $data_richiesta = getDataRichiesta($cid, $utente, $email);
+                        $data_accettazione = getDataAccettazione($cid, $utente, $email);
+                        if ($data_richiesta==0){
                         ?>
                             <button class="btn profile-edit-btn"  onclick="location.href='../backend/request_friendship-exe.php?utente=<?php echo $utente ?>'">Invia Richiesta</button>
-                        <?php } elseif ((!empty($data_richiesta)) && (empty($data_accettazione))) { ?>
+                        <?php } elseif (($data_richiesta!=0) && ($data_accettazione==0)) { ?>
                             <button class="btn profile-edit-btn">Richiesta Inviata</button>
                         <?php } else {?>
                             <button class="btn profile-edit-btn"  onclick="location.href='../backend/unfollow-exe.php?utente=<?php echo $utente ?>'">Unfollow</button>
