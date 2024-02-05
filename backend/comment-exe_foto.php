@@ -7,10 +7,15 @@ include_once "../common/funzioni.php";
     print_r($commento);
     $email = $_SESSION["email"];
     print_r($email);
-    $codice = 'jkshfdkjsafh';
+    $codice = generateCode();
     print_r($codice);
+    $utente = $_GET["utente"];
+    print_r($utente);
+    $codice_foto = getCodiceFoto($cid, $utente)[0];
+    print_r($codice_foto);
+    
 
-	$ris = insertComment($cid, $email, $codice, $commento);
+	$ris = insertCommentFoto($cid, $email, $codice, $commento, $codice_foto, $utente);
 
 	if ($ris["status"]=='ok')
 	{
