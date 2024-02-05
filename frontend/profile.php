@@ -96,7 +96,7 @@ if(isset($_SESSION['email'])){
                 <?php } ?>
                 
                 </div>
-                <!-- End of gallery -->
+
                 </div>
                    
             </div>
