@@ -53,8 +53,14 @@
                                                 </div>
                                             </div>
                                                 <div class="card-footer">
-                                                    <input type="text" placeholder="Inserisci un commento" name="commento" value="">
-                                                    <input type="submit" value="invia">
+                                                   
+                                                    
+                                                    <form method="POST" action="../backend/comment-exe.php">
+                                                        <div class="container">
+                                                            <input type="text" placeholder="Inserisci un commento" name="commento">
+                                                            <input type="submit" value="invia">
+                                                        </div>
+                                                    </form>
                                                 </div>
                                                 <div class="text-muted small"><?php echo "il giorno ", getTimeFoto($cid, $codice); ?></div>
                                     </div>

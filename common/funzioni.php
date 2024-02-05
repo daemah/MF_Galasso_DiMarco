@@ -643,5 +643,54 @@ function unfollow($cid, $utente_ricevente, $utente_richiedente)
 		return $risultato;
 }
 
+function insertComment($cid, $email, $codice, $commento)
+{
+	
+	$risultato = array("status"=>"ok","msg"=>"", "contenuto"=>"");
+	print_r($risultato);
+	if ($cid == null || $cid->connect_errno) {
+		$risultato["status"]="ko";
+		if (!is_null($cid))
+		     $risultato["msg"]="errore nella connessione al db " . $cid->connect_error;
+		else $risultato["msg"]="errore nella connessione al db ";
+		return $risultato;
+	}
+
+	$msg="";
+	$errore=false;
+
+	if ($res["status"]=='ko')
+	{
+		$errore = true;
+		$msg .= "Problemi nella lettura dal database</br>";
+	}
+	
+
+	if (!$errore)
+	{
+		
+		$sql= "INSERT INTO commenti(codice, email, testo, progressivo) VALUES('$codice', '$email','$commento', 1);";
+		$res=$cid->query($sql);
+		print_r($res);
+		if (empty($res)) {echo('ciao');}
+		if ($res==1)
+		{
+	    	$risultato["msg"]="Hai inviato correttamente il commento";
+			print_r($res);
+		}else
+		{
+			$risultato["status"]="ko";
+			$risultato["msg"]="l'inserimento del commento non è andata a buon fine". $sql . $cid->error;
+		}		
+	}
+	else
+	{
+		$risultato["status"]="ko";
+		$risultato["msg"]=$msg;
+	}	
+	return $risultato;
+	
+}
+
 
 
