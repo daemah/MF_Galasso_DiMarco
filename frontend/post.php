@@ -76,11 +76,12 @@
 
                                                     <strong><?php echo(count(getCodiceCommentoFoto($cid, $codice)))?></strong> <small class="align-middle">Comments: </small>
                                                     <?php
-                                                        $commenti = getCommentoFoto($cid, $codice);
-                                                        foreach($commenti as $commento){
-                                                            $email_commentatore = getCommentatore($cid, $commento);
+                                                        $codici_commento = getCodiceCommentoFoto($cid, $codice);
+                                                        
+                                                        foreach($codici_commento as $codice_commento){
+                                                            $email_commentatore = getCommentatore($cid, $codice_commento);
                                                             $nickname_commentatore = getNickname($cid, $email_commentatore);
-                                                            ?> <br><br> <small><?php echo($nickname_commentatore). ": "; echo($commento); ?> </small>
+                                                            ?> <br><br> <small><?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0]).",  Commento fatto il: "; echo(getTimeCommento($cid, $codice_commento));?> </small>
                                                         <?php }
                                                     ?>
                                                 </div>
@@ -94,7 +95,7 @@
                                                         </div>
                                                     </form>
                                                 </div>
-                                                <div class="text-muted small"><?php echo "il giorno ", getTimeFoto($cid, $codice); ?></div>
+                                                <div class="text-muted small"><?php echo "Postato il giorno ", getTimeFoto($cid, $codice); ?></div>
                                     </div>
                                     </div>
                                 </div>
@@ -134,11 +135,11 @@
                                                         <strong><?php echo(count(getCodiceCommentoTesto($cid, $codice)))?></strong> <small class="align-middle">Comments: </small>
 
                                                         <?php
-                                                        $commenti = getCommentoTesto($cid, $codice);
-                                                        foreach($commenti as $commento){
-                                                            $email_commentatore = getCommentatore($cid, $commento);
+                                                        $codici_commento = getCodiceCommentoTesto($cid, $codice);
+                                                        foreach($codici_commento as $codice_commento){
+                                                            $email_commentatore = getCommentatore($cid, $codice_commento);
                                                             $nickname_commentatore = getNickname($cid, $email_commentatore);
-                                                            ?> <br><br><small> <?php echo($nickname_commentatore). ": "; echo($commento); ?></small>  
+                                                            ?> <br><br><small> <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0]).",  Commento fatto il: "; echo(getTimeCommento($cid, $codice_commento));?></small>  
                                                         <?php }
                                                     ?>
                                                     </div>
@@ -151,7 +152,7 @@
                                                         </div>
                                                     </form>
                                                     </div>
-                                                    <div class="text-muted small"><?php echo "il giorno ", getTimeTesto($cid, $codice); ?></div>
+                                                    <div class="text-muted small"><?php echo "Postato il giorno ", getTimeTesto($cid, $codice); ?></div>
                                         </div>
                                         </div>
                                     </div>

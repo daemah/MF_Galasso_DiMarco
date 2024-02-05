@@ -187,17 +187,6 @@ function getCodiceCommentoFoto($cid, $codice_foto)
 	return $codici_commento_foto;
 }
 
-function getCommentoFoto($cid, $codice_foto)
-{
-	$commenti_foto = array();
-	$sql = "SELECT testo from commenti where codice_foto = '$codice_foto';";
-	$res = $cid->query($sql);
-	while ($row = $res->fetch_assoc()){
-		$commenti_foto[] = $row["testo"];
-	}
-	return $commenti_foto;
-}
-
 function getCodiceCommentoTesto($cid, $codice_testo)
 {
 	$codici_commento_testo = array();
@@ -209,24 +198,33 @@ function getCodiceCommentoTesto($cid, $codice_testo)
 	return $codici_commento_testo;
 }
 
-function getCommentoTesto($cid, $codice_testo)
+function getCommento($cid, $codice)
 {
-	$commenti_testo = array();
-	$sql = "SELECT testo from commenti where codice_testo = '$codice_testo';";
+	$commenti_foto = array();
+	$sql = "SELECT testo from commenti where codice = '$codice';";
 	$res = $cid->query($sql);
 	while ($row = $res->fetch_assoc()){
-		$commenti_testo[] = $row["testo"];
+		$commenti_foto[] = $row["testo"];
 	}
-	return $commenti_testo;
+	return $commenti_foto;
 }
 
-function getCommentatore($cid, $testo)
+function getCommentatore($cid, $codice)
 {
-	$sql = "SELECT email from commenti where testo = '$testo';";
+	$sql = "SELECT email from commenti where codice = '$codice';";
 	$res = $cid->query($sql);
 	$row = $res->fetch_assoc();
 	$email_commentatore = $row["email"];
 	return $email_commentatore;
+}
+
+function getTimeCommento($cid, $codice)
+{
+	$sql = "SELECT timestamp from commenti where codice = '$codice';";
+	$res = $cid->query($sql);
+	$row = $res->fetch_assoc();
+	$timestamp_commento = $row["timestamp"];
+	return $timestamp_commento;
 }
 
 function getDescrizioneFoto($cid, $codice)
