@@ -44,9 +44,9 @@
                                 <div class="col-lg-6">
                                     <div class="card mb-4"> 
                                     <div class="card-body">
-                                        <a  href="profile.php?utente=<?php echo $utente ?>"> 
+                                   
                                         <div class="media mb-3">
-                    
+                                           
                                             <?php if (empty(getFotoProfilo($cid, $utente))){?>
                                                 <img src="../images/profilo.jpeg" class="avatar" alt="Avatar">
                                             <?php } else { ?>
@@ -55,7 +55,7 @@
                                             
                                         <span class="media-body ml-3" id = "name">
                                         
-                                        <?php echo(getNickname($cid, $utente));?>
+                                        <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $utente ?>'"> <?php echo(getNickname($cid, $utente));?></button>
                                         
                                         </span>
                                         </div>
@@ -77,11 +77,11 @@
                                                     <strong><?php echo(count(getCodiceCommentoFoto($cid, $codice)))?></strong> <small class="align-middle">Comments: </small>
                                                     <?php
                                                         $codici_commento = getCodiceCommentoFoto($cid, $codice);
-                                                        
+                                                       
                                                         foreach($codici_commento as $codice_commento){
                                                             $email_commentatore = getCommentatore($cid, $codice_commento);
-                                                            $nickname_commentatore = getNickname($cid, $email_commentatore);
-                                                            ?> <br><br> <small><?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0]).",  Commento fatto il: "; echo(getTimeCommento($cid, $codice_commento));?> </small>
+                                                            $nickname_commentatore = getNickname($cid, $email_commentatore);?>
+                                                             <br><br> <small><img class = "iLikeIt" src="../images/i_like_it.jpeg"> <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?><br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?> </small>
                                                         <?php }
                                                     ?>
                                                 </div>
@@ -111,7 +111,7 @@
                                     <div class="col-lg-6">
                                         <div class="card mb-4">
                                         <div class="card-body">
-                                        <a  href="profile.php?utente=<?php echo $utente ?>"> 
+                                        
                                             <div class="media mb-3">
                                            
                                             <?php if (empty(getFotoProfilo($cid, $utente))){?>
@@ -123,7 +123,7 @@
                                             
                                             <span class="media-body ml-3" id = "name">
                                             
-                                                <?php echo(getNickname($cid, $utente));?>
+                                            <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $utente ?>'"> <?php echo(getNickname($cid, $utente));?></button>
                                             
                                             </span>
                                             </div>
@@ -138,8 +138,8 @@
                                                         $codici_commento = getCodiceCommentoTesto($cid, $codice);
                                                         foreach($codici_commento as $codice_commento){
                                                             $email_commentatore = getCommentatore($cid, $codice_commento);
-                                                            $nickname_commentatore = getNickname($cid, $email_commentatore);
-                                                            ?> <br><br><small> <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0]).",  Commento fatto il: "; echo(getTimeCommento($cid, $codice_commento));?></small>  
+                                                            $nickname_commentatore = getNickname($cid, $email_commentatore);?>
+                                                            <br><br><small> <img class = "iLikeIt" src="../images/i_like_it.jpeg"> <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?> <br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?></small>  
                                                         <?php }
                                                     ?>
                                                     </div>

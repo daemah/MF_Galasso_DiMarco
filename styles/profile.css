@@ -116,6 +116,23 @@
     font-weight: 600;
 }
 
+.goToFriends{
+    font-size: 20px;
+    border-width:0ch;
+    background-color: #e3e3e300;
+}
+
+.iLikeIt{
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.iLikeIt:hover {
+    opacity: 0.5;
+  }
+
 /* Gallery Section */
 
 .gallery {
@@ -144,6 +161,10 @@ strong{
 }
 
 p{
+    color: black;
+}
+
+small{
     color: black;
 }
 

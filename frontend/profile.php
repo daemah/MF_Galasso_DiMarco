@@ -48,8 +48,8 @@ if(isset($_SESSION['email'])){
 
                         <ul id = "ul_profile">
                             <li id = "li-profile"><span class="profile-stat-count"><?php echo(count(getCodiceFoto($cid, $email)) + count(getCodiceTesto($cid, $email))); ?></span> posts</li>
-                            <li id = "li-profile"><a href='users.php?utente=<?php echo $email ?>&page=followers'><?php echo count(getFollowers($cid, $email)); ?></a> followers</li>
-                            <li id = "li-profile"><a href='users.php?utente=<?php echo $email ?>&page=following'><?php echo count(getFollowing($cid, $email)); ?></a> following</li>
+                            <li id = "li-profile"> <button type="button" class="goToFriends" onclick ="location.href='users.php?utente=<?php echo $email ?>&page=followers'"><?php echo count(getFollowers($cid, $email)); ?></button> followers</li>
+                            <li id = "li-profile"> <button type="button" class="goToFriends" onclick ="location.href='users.php?utente=<?php echo $email ?>&page=following'"><?php echo count(getFollowing($cid, $email)); ?></button> following</li>
                         </ul>
 
                     </div>  
@@ -75,11 +75,18 @@ if(isset($_SESSION['email'])){
                         <img src=<?php echo getFoto($cid, $codice);?> class="gallery-image" alt="">
 
                         <div class="card-footer">
-                                <strong>12</strong> <small class="align-middle">Comments</small>
                             <p>
                             <?php echo getDescrizioneFoto($cid, $codice); ?>
                             </p>
-                            <div class="text-muted small"><?php echo "il giorno ", getTimeFoto($cid, $codice); ?></div>
+                            <strong><?php echo(count(getCodiceCommentoFoto($cid, $codice)))?></strong> <small class="align-middle">Comments: </small>
+                                    <?php
+                                    $codici_commento = getCodiceCommentoFoto($cid, $codice);
+                                    foreach($codici_commento as $codice_commento){
+                                        $email_commentatore = getCommentatore($cid, $codice_commento);
+                                        $nickname_commentatore = getNickname($cid, $email_commentatore);?> 
+                                         <br><small><img class = "iLikeIt" src="../images/i_like_it.jpeg"> <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?><br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?></small>  
+                                    <?php }?>
+                            <div class="text-muted small"><?php echo "Pubblicato il giorno ", getTimeFoto($cid, $codice); ?></div>
                         </div>
                     <?php } ?>
                     </div>
@@ -89,8 +96,17 @@ if(isset($_SESSION['email'])){
                 <p id = "messaggio_testo"><?php echo getTesto($cid, $codice_t);?></p>
 
                         <div class="card-footer">
-                                <strong>12</strong> <small class="align-middle">Comments</small>
-                                <div class="text-muted small"><?php echo "il giorno  ", getTimeTesto($cid, $codice_t); ?></div>
+                                
+                                <strong><?php echo(count(getCodiceCommentoTesto($cid, $codice_t)))?></strong> <small class="align-middle">Comments: </small>
+
+                                    <?php
+                                    $codici_commento = getCodiceCommentoTesto($cid, $codice_t);
+                                    foreach($codici_commento as $codice_commento){
+                                        $email_commentatore = getCommentatore($cid, $codice_commento);
+                                        $nickname_commentatore = getNickname($cid, $email_commentatore);
+                                        ?> <br><br><small> <img class = "iLikeIt" src="../images/i_like_it.jpeg"> <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?><br><?php echo("Commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?></small>  
+                                    <?php }?>
+                                    <div class="text-muted small"><?php echo "Pubblicato il giorno  ", getTimeTesto($cid, $codice_t); ?></div>
                         </div>
                         
                 <?php } ?>
@@ -153,8 +169,8 @@ if(isset($_SESSION['email'])){
 
                         <ul id = "ul_profile">
                             <li id = "li-profile"><span class="profile-stat-count"><?php echo(count(getCodiceFoto($cid, $utente)) + count(getCodiceTesto($cid, $utente))); ?></span> posts</li>
-                            <li id = "li-profile"><a href='users.php?utente=<?php echo $utente ?>&page=followers'><?php echo count(getFollowers($cid, $utente)); ?></a> followers</li>
-                            <li id = "li-profile"><a href='users.php?utente=<?php echo $utente ?>&page=following'><?php echo count(getFollowing($cid, $utente)); ?></a> following</li>
+                            <li id = "li-profile"><button type="button" class="goToFriends" onclick ="location.href='users.php?utente=<?php echo $utente ?>&page=followers'"><?php echo count(getFollowers($cid, $utente)); ?></button> followers</li>
+                            <li id = "li-profile"><button type="button" class="goToFriends" onclick ="location.href='users.php?utente=<?php echo $utente ?>&page=following'"><?php echo count(getFollowing($cid, $utente)); ?></button> following</li>
                         </ul>
 
                     </div>

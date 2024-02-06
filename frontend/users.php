@@ -18,13 +18,15 @@
         $users = getFollowing($cid, $utente);
     }
     ?>
+    <button type="button" class="cancelbtn" onclick="location.href='profile.php?utente=<?php echo $utente?>'">X</button>
 
 <link href="../styles/request.css" rel="stylesheet">
 <body>
-<button type="button" class="cancelbtn" onclick="location.href='profile.php?utente=<?php echo $utente ?>'">X</button>  
+
 <div class = "content">
    <?php foreach ($users as $user){?>
             <div class="container">
+              
                 <div class="row">
                     <div class="col-md-8">
                         <div class="people-nearby">

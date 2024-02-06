@@ -39,8 +39,6 @@ if(isset($_SESSION['email'])){
             </div>  
             <link href="../styles/request.css" rel="stylesheet">
     <?php foreach ($utenti as $utente){?>
-        
-        
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
