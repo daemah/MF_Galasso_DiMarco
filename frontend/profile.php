@@ -41,7 +41,8 @@ if(isset($_SESSION['email'])){
                         <h1 class="profile-user-name"><?php echo(getNickname($cid, $email)); ?></h1>
 
                         <button class="btn profile-edit-btn"  onclick="location.href='updateprofile.php'">Edit Profile</button>
-
+                        <br><span>Aggiungi post</span> <button class="btn add-message-btn"  onclick="location.href='updateprofile.php'">+</button> 
+                        
                     </div>
 
                     <div class="profile-stats">
