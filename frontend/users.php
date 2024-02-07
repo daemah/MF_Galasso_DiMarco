@@ -48,20 +48,22 @@
                                             $data_richiesta = getDataRichiesta($cid, $user, $email);
                                             $data_accettazione = getDataAccettazione($cid, $user, $email);
                                             
-                                        if ($data_richiesta==0) {
-                                        ?>
-                                        <div class="col-md-3 col-sm-3">
-                                            <button class="btn profile-edit-btn"  onclick="location.href='../backend/request_friendship-exe.php?utente=<?php echo $user ?>'">Invia Richiesta</button>
-                                        </div>
-                                        <?php } elseif (empty($data_richiesta!=0) && ($data_accettazione==0)) { ?>
-                                        <div class="col-md-3 col-sm-3">
-                                            <button class="btn profile-edit-btn" >Richiesta Inviata</button>
-                                        </div>
-                                        <?php } else {?>
-                                        <div class="col-md-3 col-sm-3">
-                                            <button class="btn profile-edit-btn" >Unfollow</button>
-                                        </div>    
-                                    <?php }}?>
+                                            if ($data_richiesta==0) {
+                                                ?>
+                                                <div class="col-md-3 col-sm-3">
+                                                    <button class="btn profile-edit-btn"  onclick="location.href='../backend/request_friendship-exe.php?utente=<?php echo $utente ?>'">Invia Richiesta</button>
+                                                </div>
+                                                <?php } elseif (($data_richiesta!=0) && ($data_accettazione==0)) { ?>
+                                                <div class="col-md-3 col-sm-3">
+                                                    <button class="btn profile-edit-btn" onclick="location.href='../backend/eliminateRequest-exe.php?utente=<?php echo $utente ?>'">Richiesta Inviata</button>
+                                                    <div class="text-muted small"><?php echo "Richiesta inviata il: ", $data_richiesta ?></div>
+                                                </div>
+                                                <?php } else {?>
+                                                <div class="col-md-3 col-sm-3">
+                                                    <button class="btn profile-edit-btn" onclick="location.href='../backend/unfollow-exe.php?utente=<?php echo $utente ?>'">Unfollow</button>
+                                                    <div class="text-muted small"><?php echo "Richiesta inviata il: ", $data_richiesta, " e accettata il giorno: ", $data_accettazione ?></div>
+                                                </div>    
+                                                <?php }}?>
 
                                     <div style="clear:both;"></div>
                                 </div>

@@ -16,6 +16,7 @@ if(isset($_SESSION['email'])){
         <body>
         
         <link href="../styles/profile.css" rel="stylesheet">
+        <script src="../js/myscript.js"></script>
         <div class = "content">
         <?php
         if (isset($_GET["status"])) {
@@ -41,7 +42,7 @@ if(isset($_SESSION['email'])){
                         <h1 class="profile-user-name"><?php echo(getNickname($cid, $email)); ?></h1>
 
                         <button class="btn profile-edit-btn"  onclick="location.href='updateprofile.php'">Edit Profile</button>
-                        <br><span>Aggiungi post</span> <button class="btn add-message-btn"  onclick="location.href='updateprofile.php'">+</button> 
+                        <br><span>Aggiungi post</span> <button class="btn add-message-btn"  onclick="location.href=''">+</button> 
                         
                     </div>
 
@@ -85,10 +86,13 @@ if(isset($_SESSION['email'])){
                                     foreach($codici_commento as $codice_commento){
                                         $email_commentatore = getCommentatore($cid, $codice_commento);
                                         $nickname_commentatore = getNickname($cid, $email_commentatore);?> 
-                                         <br><small><img class = "iLikeIt" src="../images/i_like_it.jpeg"> <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?><br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?></small>  
+                                        <br><br><small>
+                                            <a onclick="ValutaCommento()"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a><div id="visualizza"></div>
+                                            <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?><br>
+                                            <?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?></small>  
                                     <?php }?>
-                            <div class="text-muted small"><?php echo "Pubblicato il giorno ", getTimeFoto($cid, $codice); ?></div>
                         </div>
+                        <div class="text-muted small"><?php echo "Pubblicato il giorno ", getTimeFoto($cid, $codice); ?></div>
                     <?php } ?>
                     </div>
 
@@ -105,17 +109,20 @@ if(isset($_SESSION['email'])){
                                     foreach($codici_commento as $codice_commento){
                                         $email_commentatore = getCommentatore($cid, $codice_commento);
                                         $nickname_commentatore = getNickname($cid, $email_commentatore);
-                                        ?> <br><br><small> <img class = "iLikeIt" src="../images/i_like_it.jpeg"> <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?><br><?php echo("Commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?></small>  
+                                        ?> <br><br><small> 
+                                        <a onclick="ValutaCommento()"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a><div id="visualizza"></div>
+                                        <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?><br>
+                                        <?php echo("Commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?></small>  
                                     <?php }?>
-                                    <div class="text-muted small"><?php echo "Pubblicato il giorno  ", getTimeTesto($cid, $codice_t); ?></div>
+                                   
                         </div>
-                        
+                        <div class="text-muted small"><?php echo "Pubblicato il giorno  ", getTimeTesto($cid, $codice_t); ?></div>
                 <?php } ?>
                 
                 </div>
 
                 </div>
-                   
+                <?php require "../common/footer.php"?>   
             </div>
 
     <?php }else{?>
@@ -160,7 +167,7 @@ if(isset($_SESSION['email'])){
                         ?>
                             <button class="btn profile-edit-btn"  onclick="location.href='../backend/request_friendship-exe.php?utente=<?php echo $utente ?>'">Invia Richiesta</button>
                         <?php } elseif (($data_richiesta!=0) && ($data_accettazione==0)) { ?>
-                            <button class="btn profile-edit-btn">Richiesta Inviata</button>
+                            <button class="btn profile-edit-btn" onclick="location.href='../backend/eliminateRequest-exe.php?utente=<?php echo $utente ?>'">Richiesta Inviata</button>
                         <?php } else {?>
                             <button class="btn profile-edit-btn"  onclick="location.href='../backend/unfollow-exe.php?utente=<?php echo $utente ?>'">Unfollow</button>
                         <?php }?>
@@ -200,30 +207,69 @@ if(isset($_SESSION['email'])){
                         <img src=<?php echo getFoto($cid, $codice);?> class="gallery-image" alt="">
 
                         <div class="card-footer">
-                                <strong>12</strong> <small class="align-middle">Comments</small>
+                           
+                            <strong><?php print_r($codice); echo(count(getCodiceCommentoFoto($cid, $codice)))?></strong> <small class="align-middle">Comments: </small>
+                            <?php
+                                $codici_commento = getCodiceCommentoFoto($cid, $codice);
+                                print_r($codici_commento);
+                                foreach($codici_commento as $codice_commento){
+                                    $email_commentatore = getCommentatore($cid, $codice_commento);
+                                    $nickname_commentatore = getNickname($cid, $email_commentatore);
+                                ?> <br><br><small> 
+                                <a onclick="ValutaCommento()"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a><div id="visualizza"></div>
+                                <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?><br>
+                                <?php echo("Commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?></small>  
+                            <?php }?>
                             <p>
                             <?php echo getDescrizioneFoto($cid, $codice); ?>
                             </p>
-                            <div class="text-muted small"><?php echo "il giorno ", getTimeFoto($cid, $codice); ?></div>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        <form method="POST" action="../backend/comment-exe_foto.php?utente=<?php echo $utente?>">
+                            <div class="container">
+                                <input type="text" placeholder="Inserisci un commento" name="commento">
+                                <input type="submit" value="invia">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="text-muted small"><?php echo "Foto pubblicata il giorno ", getTimeFoto($cid, $codice); ?></div>
                     <?php } ?>
                 <div class="gallery-item" tabindex="0">
+
                 <?php $codici_t = getCodiceTesto($cid, $utente); foreach($codici_t as $codice_t){ ?>
                 <p id = "messaggio_testo"><?php echo getTesto($cid, $codice_t);?></p>
 
                         <div class="card-footer">
-                                <strong>12</strong> <small class="align-middle">Comments</small>
-                            <div class="text-muted small"><?php echo "il giorno ", getTimeTesto($cid, $codice_t); ?></div>
+                        <strong><?php echo(count(getCodiceCommentoTesto($cid, $codice_t)))?></strong> <small class="align-middle">Comments: </small>
+                                <?php
+                                    $codici_commento = getCodiceCommentoTesto($cid, $codice_t);
+                                    foreach($codici_commento as $codice_commento){
+                                        $email_commentatore = getCommentatore($cid, $codice_commento);
+                                        $nickname_commentatore = getNickname($cid, $email_commentatore);?>
+                                        <br><br><small> 
+                                        <a onclick="ValutaCommento()"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a><div id="visualizza"></div>
+                                        <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?> 
+                                        <br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?></small>  
+                                    <?php } ?>
                         </div>
                 </div>
+                <div class="card-footer">
+                        <form method="POST" action="../backend/comment-exe_foto.php?utente=<?php echo $utente?>">
+                            <div class="container">
+                                <input type="text" placeholder="Inserisci un commento" name="commento">
+                                <input type="submit" value="invia">
+                            </div>
+                        </form>
+                </div>
+                <div class="text-muted small"><?php echo "Testo pubblicato il giorno ", getTimeTesto($cid, $codice_t); ?></div>
                 <?php } ?>
                 </div>
                 </div>
-                <!-- End of gallery -->                
+                <!-- End of gallery --> 
+                <?php require "../common/footer.php"?>                
             </div>
         <?php } ?>
-        <?php require "../common/footer.php"?> 
         </body>
     <?php
     }

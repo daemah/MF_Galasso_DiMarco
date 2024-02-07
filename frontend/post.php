@@ -12,11 +12,9 @@
         <body>
         <div><?php require "../common/navbar.php";?></div>
             <link href="../styles/post.css" rel="stylesheet">
-            <?php $utenti = getUtenti($cid); foreach($utenti as $utente){
-                $codici = getCodiceFoto($cid, $utente); foreach($codici as $codice){
-                    if ($codice != null){?>
-                        <div class="content">
-                        <?php
+            <script src="../js/myscript.js"></script>
+            <div class = "content">
+            <?php
                 if (isset($_GET["status"])) {
                     if ($_GET["status"]=='ko')
                             {
@@ -39,7 +37,12 @@
                             }
                       
             }?>
-                        <h2> Post suggested for you </h2>  
+                        <h2> Posts suggested for you </h2>
+            </div>
+            <?php $utenti = getUtenti($cid); foreach($utenti as $utente){
+                $codici = getCodiceFoto($cid, $utente); foreach($codici as $codice){
+                    if ($codice != null){?> 
+                        <div class="content"> 
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="card mb-4"> 
@@ -56,6 +59,18 @@
                                         <span class="media-body ml-3" id = "name">
                                         
                                         <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $utente ?>'"> <?php echo(getNickname($cid, $utente));?></button>
+                                        <?php
+                                        if ($utente != $email){
+                                            $data_richiesta = getDataRichiesta($cid, $utente, $email);
+                                            $data_accettazione = getDataAccettazione($cid, $utente, $email);
+                                            if ($data_richiesta==0){
+                                        ?>
+                                            <button class="btn profile-edit-btn"  onclick="location.href='../backend/request_friendship-exe.php?utente=<?php echo $utente ?>'">Invia Richiesta</button>
+                                        <?php } elseif (($data_richiesta!=0) && ($data_accettazione==0)) { ?>
+                                            <button class="btn profile-edit-btn" onclick="location.href='../backend/eliminateRequest-exe.php?utente=<?php echo $utente ?>'">Richiesta Inviata</button>
+                                        <?php } else {?>
+                                            <button class="btn profile-edit-btn"  onclick="location.href='../backend/unfollow-exe.php?utente=<?php echo $utente ?>'">Unfollow</button>
+                                        <?php }}?>
                                         
                                         </span>
                                         </div>
@@ -81,7 +96,10 @@
                                                         foreach($codici_commento as $codice_commento){
                                                             $email_commentatore = getCommentatore($cid, $codice_commento);
                                                             $nickname_commentatore = getNickname($cid, $email_commentatore);?>
-                                                             <br><br> <small><img class = "iLikeIt" src="../images/i_like_it.jpeg"> <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?><br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?> </small>
+                                                                <br><br> <small>
+                                                                <a onclick="ValutaCommento()"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a><div id="visualizza"></div>
+                                                                <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?>
+                                                                <br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?> </small>
                                                         <?php }
                                                     ?>
                                                 </div>
@@ -106,7 +124,6 @@
                 <?php $codici = getCodiceTesto($cid, $utente); foreach($codici as $codice){
                         if ($codice != null){?>
                         <div class="content">
-                        <h2> Post suggested for you </h2>
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="card mb-4">
@@ -124,6 +141,18 @@
                                             <span class="media-body ml-3" id = "name">
                                             
                                             <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $utente ?>'"> <?php echo(getNickname($cid, $utente));?></button>
+                                            <?php
+                                            if ($utente != $email){
+                                                $data_richiesta = getDataRichiesta($cid, $utente, $email);
+                                                $data_accettazione = getDataAccettazione($cid, $utente, $email);
+                                            if ($data_richiesta==0){
+                                            ?>
+                                                <button class="btn profile-edit-btn"  onclick="location.href='../backend/request_friendship-exe.php?utente=<?php echo $utente ?>'">Invia Richiesta</button>
+                                            <?php } elseif (($data_richiesta!=0) && ($data_accettazione==0)) { ?>
+                                                <button class="btn profile-edit-btn" onclick="location.href='../backend/eliminateRequest-exe.php?utente=<?php echo $utente ?>'">Richiesta Inviata</button>
+                                            <?php } else {?>
+                                                <button class="btn profile-edit-btn"  onclick="location.href='../backend/unfollow-exe.php?utente=<?php echo $utente ?>'">Unfollow</button>
+                                            <?php }}?>
                                             
                                             </span>
                                             </div>
@@ -139,9 +168,11 @@
                                                         foreach($codici_commento as $codice_commento){
                                                             $email_commentatore = getCommentatore($cid, $codice_commento);
                                                             $nickname_commentatore = getNickname($cid, $email_commentatore);?>
-                                                            <br><br><small> <img class = "iLikeIt" src="../images/i_like_it.jpeg"> <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?> <br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?></small>  
-                                                        <?php }
-                                                    ?>
+                                                            <br><br><small> 
+                                                            <a onclick="ValutaCommento()"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a><div id="visualizza"></div>
+                                                            <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?> 
+                                                            <br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?></small>  
+                                                        <?php } ?>
                                                     </div>
                                             </div>
                                                     <div class="card-footer">

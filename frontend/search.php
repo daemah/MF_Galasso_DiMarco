@@ -31,6 +31,29 @@ if(isset($_SESSION['email'])){
         <link href="../styles/search.css" rel="stylesheet">
         <div><?php require "../common/navbar.php"?></div>
         <div class = "content">
+        <?php
+        if (isset($_GET["status"])) {
+            if ($_GET["status"]=='ko')
+                    {
+        
+                        {
+                            echo "<div class='alert-warning'>\n";
+                            echo $_GET["msg"];
+                            echo "</div>";
+                        }
+                    }
+                }
+        ?>
+         <?php if (isset($_GET["status"]))
+                {
+                    if ($_GET["status"]=='ok')
+                    {
+                        echo "<div class='alert-success'>\n";
+                        echo $_GET["msg"];
+                        echo "</div>";
+                    }
+                      
+                    }?>
             <h2> Cerca </h2>
             <div>
                 <form class="modulo-ricerca">
@@ -70,7 +93,7 @@ if(isset($_SESSION['email'])){
                                 </div>
                                 <?php } elseif (($data_richiesta!=0) && ($data_accettazione==0)) { ?>
                                 <div class="col-md-3 col-sm-3">
-                                    <button class="btn profile-edit-btn" >Richiesta Inviata</button>
+                                    <button class="btn profile-edit-btn" onclick="location.href='../backend/eliminateRequest-exe.php?utente=<?php echo $utente ?>'">Richiesta Inviata</button>
                                     <div class="text-muted small"><?php echo "Richiesta inviata il: ", $data_richiesta ?></div>
                                 </div>
                                 <?php } else {?>

@@ -675,6 +675,38 @@ function acceptRequest($cid, $utente_ricevente, $utente_richiedente)
 		return $risultato;
 }
 
+function eliminateRequest($cid, $utente_ricevente, $utente_richiedente)
+{
+	$risultato = array("status"=>"ko","msg"=>"");
+	$errore = false;
+	#ERRORE CONNESSIONE 
+	if ($cid == null || $cid->connect_errno) {
+		$risultato["status"]="ko";
+		if (!is_null($cid))
+		     $risultato["msg"]="errore nella connessione al db " . $cid->connect_error;
+		else $risultato["msg"]="errore nella connessione al db ";
+		return $risultato;
+	}
+	if ($cid->connect_error) {
+		$risultato["status"]="ko";
+		$risultato["msg"]="errore nella connessione al db " . $cid->connect_error;
+		return $risultato;
+	}
+	print_r($utente_ricevente);
+	print_r($utente_richiedente);
+	$sql = "DELETE from chiede_amicizia where utente_ricevente = '$utente_ricevente' and utente_richiedente = '$utente_richiedente';";
+	$res=$cid->query($sql);
+		if ($res==1)
+		{
+			$risultato["status"]="ok";
+	    	$risultato["msg"]="Hai ritirato la richiesta di amicizia";
+		}else{
+			$risultato["msg"]="L'eliminazione della richiesta è fallita". $sql . $cid->error;
+		}
+
+		return $risultato;
+}
+
 function unfollow($cid, $utente_ricevente, $utente_richiedente)
 {
 	$risultato = array("status"=>"ko","msg"=>"");
