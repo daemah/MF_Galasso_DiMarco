@@ -54,12 +54,20 @@ if(isset($_SESSION['email'])){
                     }
                       
                     }?>
-            <h2> Cerca </h2>
+            <h2> Cerca i tuoi futuri amici: </h2>
             <div>
                 <form class="modulo-ricerca">
                     <input id="search" type="text" placeholder="Cerca un amico" onkeyup="search_profile()" required>
                 </form>
             </div>  
+            <div>
+                <form class="modulo-ricerca">
+                    <p> Cerca un amico in base a: </p>
+                    <button type="button"> hobby </button>
+                    <button type="button"> città nascita </button>
+                    <button type="button" > città residenza </button>
+                </form>
+            </div>
             <link href="../styles/request.css" rel="stylesheet">
     <?php foreach ($utenti as $utente){?>
         <div class="container">
