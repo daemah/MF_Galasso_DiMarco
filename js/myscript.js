@@ -1,3 +1,5 @@
+var setTimer;
+
 function ajaxRequest()
 {var request=false;
   try { request = new XMLHttpRequest()}catch(e1){
@@ -42,8 +44,18 @@ function ValutaCommento()
 function ValutaCommento() {
     var messaggio;
     var valutazione = window.prompt("Inserisci una valutazione da -3 a +3:", );
+	console.log(valutazione);
     
-    messaggio = "Hai valutato il commento con: " + valutazione;
+    messaggio = valutazione;
     document.getElementById("visualizza").innerHTML = messaggio;
+	/*if (valutazione!=null){
+		location.href='../backend/insertValutazione-exe.php?valutazione='+valutazione;
+	}*/
 }
 
+function logOutConfirm() {
+    var conferma = window.confirm("Sicuro che vuoi sloggarti?");
+	if (conferma){
+		location.href='../backend/logout-exe.php';
+	} 
+}

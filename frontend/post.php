@@ -96,9 +96,11 @@
                                                         foreach($codici_commento as $codice_commento){
                                                             $email_commentatore = getCommentatore($cid, $codice_commento);
                                                             $nickname_commentatore = getNickname($cid, $email_commentatore);?>
-                                                                <br><br> <small>
-                                                                <a onclick="ValutaCommento()"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a><div id="visualizza"></div>
-                                                                <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?>
+                                                                <br><br> 
+                                                                <a onclick="return ValutaCommento();"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a><div id="visualizza"></div>
+                                                                <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore . ": ");?></button>
+                                                                <?php echo(getCommento($cid, $codice_commento)[0])?>
+                                                                <br><small>
                                                                 <br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?> 
                                                                 <br>
                                                                 <?php  
@@ -110,7 +112,7 @@
                                                                 }else{
                                                                     echo("Il commento non ha ricevuto valutazioni");
                                                                 }
-                                                                ?></small>
+                                                                ?><br></small>
                                                                 
                                                         <?php }
                                                     ?>
@@ -182,8 +184,9 @@
                                                             $nickname_commentatore = getNickname($cid, $email_commentatore);?>
                                                             <br><br><small> 
                                                             <a onclick="ValutaCommento()"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a><div id="visualizza"></div>
-                                                            <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?> 
-                                                            <br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
+                                                            <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore . ": ");?></button>
+                                                            <?php echo(getCommento($cid, $codice_commento)[0])?> 
+                                                            <br><br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
                                                             <br>
                                                                 <?php  
                                                                 $gradimenti = getIndGradimento($cid, $codice_commento);
@@ -194,7 +197,7 @@
                                                                 }else{
                                                                     echo("Il commento non ha ricevuto valutazioni");
                                                                 }
-                                                                ?></small>  
+                                                                ?><br></small>  
                                                         <?php } ?>
                                                     </div>
                                             </div>
