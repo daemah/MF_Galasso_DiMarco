@@ -102,6 +102,17 @@ function getHobby($cid)
 	return $hobby;
 }
 
+function getIndGradimento($cid, $codice)
+{
+	$gradimenti_commento = array();
+	$sql = "SELECT gradimento FROM valuta WHERE codice_commento = '$codice';";
+	$res = $cid->query($sql);
+	while ($row = $res->fetch_assoc()){
+		$gradimenti_commento[] = $row["gradimento"];
+	}
+	return $gradimenti_commento;
+}
+
 function getCittaNascita($cid,$email)
 {
 	$sql = "SELECT citta_nascita from utente where email = '$email';";

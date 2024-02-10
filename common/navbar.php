@@ -4,6 +4,7 @@ include_once "funzioni.php";
 ?>
 
 <link rel="stylesheet" href="../styles/navbar.css">
+<script src="../js/myscript.js"></script>
 <nav class="side-nav">
     <ul>
          <!--LOGO-->
@@ -16,7 +17,7 @@ include_once "funzioni.php";
         <?php if (isset($_SESSION["logged"])) {
             $email = $_SESSION["email"];?>
             <div> 
-                <button type="button" id = "login" onclick="location.href='../backend/logout-exe.php'"> Logout </button>
+                <button type="button" id = "login" onclick=" logOutConfirm()"> Logout </button>
             </div>
             <!--PROFILE-->
             <li id="profile">
@@ -46,6 +47,13 @@ include_once "funzioni.php";
             <li id="home">
                 <a class="nav-link" href="notifications.php"  >
                     <img src="../images/notifications.jpeg" class="avatar" alt="Avatar">
+                </a>
+            </li>
+
+            <!--STATISTICS-->
+            <li id="home">
+                <a class="nav-link" href="statistics.php"  >
+                    <img src="../images/statistics.png" class="avatar" alt="Avatar">
                 </a>
             </li>
 

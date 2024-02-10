@@ -99,7 +99,19 @@
                                                                 <br><br> <small>
                                                                 <a onclick="ValutaCommento()"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a><div id="visualizza"></div>
                                                                 <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?>
-                                                                <br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?> </small>
+                                                                <br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?> 
+                                                                <br>
+                                                                <?php  
+                                                                $gradimenti = getIndGradimento($cid, $codice_commento);
+                                                                $somma = 0;
+                                                                if (!empty($gradimenti)){
+                                                                    foreach ($gradimenti as $gradimento){$somma += $gradimento;}
+                                                                    echo("La media delle valutazioni di questo commento è (indice di gradimento): ". $somma/count($gradimenti));
+                                                                }else{
+                                                                    echo("Il commento non ha ricevuto valutazioni");
+                                                                }
+                                                                ?></small>
+                                                                
                                                         <?php }
                                                     ?>
                                                 </div>
@@ -171,7 +183,18 @@
                                                             <br><br><small> 
                                                             <a onclick="ValutaCommento()"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a><div id="visualizza"></div>
                                                             <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?> 
-                                                            <br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?></small>  
+                                                            <br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
+                                                            <br>
+                                                                <?php  
+                                                                $gradimenti = getIndGradimento($cid, $codice_commento);
+                                                                $somma = 0;
+                                                                if (!empty($gradimenti)){
+                                                                    foreach ($gradimenti as $gradimento){$somma += $gradimento;}
+                                                                    echo("La media delle valutazioni di questo commento è (indice di gradimento): ". $somma/count($gradimenti));
+                                                                }else{
+                                                                    echo("Il commento non ha ricevuto valutazioni");
+                                                                }
+                                                                ?></small>  
                                                         <?php } ?>
                                                     </div>
                                             </div>
