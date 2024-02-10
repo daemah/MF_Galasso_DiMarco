@@ -838,7 +838,6 @@ function insertCommentTesto($cid, $email, $codice, $commento, $codice_testo, $em
 		if ($res==1)
 		{
 	    	$risultato["msg"]="Hai inviato correttamente il commento";
-			print_r($res);
 		}else
 		{
 			$risultato["status"]="ko";
@@ -852,5 +851,49 @@ function insertCommentTesto($cid, $email, $codice, $commento, $codice_testo, $em
 	}	
 	return $risultato;
 	
+}
+
+function insertIndGradimento($cid, $codice_commento, $email_valutatore, $gradimento, $email_valutato)
+{
+	$risultato = array("status"=>"ok","msg"=>"", "contenuto"=>"");
+	print_r($risultato);
+	if ($cid == null || $cid->connect_errno) {
+		$risultato["status"]="ko";
+		if (!is_null($cid))
+		     $risultato["msg"]="errore nella connessione al db " . $cid->connect_error;
+		else $risultato["msg"]="errore nella connessione al db ";
+		return $risultato;
+	}
+
+	$msg="";
+	$errore=false;
+
+	if ($res["status"]=='ko')
+	{
+		$errore = true;
+		$msg .= "Problemi nella lettura dal database</br>";
+	}
+	
+
+	if (!$errore)
+	{
+	$sql = "INSERT INTO valuta(codice_commento, email_commento, gradimento, email_valutatore, timestamp) VALUES('$codice_commento', '$email_valutato', '$gradimento', '$email_valutatore', CURRENT_TIMESTAMP);";
+	$res=$cid->query($sql);
+	if ($res==1)
+	{
+		$risultato["msg"]="Hai valutato correttamente il commento";
+	}else
+	{
+		$risultato["status"]="ko";
+		$risultato["msg"]="l'inserimento della valutazione del commento non è andata a buon fine". $sql . $cid->error;
+	}		
+	}
+	else
+	{
+		$risultato["status"]="ko";
+		$risultato["msg"]=$msg;
+	}	
+	return $risultato;
+
 }
 

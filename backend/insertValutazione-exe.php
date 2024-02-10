@@ -3,15 +3,17 @@ session_start();
 include_once "../common/connection.php";
 include_once "../common/funzioni.php";
 
-	$commento = $_POST["commento"];
+	$codice_commento = $_POST["commento"];
+    print_r($codice_commento);
     $email = $_SESSION["email"];
-    $codice = generateCode();
+    print_r($email);
+    $gradimento = $_GET["valutazione"];
+    print_r($gradimento);
     $utente = $_GET["utente"];
-    $codice_testo = getCodiceTesto($cid, $utente)[0];
-    
+    print_r($utente);
 
-	$ris = insertCommentTesto($cid, $email, $codice, $commento, $codice_testo, $utente);
-
+	$ris = insertIndGradimento($cid, $codice_commento, $email, $gradimento, $utente);
+/*
 	if ($ris["status"]=='ok')
 	{
 		header("location: ../frontend/post.php?status=ok&msg=" . urlencode($ris["msg"]));
@@ -20,5 +22,5 @@ include_once "../common/funzioni.php";
 	{
 		header("location: ../frontend/post.php?status=ko&msg=". urlencode($ris["msg"]));	
 	}
-
+*/
 ?>

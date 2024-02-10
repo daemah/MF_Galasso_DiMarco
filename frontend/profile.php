@@ -87,7 +87,8 @@ if(isset($_SESSION['email'])){
                                         $email_commentatore = getCommentatore($cid, $codice_commento);
                                         $nickname_commentatore = getNickname($cid, $email_commentatore);?> 
                                         <br><br><small>
-                                            <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?><br>
+                                            <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore . ": ");?></button>
+                                            <?php echo(getCommento($cid, $codice_commento)[0])?><br><br>
                                             <?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
                                             <br>
                                             <?php  
@@ -99,7 +100,7 @@ if(isset($_SESSION['email'])){
                                                 }else{
                                                     echo("Il commento non ha ricevuto valutazioni");
                                                 }
-                                                ?></small>  
+                                                ?><br></small>  
                                     <?php }?>
                         </div>
                         <div class="text-muted small"><?php echo "Pubblicato il giorno ", getTimeFoto($cid, $codice); ?></div>
@@ -120,7 +121,8 @@ if(isset($_SESSION['email'])){
                                         $email_commentatore = getCommentatore($cid, $codice_commento);
                                         $nickname_commentatore = getNickname($cid, $email_commentatore);
                                         ?> <br><br><small> 
-                                        <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?><br>
+                                        <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore . ": ");?></button>
+                                        <?php echo(getCommento($cid, $codice_commento)[0])?><br><br>
                                         <?php echo("Commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
                                         <br>
                                         <?php  
@@ -132,7 +134,7 @@ if(isset($_SESSION['email'])){
                                             }else{
                                                 echo("Il commento non ha ricevuto valutazioni");
                                             }
-                                            ?></small>  
+                                            ?><br></small>  
                                     <?php }?>
                                    
                         </div>
@@ -228,7 +230,7 @@ if(isset($_SESSION['email'])){
 
                         <div class="card-footer">
                            
-                            <strong><?php print_r($codice); echo(count(getCodiceCommentoFoto($cid, $codice)))?></strong> <small class="align-middle">Comments: </small>
+                            <strong><?php echo(count(getCodiceCommentoFoto($cid, $codice)))?></strong> <small class="align-middle">Comments: </small>
                             <?php
                                 $codici_commento = getCodiceCommentoFoto($cid, $codice);
                                 print_r($codici_commento);
@@ -237,7 +239,8 @@ if(isset($_SESSION['email'])){
                                     $nickname_commentatore = getNickname($cid, $email_commentatore);
                                 ?> <br><br><small> 
                                 <a onclick="ValutaCommento()"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a><div id="visualizza"></div>
-                                <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?><br>
+                                <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore),": ";?></button>
+                                <?php echo(getCommento($cid, $codice_commento)[0])?><br><br>
                                 <?php echo("Commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
                                 <br>
                                 <?php  
@@ -249,7 +252,7 @@ if(isset($_SESSION['email'])){
                                     }else{
                                         echo("Il commento non ha ricevuto valutazioni");
                                     }
-                                    ?></small>  
+                                    ?><br></small>  
                             <?php }?>
                             <p>
                             <?php echo getDescrizioneFoto($cid, $codice); ?>
@@ -280,8 +283,9 @@ if(isset($_SESSION['email'])){
                                         $nickname_commentatore = getNickname($cid, $email_commentatore);?>
                                         <br><br><small> 
                                         <a onclick="ValutaCommento()"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a><div id="visualizza"></div>
-                                        <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0])?> 
-                                        <br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
+                                        <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore. ": "); ?></button>
+                                        <?php echo(getCommento($cid, $codice_commento)[0])?> 
+                                        <br><br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
                                         <br>
                                         <?php  
                                             $gradimenti = getIndGradimento($cid, $codice_commento);
@@ -292,7 +296,7 @@ if(isset($_SESSION['email'])){
                                             }else{
                                                 echo("Il commento non ha ricevuto valutazioni");
                                             }
-                                        ?></small>  
+                                        ?><br></small>  
                                     <?php } ?>
                         </div>
                 </div>
