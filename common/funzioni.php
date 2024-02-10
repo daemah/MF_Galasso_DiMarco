@@ -81,6 +81,7 @@ function getDataNascita($cid,$email)
 	$data_nascita = $row["data_nascita"];
 	return $data_nascita;
 }
+
 function getRegioneNascita($cid,$email)
 {
 	$sql = "SELECT regione_nascita from utente where email = '$email';";
@@ -89,6 +90,18 @@ function getRegioneNascita($cid,$email)
 	$regione_nascita = $row["regione_nascita"];
 	return $regione_nascita;
 }
+
+function getHobby($cid)
+{
+	$hobby = array();
+	$sql = "SELECT nome from hobby";
+	$res = $cid->query($sql);
+	while ($row = $res->fetch_assoc()){
+		$hobby[] = $row["nome"];
+	}
+	return $hobby;
+}
+
 function getCittaNascita($cid,$email)
 {
 	$sql = "SELECT citta_nascita from utente where email = '$email';";

@@ -46,7 +46,7 @@ if(isset($_SESSION['email'])){
                                     </div>
                                    
                                     <div class="col-md-7 col-sm-7">
-                                        <h5><a href="profile.php?utente=<?php echo $richiesta ?>" class="profile-link"><?php echo getNickname($cid, $richiesta); ?></a></h5>
+                                        <h5><button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $richiesta ?>'"> <?php echo(getNickname($cid, $richiesta));?></button></h5>
                                     </div>
                                     <?php
                                         $data_accettazione = getDataAccettazione($cid, $email, $richiesta);    

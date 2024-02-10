@@ -40,7 +40,7 @@
                                     <?php } ?>
                                    
                                     <div class="col-md-7 col-sm-7">
-                                        <h5><a href="profile.php?utente=<?php echo $user ?>" class="profile-link"><?php echo getNickname($cid, $user); ?></a></h5>
+                                        <h5><button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $user ?>'"> <?php echo(getNickname($cid, $user));?></button></h5>
                                     </div>
                                     
                                     <?php
