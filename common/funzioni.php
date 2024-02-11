@@ -388,27 +388,9 @@ function controllaCampo($cid,$sql)
 	return $risultato;
 }
 
-function createLocation($country, $region, $city, $email, $whichone)
+function createLocation($country, $region, $city, $email)
 {
-
-	if ($whichone === 'residenza')
-	{
-		$regioneDb = 'regione_residenza';
-		$statoDb = 'stato_residenza';
-		$cittaDb = 'citta_residenza';
-	}else{
-
-		$regioneDb = 'regione_nascita';
-		$statoDb = 'stato_nascita';
-		$cittaDb = 'citta_nascita';
-	}
-	
-	if (!(empty($country) or empty($region) or empty($city))) {
-		$sql = "INSERT INTO `città` (`regione`, `nome`, `stato`, `provincia`) VALUES ('$region', '$city', '$country', NULL);";
-
-}else{
-	$sql = "UPDATE `utente` set `$regioneDb` = NULL , `$cittaDb` = NULL , `$statoDb` = NULL where `utente`.`email` = '$email';";
-} 
+	$sql = "INSERT INTO `città` (`regione`, `nome`, `stato`, `provincia`) VALUES ('$region', '$city', '$country', NULL);";
 	return $sql;
 }
 
@@ -496,16 +478,29 @@ function updateProfile($cid,$email,$nickname,$name,$lname,$sex,$dateb, $countryR
 		$ris_dateb= controllaCampo($cid,$sql);
 		array_push($risposte,$ris_dateb);
 
-		$sql = createLocation($countryRes,$regionRes, $cityRes,$email,'residenza');
-		$ris_res= controllaCampo($cid,$sql);
-		array_push($risposte,$ris_res);
+		if (!(empty($countryRes) or empty($regionRes) or empty($cityRes))) {
+			if ($countryRes != getStatoResidenza($cid,$email) || $regionRes != getRegioneResidenza($cid, $email) || $cityRes != getCittaResidenza($cid,$email)){
+			$sql = createLocation($countryRes,$regionRes, $cityRes,$email);
+			$ris_res= controllaCampo($cid,$sql);
+			array_push($risposte,$ris_res);
+			}
+		}
 
 		$sql = updateLuogo($regionRes,$cityRes,$countryRes , 'residenza',$email);
 		$ris_res= controllaCampo($cid,$sql);
 		array_push($risposte,$ris_res);
 
+
+		if (!(empty($countryBir) or empty($regionBir) or empty($cityBir))) {
+			if ($countryBir != getStatoNascita($cid,$email) || $regionBir != getRegioneNascita($cid, $email) || $cityBir != getCittaNascita($cid,$email)){
+			$sql = createLocation($countryBir,$regionBir, $cityBir,$email);
+			$ris_bir= controllaCampo($cid,$sql);
+			array_push($risposte,$ris_bir);
+			}
+	
+		}
 		
-		$sql = createLocation($countryBir,$regionBir, $cityBir,$email,'nascita');
+		$sql = createLocation($countryBir,$regionBir, $cityBir,$email);
 		$ris_bir= controllaCampo($cid,$sql);
 		array_push($risposte,$ris_bir);
 
