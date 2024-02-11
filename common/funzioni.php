@@ -312,6 +312,54 @@ function controllaCampo($cid,$sql)
 		}
 	return $risultato;
 }
+
+function createLocation($country, $region, $city, $email, $whichone)
+{
+
+	if ($whichone === 'residenza')
+	{
+		$regioneDb = 'regione_residenza';
+		$statoDb = 'stato_residenza';
+		$cittaDb = 'citta_residenza';
+	}else{
+
+		$regioneDb = 'regione_nascita';
+		$statoDb = 'stato_nascita';
+		$cittaDb = 'citta_nascita';
+	}
+	
+	if (!(empty($country) or empty($region) or empty($city))) {
+		$sql = "INSERT INTO `città` (`regione`, `nome`, `stato`, `provincia`) VALUES ('$region', '$city', '$country', NULL);";
+
+}else{
+	$sql = "UPDATE `utente` set `$regioneDb` = NULL , `$cittaDb` = NULL , `$statoDb` = NULL where `utente`.`email` = '$email';";
+} 
+	return $sql;
+}
+
+function updateLuogo($region,$city,$country, $whichone ,$email) 
+{
+	if ($whichone === 'residenza')
+	{
+		$regioneDb = 'regione_residenza';
+		$statoDb = 'stato_residenza';
+		$cittaDb = 'citta_residenza';
+	}else{
+
+		$regioneDb = 'regione_nascita';
+		$statoDb = 'stato_nascita';
+		$cittaDb = 'citta_nascita';
+	}
+
+	if (empty($region) or empty($city) or empty($country)) {
+		$sql = "UPDATE `utente` set `$regioneDb` = NULL , `$cittaDb` = NULL , `$statoDb` = NULL where `utente`.`email` = '$email';";
+	}else{
+		$sql = "UPDATE `utente` set `$regioneDb`= '$region' , `$cittaDb` = '$city' , `$statoDb` = '$country' where `utente`.`email` = '$email';";
+	}
+	return $sql;
+
+
+}
 /*
 function debug_to_console($data) {
     $output = $data;
@@ -321,7 +369,8 @@ function debug_to_console($data) {
     echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
 }
 */
-function updateProfile($cid,$email,$nickname,$name,$lname,$sex,$dateb)
+function updateProfile($cid,$email,$nickname,$name,$lname,$sex,$dateb, $countryRes , $regionRes, $cityRes,$countryBir , $regionBir, $cityBir )
+
 {
 	$risultato = array("status"=>"ok","msg"=>"");
 	$errore = false;
@@ -372,33 +421,23 @@ function updateProfile($cid,$email,$nickname,$name,$lname,$sex,$dateb)
 		$ris_dateb= controllaCampo($cid,$sql);
 		array_push($risposte,$ris_dateb);
 
-		$sql = updateCampo($countryb,'stato_nascita',$email);
-		$ris_countryb= controllaCampo($cid,$sql);
-		array_push($risposte,$ris_countryb);
+		$sql = createLocation($countryRes,$regionRes, $cityRes,$email,'residenza');
+		$ris_res= controllaCampo($cid,$sql);
+		array_push($risposte,$ris_res);
 
-		$sql = updateCampo($regionb,'regione_nascita',$email);
-		$ris_regionb= controllaCampo($cid,$sql);
-		array_push($risposte,$ris_regionb);
-
-		$sql = updateCampo($cityb,'citta_nascita',$email);
-		$ris_cityb= controllaCampo($cid,$sql);
-		array_push($risposte,$ris_cityb);
-
-		$sql = updateCampo($countryr,'stato_residenza',$email);
-		$ris_countryr= controllaCampo($cid,$sql);
-		array_push($risposte,$ris_countryr);
-
-		$sql = updateCampo($regionr,'regione_residenza',$email);
-		$ris_regionr= controllaCampo($cid,$sql);
-		array_push($risposte,$ris_regionr);
-
-		$sql = updateCampo($cityr,'citta_residenza',$email);
-		$ris_cityr = controllaCampo($cid,$sql);
-		array_push($risposte,$ris_cityr);
-
+		$sql = updateLuogo($regionRes,$cityRes,$countryRes , 'residenza',$email);
+		$ris_res= controllaCampo($cid,$sql);
+		array_push($risposte,$ris_res);
 
 		
+		$sql = createLocation($countryBir,$regionBir, $cityBir,$email,'nascita');
+		$ris_bir= controllaCampo($cid,$sql);
+		array_push($risposte,$ris_bir);
 
+		$sql = updateLuogo($regionBir,$cityBir,$countryBir , 'nascita',$email);
+		$ris_bir= controllaCampo($cid,$sql);
+		array_push($risposte,$ris_bir);
+		
 		foreach ($risposte as $ris){
 			if ($ris["status"]=="ko"){
 				$risultato["status"]="ko";
