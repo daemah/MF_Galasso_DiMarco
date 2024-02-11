@@ -238,7 +238,7 @@ if(isset($_SESSION['email'])){
                                     $email_commentatore = getCommentatore($cid, $codice_commento);
                                     $nickname_commentatore = getNickname($cid, $email_commentatore);
                                 ?> <br><br><small> 
-                                <a onclick="ValutaCommento()"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a><div id="visualizza"></div>
+                                <a onclick="ValutaCommento()"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a>
                                 <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore),": ";?></button>
                                 <?php echo(getCommento($cid, $codice_commento)[0])?><br><br>
                                 <?php echo("Commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
@@ -282,7 +282,7 @@ if(isset($_SESSION['email'])){
                                         $email_commentatore = getCommentatore($cid, $codice_commento);
                                         $nickname_commentatore = getNickname($cid, $email_commentatore);?>
                                         <br><br><small> 
-                                        <a onclick="ValutaCommento()"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a><div id="visualizza"></div>
+                                        <a onclick="ValutaCommento()"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a>
                                         <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore. ": "); ?></button>
                                         <?php echo(getCommento($cid, $codice_commento)[0])?> 
                                         <br><br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>

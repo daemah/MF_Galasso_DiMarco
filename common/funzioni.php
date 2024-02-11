@@ -518,7 +518,7 @@ function updateProfile($cid,$email,$nickname,$name,$lname,$sex,$dateb, $countryR
 				$risultato["status"]="ko";
 				$risultato["msg"] = $ris["msg"];
 			}else {
-				#$risultato["status"]="ok";
+				$risultato["status"]="ok";
 				$risultato["msg"] = $ris["msg"];
 			}
 		}
