@@ -16,6 +16,29 @@
                 $codici = getCodiceFoto($cid, $utente); foreach($codici as $codice){
                     if ($codice != null){?>
                         <div class="content">
+                        <?php
+                if (isset($_GET["status"])) {
+                    if ($_GET["status"]=='ko')
+                            {
+                
+                                {
+                                    echo "<div class='alert-warning'>\n";
+                                    echo $_GET["msg"];
+                                    echo "</div>";
+                                }
+                            }
+                        }
+                ?>
+                <?php if (isset($_GET["status"]))
+                        {
+                            if ($_GET["status"]=='ok')
+                            {
+                                echo "<div class='alert-success'>\n";
+                                echo $_GET["msg"];
+                                echo "</div>";
+                            }
+                      
+            }?>
                         <h2> Post suggested for you </h2>  
                             <div class="row">
                                 <div class="col-lg-6">
@@ -46,17 +69,33 @@
 
                                             <img src=<?php echo getFoto($cid, $codice);?> class="gallery-image" alt="">
                                                 <div class="card-footer">
-                                                    <strong>12</strong> <small class="align-middle">Comments</small>
+                                                    
                                                     <p>
                                                         <?php echo getDescrizioneFoto($cid, $codice); ?>
                                                     </p>
+
+                                                    <strong><?php echo(count(getCodiceCommentoFoto($cid, $codice)))?></strong> <small class="align-middle">Comments: </small>
+                                                    <?php
+                                                        $codici_commento = getCodiceCommentoFoto($cid, $codice);
+                                                        
+                                                        foreach($codici_commento as $codice_commento){
+                                                            $email_commentatore = getCommentatore($cid, $codice_commento);
+                                                            $nickname_commentatore = getNickname($cid, $email_commentatore);
+                                                            ?> <br><br> <small><?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0]).",  Commento fatto il: "; echo(getTimeCommento($cid, $codice_commento));?> </small>
+                                                        <?php }
+                                                    ?>
                                                 </div>
                                             </div>
                                                 <div class="card-footer">
-                                                    <input type="text" placeholder="Inserisci un commento" name="commento" value="">
-                                                    <input type="submit" value="invia">
+                                                   
+                                                    <form method="POST" action="../backend/comment-exe_foto.php?utente=<?php echo $utente?>">
+                                                        <div class="container">
+                                                            <input type="text" placeholder="Inserisci un commento" name="commento">
+                                                            <input type="submit" value="invia">
+                                                        </div>
+                                                    </form>
                                                 </div>
-                                                <div class="text-muted small"><?php echo "il giorno ", getTimeFoto($cid, $codice); ?></div>
+                                                <div class="text-muted small"><?php echo "Postato il giorno ", getTimeFoto($cid, $codice); ?></div>
                                     </div>
                                     </div>
                                 </div>
@@ -93,14 +132,27 @@
 
                                                 <p class="gallery-image" alt=""><?php echo getTesto($cid, $codice);?></p>
                                                     <div class="card-footer">
-                                                        <strong>12</strong> <small class="align-middle">Comments</small>
+                                                        <strong><?php echo(count(getCodiceCommentoTesto($cid, $codice)))?></strong> <small class="align-middle">Comments: </small>
+
+                                                        <?php
+                                                        $codici_commento = getCodiceCommentoTesto($cid, $codice);
+                                                        foreach($codici_commento as $codice_commento){
+                                                            $email_commentatore = getCommentatore($cid, $codice_commento);
+                                                            $nickname_commentatore = getNickname($cid, $email_commentatore);
+                                                            ?> <br><br><small> <?php echo($nickname_commentatore). ": "; echo(getCommento($cid, $codice_commento)[0]).",  Commento fatto il: "; echo(getTimeCommento($cid, $codice_commento));?></small>  
+                                                        <?php }
+                                                    ?>
                                                     </div>
                                             </div>
                                                     <div class="card-footer">
-                                                        <input type="text" placeholder="Inserisci un commento" name="commento" value="">
-                                                        <input type="submit" value="invia">
+                                                    <form method="POST" action="../backend/comment-exe_testo.php?utente=<?php echo $utente ?>">
+                                                        <div class="container">
+                                                            <input type="text" placeholder="Inserisci un commento" name="commento">
+                                                            <input type="submit" value="invia">
+                                                        </div>
+                                                    </form>
                                                     </div>
-                                                    <div class="text-muted small"><?php echo "il giorno ", getTimeTesto($cid, $codice); ?></div>
+                                                    <div class="text-muted small"><?php echo "Postato il giorno ", getTimeTesto($cid, $codice); ?></div>
                                         </div>
                                         </div>
                                     </div>

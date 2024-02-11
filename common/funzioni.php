@@ -176,6 +176,57 @@ function getCodiceTesto($cid, $email)
 	return $codici_testo;
 }
 
+function getCodiceCommentoFoto($cid, $codice_foto)
+{
+	$codici_commento_foto = array();
+	$sql = "SELECT codice from commenti where codice_foto = '$codice_foto';";
+	$res = $cid->query($sql);
+	while ($row = $res->fetch_assoc()){
+		$codici_commento_foto[] = $row["codice"];
+	}
+	return $codici_commento_foto;
+}
+
+function getCodiceCommentoTesto($cid, $codice_testo)
+{
+	$codici_commento_testo = array();
+	$sql = "SELECT codice from commenti where codice_testo = '$codice_testo';";
+	$res = $cid->query($sql);
+	while ($row = $res->fetch_assoc()){
+		$codici_commento_testo[] = $row["codice"];
+	}
+	return $codici_commento_testo;
+}
+
+function getCommento($cid, $codice)
+{
+	$commenti_foto = array();
+	$sql = "SELECT testo from commenti where codice = '$codice';";
+	$res = $cid->query($sql);
+	while ($row = $res->fetch_assoc()){
+		$commenti_foto[] = $row["testo"];
+	}
+	return $commenti_foto;
+}
+
+function getCommentatore($cid, $codice)
+{
+	$sql = "SELECT email from commenti where codice = '$codice';";
+	$res = $cid->query($sql);
+	$row = $res->fetch_assoc();
+	$email_commentatore = $row["email"];
+	return $email_commentatore;
+}
+
+function getTimeCommento($cid, $codice)
+{
+	$sql = "SELECT timestamp from commenti where codice = '$codice';";
+	$res = $cid->query($sql);
+	$row = $res->fetch_assoc();
+	$timestamp_commento = $row["timestamp"];
+	return $timestamp_commento;
+}
+
 function getDescrizioneFoto($cid, $codice)
 {
 	$sql = "SELECT descrizione from foto where codice = '$codice';";
@@ -694,5 +745,95 @@ function unfollow($cid, $utente_ricevente, $utente_richiedente)
 		return $risultato;
 }
 
+function insertCommentFoto($cid, $email, $codice, $commento, $codice_foto, $email_foto)
+{
+	
+	$risultato = array("status"=>"ok","msg"=>"", "contenuto"=>"");
+	print_r($risultato);
+	if ($cid == null || $cid->connect_errno) {
+		$risultato["status"]="ko";
+		if (!is_null($cid))
+		     $risultato["msg"]="errore nella connessione al db " . $cid->connect_error;
+		else $risultato["msg"]="errore nella connessione al db ";
+		return $risultato;
+	}
 
+	$msg="";
+	$errore=false;
+
+	if ($res["status"]=='ko')
+	{
+		$errore = true;
+		$msg .= "Problemi nella lettura dal database</br>";
+	}
+	
+
+	if (!$errore)
+	{
+		$sql= "INSERT INTO commenti(codice, email, testo, timestamp, progressivo, codice_foto, email_foto) VALUES('$codice', '$email','$commento',CURRENT_TIMESTAMP, 1, '$codice_foto', '$email_foto');";
+		$res=$cid->query($sql);
+		if ($res==1)
+		{
+	    	$risultato["msg"]="Hai inviato correttamente il commento";
+			print_r($res);
+		}else
+		{
+			$risultato["status"]="ko";
+			$risultato["msg"]="l'inserimento del commento non è andata a buon fine". $sql . $cid->error;
+		}		
+	}
+	else
+	{
+		$risultato["status"]="ko";
+		$risultato["msg"]=$msg;
+	}	
+	return $risultato;
+	
+}
+
+function insertCommentTesto($cid, $email, $codice, $commento, $codice_testo, $email_testo)
+{
+	
+	$risultato = array("status"=>"ok","msg"=>"", "contenuto"=>"");
+	print_r($risultato);
+	if ($cid == null || $cid->connect_errno) {
+		$risultato["status"]="ko";
+		if (!is_null($cid))
+		     $risultato["msg"]="errore nella connessione al db " . $cid->connect_error;
+		else $risultato["msg"]="errore nella connessione al db ";
+		return $risultato;
+	}
+
+	$msg="";
+	$errore=false;
+
+	if ($res["status"]=='ko')
+	{
+		$errore = true;
+		$msg .= "Problemi nella lettura dal database</br>";
+	}
+	
+
+	if (!$errore)
+	{
+		$sql= "INSERT INTO commenti(codice, email, testo, timestamp, progressivo, codice_testo, email_testo) VALUES('$codice', '$email','$commento',CURRENT_TIMESTAMP, 1, '$codice_testo', '$email_testo');";
+		$res=$cid->query($sql);
+		if ($res==1)
+		{
+	    	$risultato["msg"]="Hai inviato correttamente il commento";
+			print_r($res);
+		}else
+		{
+			$risultato["status"]="ko";
+			$risultato["msg"]="l'inserimento del commento non è andata a buon fine". $sql . $cid->error;
+		}		
+	}
+	else
+	{
+		$risultato["status"]="ko";
+		$risultato["msg"]=$msg;
+	}	
+	return $risultato;
+	
+}
 
