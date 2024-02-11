@@ -9,9 +9,7 @@ $email = $_SESSION["email"];
 if(isset($_SESSION['email'])){
 
 ?>
-
-
-<?php require "../common/header.php"?>
+<?php require "../common/header.php"?> 
 <body>
 
 <link rel = "stylesheet" href= "../styles/updateprofile.css" >
@@ -36,9 +34,9 @@ if(isset($_SESSION['email'])){
 			
 			<div class="my-5">
 				<h3>My Profile</h3>
-			</div>
-		
-			<form  method="POST" action="../backend/updateprofile-exe.php">
+			</div>		
+			<form  method="POST" action="../backend/updateprofile-exe.php" autocomplete="off">
+				<script src="../js/places.js"></script>
 				<div class="row mb-5 gx-5">
 					
 					<div class="col-xxl-8 mb-5 mb-xxl-0">
@@ -78,7 +76,39 @@ if(isset($_SESSION['email'])){
 									<label class="form-label">Birthday</label>
 									<input type="date" class="form-control" value="<?php $dateb = getDataNascita($cid,$email); if (!empty($dateb)){ print_r($dateb);}?>" placeholder= "<?php if (empty($dateb)){ echo null;}?>" name="dateb">
 								</div>
+
+								<div class="autocomplete">
+									<label class="form-label">State of birth</label>
+									<input id="CountryBir" type="text" name="countrybir" value="<?php $countryb = getStatoNascita($cid,$email); if (!empty($countryb)){ print_r($countryb);}?>" placeholder="Country of birth">
+								</div>
+
+								<div class="autocomplete">
+									<label class="form-label">Region of birth</label>
+									<input id="RegionBir" type="text" name="regionbir" value="<?php $regionb = getRegioneNascita($cid,$email); if (!empty($regionb)){ print_r($regionb);}?>" placeholder="Region of birth">
+								</div>
+
+								<div class="autocomplete">
+									<label class="form-label">City of birth </label>
+									<input id="CityBir" type="text" name="citybir" value="<?php $cityb = getCittaNascita($cid,$email); if (!empty($cityb)){ print_r($cityb);}?>" placeholder="City of birth">
+								</div>
+
+								<div class="autocomplete">
+									<label class="form-label">Country of residence</label>
+									<input id="CountryRes" type="text" name="countryres" value="<?php $countryr = getStatoResidenza($cid,$email); if (!empty($countryr)){ print_r($countryr);}?>" placeholder="Country of residence">
+								</div>
+
+								<div class="autocomplete">
+									<label class="form-label">Region of residence</label>
+									<input id="RegionRes" type="text" name="regionres"  value="<?php $regionr = getRegioneResidenza($cid,$email); if (!empty($regionr)){ print_r($regionr);}?>" placeholder="Region of residence">
+								</div>
+
+								<div class="autocomplete">
+									<label class="form-label">City of residence </label>
+									<input id="CityRes" type="text" name="cityres"  value="<?php $cityr = getCittaResidenza($cid,$email); if (!empty($cityr)){ print_r($cityr);}?>" placeholder="City of residence">
+								</div>
 								
+				
+
 							</div> 
 						</div>
 					</div>
@@ -94,13 +124,14 @@ if(isset($_SESSION['email'])){
 				
 			</form>
 
+			<!--
 			<form  method="post" action="../backend/uploadfile-exe2.php" enctype="multipart/form-data">
 								<div class="col-md-6">
 									Profile photo
 									<input type="file" class="form-control" name="ImageToUpload" id="ImageToUpload" >
 									<input type="submit" class="form-control" value="Submit" name="submit">
 								</div>
-			</form>
+			</form> -->
 				
 
 		</div>

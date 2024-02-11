@@ -9,8 +9,14 @@ $name = $_POST["name"];
 $lname = $_POST["lname"];
 $sex = $_POST["sex"];
 $dateb = $_POST["dateb"];
+$countryRes = $_POST["countryres"] ; 
+$regionRes = $_POST["regionres"]; 
+$cityRes = $_POST["cityres"];
+$countryBir = $_POST["countrybir"] ; 
+$regionBir = $_POST["regionbir"]; 
+$cityBir = $_POST["citybir"];
 
-$ris = updateProfile($cid, $email, $nickname, $name, $lname, $sex, $dateb);
+$ris = updateProfile($cid, $email, $nickname, $name, $lname, $sex, $dateb, $countryRes, $regionRes, $cityRes, $countryBir, $regionBir, $cityBir);
     
     if ($ris["status"]=='ok')
     {
