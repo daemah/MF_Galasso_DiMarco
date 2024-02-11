@@ -70,10 +70,6 @@ if(isset($_SESSION['email'])){
             </div>
             <link href="../styles/request.css" rel="stylesheet">
     <?php foreach ($utenti as $utente){?>
-<<<<<<< HEAD
-=======
-        
->>>>>>> 26ac6eb017ebda6d5a95c03193e3199c978ae02c
         <div class="container">
             <div class="row">
                 <div class="col-md-8">

@@ -98,10 +98,7 @@
                                                             $nickname_commentatore = getNickname($cid, $email_commentatore);?>
                                                              
                                                                 <br><br> 
-                                                                <a onclick="ValutaCommento();">
-                                                                <img class = "iLikeIt" src="../images/i_like_it.jpeg"></a>
-                                                                <script> $codice_commento = <?php echo json_encode($codice_commento); ?>; </script>
-                                                                <?php $valutazione = $_GET['valutazione']; echo($valutazione); ?>
+                                                                <a onclick="ValutaCommento();"> <img class = "iLikeIt" src="../images/i_like_it.jpeg"> </a>
                                                                 <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore . ": ");?></button>
                                                                 <?php echo(getCommento($cid, $codice_commento)[0])?>
                                                                 <br><small>
@@ -117,7 +114,6 @@
                                                                     echo("Il commento non ha ricevuto valutazioni");
                                                                 }
                                                                 ?><br></small>
-                                                                
                                                         <?php }
                                                     ?>
                                                 </div>

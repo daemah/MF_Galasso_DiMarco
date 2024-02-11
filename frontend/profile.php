@@ -43,6 +43,7 @@ if(isset($_SESSION['email'])){
 
                         <button class="btn profile-edit-btn"  onclick="location.href='updateprofile.php'">Edit Profile</button>
                         <br><span>Aggiungi post</span> <button class="btn add-message-btn"  onclick="location.href=''">+</button> 
+                        <br><br>Indice di rispettabilità: <?php echo(getRispettabilità($cid, $email)); ?>
                         
                     </div>
 
@@ -193,6 +194,7 @@ if(isset($_SESSION['email'])){
                         <?php } else {?>
                             <button class="btn profile-edit-btn"  onclick="location.href='../backend/unfollow-exe.php?utente=<?php echo $utente ?>'">Unfollow</button>
                         <?php }?>
+                        <br><br>Indice di rispettabilità: <?php echo(getRispettabilità($cid, $utente)); ?>
                     </div>
 
                     <div class="profile-stats">
