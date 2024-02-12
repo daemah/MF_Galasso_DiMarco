@@ -12,15 +12,16 @@ function ajaxRequest()
 }
 
 
-function ValutaCommento() {
+function ValutaCommento(codice_commento, utente_commentato) {
     //var messaggio;
+	console.log(codice_commento);
     var valutazione = window.prompt("Inserisci una valutazione da -3 a +3:");
 	//document.write("Valutazione: "+$codice_commento);
 	console.log(valutazione);
 
     //messaggio = valutazione;
     //document.getElementById("visualizza").innerHTML = codiceCommento;
-	//location.href='../frontend/post.php?valutazione='+valutazione;
+	if (valutazione != null){location.href='../backend/insertValutazione-exe.php?valutazione='+valutazione+'&codiceCommento='+codice_commento+'&utente='+utente_commentato;}
 	
 }
 

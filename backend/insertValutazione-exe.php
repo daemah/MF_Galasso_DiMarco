@@ -13,7 +13,7 @@ include_once "../common/funzioni.php";
     print_r($utente);
 
 	$ris = insertIndGradimento($cid, $codice_commento, $email, $gradimento, $utente);
-/*
+
 	if ($ris["status"]=='ok')
 	{
 		header("location: ../frontend/post.php?status=ok&msg=" . urlencode($ris["msg"]));
@@ -22,5 +22,5 @@ include_once "../common/funzioni.php";
 	{
 		header("location: ../frontend/post.php?status=ko&msg=". urlencode($ris["msg"]));	
 	}
-*/
+
 ?>
