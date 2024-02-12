@@ -102,6 +102,16 @@ function getHobby($cid)
 	return $hobby;
 }
 
+function getHaHobby($cid,$email)
+{
+	$sql = "SELECT nome from ha_hobby where `email` = '$email' ";
+	$res = $cid->query($sql);
+	$row = $res->fetch_assoc();
+	$hobby = $row["nome"];
+	return $hobby;
+}
+
+
 function getIndGradimento($cid, $codice)
 {
 	$gradimenti_commento = array();
@@ -373,6 +383,16 @@ function updateCampo($var,$dbvar,$email)
 	return $sql;
 }
 
+function updateHobby($var,$email)
+{
+	if (empty($var)) {
+		$sql = "UPDATE ha_hobby set `nome` = NULL where `email` = '$email';";
+	}else{
+		$sql = "INSERT INTO `ha_hobby` (`nome`, `email`) VALUES ('$var', '$email');";
+	}
+	return $sql;
+}
+
 function controllaCampo($cid,$sql)
 {
 	$res = $cid->query($sql);
@@ -426,7 +446,7 @@ function debug_to_console($data) {
     echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
 }
 */
-function updateProfile($cid,$email,$nickname,$name,$lname,$sex,$dateb, $countryRes , $regionRes, $cityRes,$countryBir , $regionBir, $cityBir )
+function updateProfile($cid,$email,$nickname,$name,$lname,$sex,$dateb, $countryRes , $regionRes, $cityRes,$countryBir , $regionBir, $cityBir , $hobby)
 
 {
 	$risultato = array("status"=>"ok","msg"=>"");
@@ -478,6 +498,18 @@ function updateProfile($cid,$email,$nickname,$name,$lname,$sex,$dateb, $countryR
 		$ris_dateb= controllaCampo($cid,$sql);
 		array_push($risposte,$ris_dateb);
 
+		if (!empty($hobby)){
+			if (!(in_array($hobby,getHobby($cid))))
+			$sql = "INSERT INTO `hobby` (`nome`) VALUES ('$hobby');";
+			$ris_hobby = controllaCampo($cid , $sql);
+			array_push($risposte,$ris_hobby);
+		}
+
+		$sql = updateHobby($hobby,$email);
+		$ris_dateb= controllaCampo($cid,$sql);
+		array_push($risposte,$ris_dateb);
+		
+
 		if (!(empty($countryRes) or empty($regionRes) or empty($cityRes))) {
 			if ($countryRes != getStatoResidenza($cid,$email) || $regionRes != getRegioneResidenza($cid, $email) || $cityRes != getCittaResidenza($cid,$email)){
 			$sql = createLocation($countryRes,$regionRes, $cityRes,$email);
@@ -497,16 +529,12 @@ function updateProfile($cid,$email,$nickname,$name,$lname,$sex,$dateb, $countryR
 			$ris_bir= controllaCampo($cid,$sql);
 			array_push($risposte,$ris_bir);
 			}
-	
 		}
-		
-		$sql = createLocation($countryBir,$regionBir, $cityBir,$email);
-		$ris_bir= controllaCampo($cid,$sql);
-		array_push($risposte,$ris_bir);
 
 		$sql = updateLuogo($regionBir,$cityBir,$countryBir , 'nascita',$email);
 		$ris_bir= controllaCampo($cid,$sql);
 		array_push($risposte,$ris_bir);
+
 		
 		foreach ($risposte as $ris){
 			if ($ris["status"]=="ko"){

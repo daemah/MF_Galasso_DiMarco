@@ -107,7 +107,10 @@ if(isset($_SESSION['email'])){
 									<input id="CityRes" type="text" name="cityres"  value="<?php $cityr = getCittaResidenza($cid,$email); if (!empty($cityr)){ print_r($cityr);}?>" placeholder="City of residence">
 								</div>
 								
-				
+								<div class="autocomplete">
+									<label class="form-label">Hobby </label>
+									<input id="Hobby" type="text" name="hobby" value="<?php $hobby = getHaHobby($cid,$email); if (!empty($hobby)){ print_r($hobby);}?>" placeholder="Write your hobby">
+								</div>
 
 							</div> 
 						</div>
@@ -124,20 +127,20 @@ if(isset($_SESSION['email'])){
 				
 			</form>
 
-			<!--
-			<form  method="post" action="../backend/uploadfile-exe2.php" enctype="multipart/form-data">
+			
+			<form  method="post" action="../backend/uploadfile-exe.php" enctype="multipart/form-data">
 								<div class="col-md-6">
 									Profile photo
 									<input type="file" class="form-control" name="ImageToUpload" id="ImageToUpload" >
 									<input type="submit" class="form-control" value="Submit" name="submit">
 								</div>
-			</form> -->
+			</form> 
 				
 
 		</div>
 	</div>
 	<?php require "../common/footer.php"?> 
-	</div>
+</div>
 
 </body>
 <?php

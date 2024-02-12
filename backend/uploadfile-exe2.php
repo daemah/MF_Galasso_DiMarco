@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
             $msg .= "Tutto ok</br>";
             header('location: ../frontend/updateprofile.php?status=ok&msg=' . urlencode($msg));
         } else {
-            $msg .= "Errore durante il caricamento del file:  ". "$fileTmpName" . "</br>";
+            $msg .= "Errore durante il caricamento del file: </br>";
         }
     }
 
