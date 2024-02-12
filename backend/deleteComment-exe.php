@@ -3,7 +3,7 @@
 include_once "../common/connection.php";
 include_once "../common/funzioni.php";
 
-	$codice = $_GET["commento"];
+	$codice = $_GET["codice"];
     print_r($codice);
 
 	$ris = deleteCommento($cid, $codice);
