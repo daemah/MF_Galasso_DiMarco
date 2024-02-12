@@ -14,11 +14,17 @@
     cursor: pointer;
 }
 
+span{color: black;}
+
 .goToProfile{
-    font-size: 25px;
+    font-size: 15px;
     border-width:0ch;
     background-color: #e3e3e300;
 }
+
+.goToProfile:hover {
+    opacity: 0.5;
+  }
 
 .btn:focus {
     outline: 0.5rem auto #4d90fe;
@@ -135,6 +141,10 @@
     border-width:0ch;
     background-color: #e3e3e300;
 }
+
+.goToFriends:hover {
+    opacity: 0.5;
+  }
 
 .iLikeIt{
     width: 20px;

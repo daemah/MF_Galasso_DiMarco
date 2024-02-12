@@ -42,15 +42,13 @@ function ValutaCommento()
 */
 
 function ValutaCommento() {
-    var messaggio;
-    var valutazione = window.prompt("Inserisci una valutazione da -3 a +3:", );
+    //var messaggio;
+    var valutazione = window.prompt("Inserisci una valutazione da -3 a +3:");
+	//document.write("Valutazione: "+$codice_commento);
 	console.log(valutazione);
-    
-    messaggio = valutazione;
-    document.getElementById("visualizza").innerHTML = messaggio;
-	/*if (valutazione!=null){
-		location.href='../backend/insertValutazione-exe.php?valutazione='+valutazione;
-	}*/
+    //messaggio = valutazione;
+    //document.getElementById("visualizza").innerHTML = codiceCommento;
+	//location.href='../frontend/post.php?valutazione='+valutazione;
 }
 
 function logOutConfirm() {

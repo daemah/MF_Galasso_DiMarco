@@ -370,7 +370,16 @@ function getDataRichiesta($cid, $utente, $email)
     } else{
 	return 0;}
 	
-}			
+}
+
+function getRispettabilità($cid, $email)
+{
+	$sql = "SELECT rispettabilità FROM utente WHERE email = '$email';";
+    $res=$cid->query($sql);
+    $row = $res->fetch_assoc();
+	$rispettabilità = $row["rispettabilità"]; 	
+	return $rispettabilità;
+}
 
 ####### FUNZIONI UPDATE ##########
 function updateCampo($var,$dbvar,$email)

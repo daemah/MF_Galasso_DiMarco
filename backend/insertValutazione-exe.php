@@ -3,7 +3,7 @@ session_start();
 include_once "../common/connection.php";
 include_once "../common/funzioni.php";
 
-	$codice_commento = $_POST["commento"];
+	$codice_commento = $_GET["codiceCommento"];
     print_r($codice_commento);
     $email = $_SESSION["email"];
     print_r($email);

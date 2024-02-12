@@ -28,7 +28,7 @@ if(isset($_SESSION['email'])){
                     }
 				}
 ?>
-<div class="container">
+<div class="content">
 <div class="row">
 		<div class="col-12">
 			
