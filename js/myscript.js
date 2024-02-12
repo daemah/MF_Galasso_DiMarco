@@ -26,7 +26,6 @@ function ValutaCommento(codice_commento, utente_commentato) {
 }
 
 
-
 function logOutConfirm() {
     var conferma = window.confirm("Sicuro che vuoi sloggarti?");
 	if (conferma){

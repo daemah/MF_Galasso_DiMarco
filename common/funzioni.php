@@ -774,6 +774,37 @@ function eliminateRequest($cid, $utente_ricevente, $utente_richiedente)
 		return $risultato;
 }
 
+function deleteCommento($cid, $codice)
+{
+	$risultato = array("status"=>"ko","msg"=>"");
+	$errore = false;
+
+	if ($cid == null || $cid->connect_errno) {
+		$risultato["status"]="ko";
+		if (!is_null($cid))
+		     $risultato["msg"]="errore nella connessione al db " . $cid->connect_error;
+		else $risultato["msg"]="errore nella connessione al db ";
+		return $risultato;
+	}
+	if ($cid->connect_error) {
+		$risultato["status"]="ko";
+		$risultato["msg"]="errore nella connessione al db " . $cid->connect_error;
+		return $risultato;
+	}
+
+	$sql = "DELETE from commenti where codice = '$codice';";
+	$res=$cid->query($sql);
+		if ($res==1)
+		{
+			$risultato["status"]="ok";
+	    	$risultato["msg"]="Hai eliminato il commento";
+		}else{
+			$risultato["msg"]="L'eliminazione del commento è fallita". $sql . $cid->error;
+		}
+
+	return $risultato;
+}
+
 function unfollow($cid, $utente_ricevente, $utente_richiedente)
 {
 	$risultato = array("status"=>"ko","msg"=>"");

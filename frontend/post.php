@@ -101,6 +101,9 @@
                                                                 <a onclick="ValutaCommento('<?php echo $codice_commento;?>', '<?php echo $utente;?>');"> <img class = "iLikeIt" src="../images/i_like_it.jpeg"> </a>
                                                                 <button type="button"  class="goToProfileComment" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore . ": ");?></button>
                                                                 <?php echo(getCommento($cid, $codice_commento)[0])?>
+                                                                <?php if ($nickname_commentatore == getNickname($cid,$email)){?>
+                                                                <span><button onclick= "location.href='../backend/deleteComment-exe.php?commento=<?php echo $codice_commento ?>'">Delete comment</button></span>
+                                                                <?php } ?>
                                                                 <br><small>
                                                                 <br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?> 
                                                                 <br>
@@ -183,9 +186,12 @@
                                                             $email_commentatore = getCommentatore($cid, $codice_commento);
                                                             $nickname_commentatore = getNickname($cid, $email_commentatore);?>
                                                             <br><br>
-                                                            <a onclick="ValutaCommento()"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a>
+                                                            <a onclick="ValutaCommento('<?php echo $codice_commento;?>', '<?php echo $utente;?>')"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a>
                                                             <button type="button"  class="goToProfileComment" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore . ": ");?></button>
                                                             <?php echo(getCommento($cid, $codice_commento)[0])?> 
+                                                            <?php if ($nickname_commentatore == getNickname($cid,$email)){?>
+                                                                <span><button onclick = "location.href='../backend/deleteComment-exe.php?codice=<?php echo $codice_commento ?>'">Delete comment</button></span>
+                                                            <?php } ?>
                                                             <small><br><br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
                                                             <br>
                                                                 <?php  
