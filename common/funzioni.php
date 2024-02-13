@@ -415,6 +415,18 @@ function getDataBlocco($cid, $email)
 	return 0;
 }
 
+function contaCommenti($cid, $email, $codice)
+{
+	$commenti = array();
+	$sql = "SELECT email FROM commenti WHERE email = '$email' and (codice_foto = '$codice' or codice_testo = '$codice');";
+	$res= $cid->query($sql);
+	while ($row = $res->fetch_assoc()){
+		$commenti[] = $row["email"];
+	}
+	return count($commenti);
+
+}
+
 ####### FUNZIONI UPDATE ##########
 function updateCampo($var,$dbvar,$email)
 {
@@ -919,7 +931,16 @@ function insertCommentFoto($cid, $email, $codice, $commento, $codice_foto, $emai
 		$errore = true;
 		$msg .= "Problemi nella lettura dal database</br>";
 	}
-	
+
+	if (getDataBlocco($cid, $email)!= 0){
+		$errore = true;
+		$msg .= "Non puoi inserire il commento perchè sei stato bloccato!</br>";
+	}
+
+	if (contaCommenti($cid, $email, $codice_foto)>4){
+		$errore = true;
+		$msg .= "Non puoi inserire il commento perchè ne hai già inseriti 5!</br>";
+	}	
 
 	if (!$errore)
 	{
@@ -965,7 +986,16 @@ function insertCommentTesto($cid, $email, $codice, $commento, $codice_testo, $em
 		$errore = true;
 		$msg .= "Problemi nella lettura dal database</br>";
 	}
-	
+
+	if (getDataBlocco($cid, $email)!= 0){
+		$errore = true;
+		$msg .= "Non puoi inserire il commento perchè sei stato bloccato</br>";
+	}
+
+	if (contaCommenti($cid, $email, $codice_testo)>4){
+		$errore = true;
+		$msg .= "Non puoi inserire il commento perchè ne hai già inseriti 5!</br>";
+	}	
 
 	if (!$errore)
 	{
