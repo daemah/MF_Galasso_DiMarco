@@ -371,6 +371,18 @@ function getRispettabilità($cid, $email)
 	return $rispettabilità;
 }
 
+function getValutazione($cid, $email, $codice_commento)
+{
+	$sql = "SELECT gradimento FROM valuta WHERE codice_commento = '$codice_commento' and email_valutatore = '$email';";
+    $res=$cid->query($sql);
+    $row = $res->fetch_assoc();
+	if($row != NULL){
+		$valutazione = $row["gradimento"];
+        return $valutazione;
+    } else{
+	return 0;}
+}
+
 ####### FUNZIONI UPDATE ##########
 function updateCampo($var,$dbvar,$email)
 {
@@ -959,7 +971,7 @@ function insertIndGradimento($cid, $codice_commento, $email_valutatore, $gradime
 	}else
 	{
 		$risultato["status"]="ko";
-		$risultato["msg"]="l'inserimento della valutazione del commento non è andata a buon fine". $sql . $cid->error;
+		$risultato["msg"]="L'inserimento della valutazione del commento non è andata a buon fine --> Hai già valutato questo commento";
 	}		
 	}
 	else
@@ -971,3 +983,48 @@ function insertIndGradimento($cid, $codice_commento, $email_valutatore, $gradime
 
 }
 
+function deleteIndGradimento($cid, $codice_commento, $email_valutatore, $email_valutato)
+{
+	$risultato = array("status"=>"ok","msg"=>"", "contenuto"=>"");
+	print_r($risultato);
+	if ($cid == null || $cid->connect_errno) {
+		$risultato["status"]="ko";
+		if (!is_null($cid))
+		     $risultato["msg"]="errore nella connessione al db " . $cid->connect_error;
+		else $risultato["msg"]="errore nella connessione al db ";
+		return $risultato;
+	}
+
+	$msg="";
+	$errore=false;
+
+	if ($res["status"]=='ko')
+	{
+		$errore = true;
+		$msg .= "Problemi nella lettura dal database</br>";
+	}
+	
+
+	if (!$errore)
+	{
+	$sql = "DELETE FROM valuta WHERE codice_commento = '$codice_commento' and email_commento = '$email_valutato' and email_valutatore = '$email_valutatore';";
+	$res=$cid->query($sql);
+	if ($res==1)
+	{
+		$risultato["msg"]="Hai eliminato correttamente la valutazione del commento";
+	}else
+	{
+		$risultato["status"]="ko";
+		$risultato["msg"]="L'eliminazione della valutazione del commento non è andata a buon fine";
+	}		
+	}
+	else
+	{
+		$risultato["status"]="ko";
+		$risultato["msg"]=$msg;
+	}	
+	return $risultato;
+
+}
+
+?>
