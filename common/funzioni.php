@@ -403,6 +403,18 @@ function getAdmin($cid, $email)
 
 }
 
+function getDataBlocco($cid, $email)
+{
+	$sql = "SELECT data_blocco FROM utente WHERE email = '$email';";
+    $res=$cid->query($sql);
+    $row = $res->fetch_assoc();
+	if ($row != NULL){
+		$data_blocco = $row["data_blocco"];
+		return $data_blocco;
+	}
+	return 0;
+}
+
 ####### FUNZIONI UPDATE ##########
 function updateCampo($var,$dbvar,$email)
 {
@@ -1112,7 +1124,6 @@ function deleteFoto($cid, $codice_foto, $email)
 function deleteTesto($cid, $codice_testo, $email)
 {
 	$risultato = array("status"=>"ok","msg"=>"", "contenuto"=>"");
-	print_r($risultato);
 	if ($cid == null || $cid->connect_errno) {
 		$risultato["status"]="ko";
 		if (!is_null($cid))
@@ -1142,6 +1153,132 @@ function deleteTesto($cid, $codice_testo, $email)
 	{
 		$risultato["status"]="ko";
 		$risultato["msg"]="L'eliminazione del testo non è andata a buon fine";
+	}		
+	}
+	else
+	{
+		$risultato["status"]="ko";
+		$risultato["msg"]=$msg;
+	}	
+	return $risultato;
+}
+
+function deleteUtente($cid, $email)
+{
+	$risultato = array("status"=>"ok","msg"=>"", "contenuto"=>"");
+	if ($cid == null || $cid->connect_errno) {
+		$risultato["status"]="ko";
+		if (!is_null($cid))
+		     $risultato["msg"]="errore nella connessione al db " . $cid->connect_error;
+		else $risultato["msg"]="errore nella connessione al db ";
+		return $risultato;
+	}
+
+	$msg="";
+	$errore=false;
+
+	if ($res["status"]=='ko')
+	{
+		$errore = true;
+		$msg .= "Problemi nella lettura dal database</br>";
+	}
+	
+
+	if (!$errore)
+	{
+	$sql = "DELETE FROM utente WHERE `utente`.`email` = '$email';";
+	$res=$cid->query($sql);
+	if ($res==1)
+	{
+		$risultato["msg"]="Hai eliminato correttamente l'utente";
+	}else
+	{
+		$risultato["status"]="ko";
+		$risultato["msg"]="L'eliminazione dell'utente non è andata a buon fine";
+	}		
+	}
+	else
+	{
+		$risultato["status"]="ko";
+		$risultato["msg"]=$msg;
+	}	
+	return $risultato;	
+}
+
+function bloccaUtente($cid, $email)
+{
+	$risultato = array("status"=>"ok","msg"=>"", "contenuto"=>"");
+	if ($cid == null || $cid->connect_errno) {
+		$risultato["status"]="ko";
+		if (!is_null($cid))
+		     $risultato["msg"]="errore nella connessione al db " . $cid->connect_error;
+		else $risultato["msg"]="errore nella connessione al db ";
+		return $risultato;
+	}
+
+	$msg="";
+	$errore=false;
+
+	if ($res["status"]=='ko')
+	{
+		$errore = true;
+		$msg .= "Problemi nella lettura dal database</br>";
+	}
+	
+
+	if (!$errore)
+	{
+	$sql = "UPDATE `utente` SET `data_blocco` = CURRENT_DATE WHERE `utente`.`email` = '$email';";
+	$res=$cid->query($sql);
+	if ($res==1)
+	{
+		$risultato["msg"]="Hai bloccato correttamente l'utente";
+	}else
+	{
+		$risultato["status"]="ko";
+		$risultato["msg"]="Il blocco dell'utente non è andata a buon fine";
+	}		
+	}
+	else
+	{
+		$risultato["status"]="ko";
+		$risultato["msg"]=$msg;
+	}	
+	return $risultato;
+}
+	
+function sbloccaUtente($cid, $email)
+{
+	$risultato = array("status"=>"ok","msg"=>"", "contenuto"=>"");
+	if ($cid == null || $cid->connect_errno) {
+		$risultato["status"]="ko";
+		if (!is_null($cid))
+		     $risultato["msg"]="errore nella connessione al db " . $cid->connect_error;
+		else $risultato["msg"]="errore nella connessione al db ";
+		return $risultato;
+	}
+
+	$msg="";
+	$errore=false;
+
+	if ($res["status"]=='ko')
+	{
+		$errore = true;
+		$msg .= "Problemi nella lettura dal database</br>";
+	}
+	
+
+	if (!$errore)
+	{
+	$sql = "UPDATE `utente` SET `data_blocco` = NULL WHERE `utente`.`email` = '$email';";
+	$res=$cid->query($sql);
+	if ($res==1)
+	{
+		$risultato["msg"]="Hai sbloccato correttamente l'utente";
+	}else
+	{
+		$risultato["status"]="ko";
+		$risultato["msg"]="Lo sblocco dell'utente non è andata a buon fine";
 	}		
 	}
 	else

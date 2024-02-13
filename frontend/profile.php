@@ -86,24 +86,24 @@ if(isset($_SESSION['email'])){
                                     <?php
                                     $codici_commento = getCodiceCommentoFoto($cid, $codice);
                                     foreach($codici_commento as $codice_commento){
-                                                            $email_commentatore = getCommentatore($cid, $codice_commento);
-                                                            $nickname_commentatore = getNickname($cid, $email_commentatore);?>
-                                                            <br><br>
-                                                            <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore . ": ");?></button>
-                                                            <span><?php echo(getCommento($cid, $codice_commento)[0])?> </span>
-                                                            <small><br><br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
-                                                            <br>
-                                                                <?php  
-                                                                $gradimenti = getIndGradimento($cid, $codice_commento);
-                                                                $somma = 0;
-                                                                if (!empty($gradimenti)){
-                                                                    foreach ($gradimenti as $gradimento){$somma += $gradimento;}
-                                                                    echo("La media delle valutazioni di questo commento è (indice di gradimento): ". $somma/count($gradimenti));
-                                                                }else{
-                                                                    echo("Il commento non ha ricevuto valutazioni");
-                                                                }
-                                                                ?><br></small>  
-                                                        <?php } ?>
+                                        $email_commentatore = getCommentatore($cid, $codice_commento);
+                                        $nickname_commentatore = getNickname($cid, $email_commentatore);?>
+                                        <br><br>
+                                        <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore . ": ");?></button>
+                                        <span><?php echo(getCommento($cid, $codice_commento)[0])?> </span>
+                                        <small><br><br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
+                                        <br>
+                                        <?php  
+                                            $gradimenti = getIndGradimento($cid, $codice_commento);
+                                            $somma = 0;
+                                            if (!empty($gradimenti)){
+                                                foreach ($gradimenti as $gradimento){$somma += $gradimento;}
+                                                echo("La media delle valutazioni di questo commento è (indice di gradimento): ". $somma/count($gradimenti));
+                                                }else{
+                                                echo("Il commento non ha ricevuto valutazioni");
+                                                }
+                                                ?><br></small>  
+                                    <?php } ?>
                         </div>
                         <div class="text-muted small"><?php echo "Pubblicato il giorno ", getTimeFoto($cid, $codice); ?></div>
                     <?php } ?>
@@ -196,7 +196,17 @@ if(isset($_SESSION['email'])){
                         <?php } else {?>
                             <button class="btn profile-edit-btn"  onclick="location.href='../backend/unfollow-exe.php?utente=<?php echo $utente ?>'">Unfollow</button>
                         <?php }?>
+                        <span>
+                        <?php if (getAdmin($cid, $email)!=0){ $codice_foto = getCodiceFoto($cid, $email);?>
+                            <?php if (getDataBlocco($cid, $utente) == 0){?>
+                                <button class="btn profile-edit-btn" onclick="location.href='../backend/bloccaUtente-exe.php?utente=<?php echo $utente ?>'">Blocca utente</button>
+                            <?php } else { ?>
+                                <button class="btn profile-edit-btn" onclick="location.href='../backend/sbloccaUtente-exe.php?utente=<?php echo $utente ?>'">Sblocca utente</button>
+                            <?php } ?>                                            
+                                <button class="btn profile-edit-btn" onclick="location.href='../backend/deleteUtente-exe.php?utente=<?php echo $utente ?>'">Elimina utente</button>
+                            <?php } ?> </span>
                         <br><br>Indice di rispettabilità: <?php echo(getRispettabilità($cid, $utente)); ?>
+                        
                     </div>
 
                     <div class="profile-stats">
@@ -242,7 +252,9 @@ if(isset($_SESSION['email'])){
                                     $email_commentatore = getCommentatore($cid, $codice_commento);
                                     $nickname_commentatore = getNickname($cid, $email_commentatore);
                                 ?> <br><br> 
+                                <?php if ($nickname_commentatore != getNickname($cid,$email)){ ?>
                                 <a onclick="ValutaCommento()"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a>
+                                <?php } ?>
                                 <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore),": ";?></button>
                                 <span><?php echo(getCommento($cid, $codice_commento)[0])?></span><br><br>
                                 <small><?php echo("Commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
@@ -286,7 +298,9 @@ if(isset($_SESSION['email'])){
                                         $email_commentatore = getCommentatore($cid, $codice_commento);
                                         $nickname_commentatore = getNickname($cid, $email_commentatore);?>
                                         <br><br> 
+                                        <?php if ($nickname_commentatore != getNickname($cid,$email)){ ?>
                                         <a onclick="ValutaCommento()"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a>
+                                        <?php } ?>
                                         <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore. ": "); ?></button>
                                         <span><?php echo(getCommento($cid, $codice_commento)[0])?></span>
                                         <small><br><br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>

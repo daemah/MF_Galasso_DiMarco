@@ -71,6 +71,15 @@
                                         <?php } else {?>
                                             <button class="btn profile-edit-btn"  onclick="location.href='../backend/unfollow-exe.php?utente=<?php echo $utente ?>'">Unfollow</button>
                                         <?php }}?>
+
+                                        <?php if (($utente != $email) & getAdmin($cid, $email)!=0){?>
+                                            <?php if (getDataBlocco($cid, $utente) == 0){?>
+                                                <button class="btn profile-edit-btn" onclick="location.href='../backend/bloccaUtente-exe.php?utente=<?php echo $utente ?>'">Blocca utente</button>
+                                            <?php } else { ?>
+                                                <button class="btn profile-edit-btn" onclick="location.href='../backend/sbloccaUtente-exe.php?utente=<?php echo $utente ?>'">Sblocca utente</button>
+                                            <?php } ?>                                            
+                                            <button class="btn profile-edit-btn" onclick="location.href='../backend/deleteUtente-exe.php?utente=<?php echo $utente ?>'">Elimina utente</button>
+                                        <?php } ?>
                                         
                                         </span>
                                         </div>
@@ -174,7 +183,15 @@
                                             <?php } else {?>
                                                 <button class="btn profile-edit-btn"  onclick="location.href='../backend/unfollow-exe.php?utente=<?php echo $utente ?>'">Unfollow</button>
                                             <?php }}?>
-                                            
+
+                                            <?php if (($utente != $email) & getAdmin($cid, $email)!=0){?>
+                                                <?php if (getDataBlocco($cid, $utente) == 0){?>
+                                                    <button class="btn profile-edit-btn" onclick="location.href='../backend/bloccaUtente-exe.php?utente=<?php echo $utente ?>'">Blocca utente</button>
+                                                <?php } else { ?>
+                                                    <button class="btn profile-edit-btn" onclick="location.href='../backend/sbloccaUtente-exe.php?utente=<?php echo $utente ?>'">Sblocca utente</button>
+                                                <?php } ?>
+                                                <button class="btn profile-edit-btn" onclick="location.href='../backend/deleteUtente-exe.php?utente=<?php echo $utente ?>'">Elimina utente</button>
+                                                <?php } ?>
                                             </span>
                                             </div>
                                             </a>
