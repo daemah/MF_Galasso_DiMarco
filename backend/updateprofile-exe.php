@@ -15,8 +15,10 @@ $cityRes = $_POST["cityres"];
 $countryBir = $_POST["countrybir"] ; 
 $regionBir = $_POST["regionbir"]; 
 $cityBir = $_POST["citybir"];
+$hobby = $_POST["hobby"];
 
-$ris = updateProfile($cid, $email, $nickname, $name, $lname, $sex, $dateb, $countryRes, $regionRes, $cityRes, $countryBir, $regionBir, $cityBir);
+
+$ris = updateProfile($cid, $email, $nickname, $name, $lname, $sex, $dateb, $countryRes, $regionRes, $cityRes, $countryBir, $regionBir, $cityBir,$hobby);
     
     if ($ris["status"]=='ok')
     {
