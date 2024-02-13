@@ -393,6 +393,16 @@ function getValutazione($cid, $email, $codice_commento)
 	return 0;}
 }
 
+function getAdmin($cid, $email)
+{
+	$sql = "SELECT admin FROM utente WHERE email = '$email';";
+    $res=$cid->query($sql);
+    $row = $res->fetch_assoc();
+	$admin = $row["admin"];
+    return $admin;
+
+}
+
 ####### FUNZIONI UPDATE ##########
 function updateCampo($var,$dbvar,$email)
 {

@@ -98,7 +98,9 @@
                                                             $nickname_commentatore = getNickname($cid, $email_commentatore);?>
                                                              
                                                                 <br><br> 
+                                                                <?php if ($nickname_commentatore != getNickname($cid,$email)){ ?>
                                                                 <a onclick="ValutaCommento('<?php echo $codice_commento;?>', '<?php echo $utente;?>');"> <img class = "iLikeIt" src="../images/i_like_it.jpeg"> </a>
+                                                                <?php } ?>
                                                                 <button type="button"  class="goToProfileComment" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore . ": ");?></button>
                                                                 <?php echo(getCommento($cid, $codice_commento)[0])?>
                                                                 <?php if ($nickname_commentatore == getNickname($cid,$email)){?>
@@ -188,7 +190,9 @@
                                                             $email_commentatore = getCommentatore($cid, $codice_commento);
                                                             $nickname_commentatore = getNickname($cid, $email_commentatore);?>
                                                             <br><br>
+                                                            <?php if ($nickname_commentatore != getNickname($cid,$email)){ ?>
                                                             <a onclick="ValutaCommento('<?php echo $codice_commento;?>', '<?php echo $utente;?>')"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a>
+                                                            <?php } ?>
                                                             <button type="button"  class="goToProfileComment" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore . ": ");?></button>
                                                             <?php echo(getCommento($cid, $codice_commento)[0])?> 
                                                             <?php if ($nickname_commentatore == getNickname($cid,$email)){?>
