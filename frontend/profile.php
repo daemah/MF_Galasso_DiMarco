@@ -69,6 +69,7 @@ if(isset($_SESSION['email'])){
                 <div class="gallery">
                     <?php $codici = getCodiceFoto($cid, $email); foreach($codici as $codice){ ?>
                     <div >  
+                        <button onclick="location.href='../backend/deleteFoto-exe.php?codice=<?php echo $codice ?>'"> Elimina Foto </button>
                         <p id = "luogo">
                             <?php echo getCitta($cid, $codice)." "; echo getStato($cid, $codice); ?>
                         </p>
@@ -110,6 +111,7 @@ if(isset($_SESSION['email'])){
 
                 <div class="gallery-item" tabindex="0">
                 <?php $codici_t = getCodiceTesto($cid, $email); foreach($codici_t as $codice_t){ ?>
+                    <button onclick="location.href='../backend/deleteTesto-exe.php?codice=<?php echo $codice_t ?>'"> Elimina Testo </button>
                 <p id = "messaggio_testo"><?php echo getTesto($cid, $codice_t);?></p>
 
                         <div class="card-footer">

@@ -1055,4 +1055,91 @@ function deleteIndGradimento($cid, $codice_commento, $email_valutatore, $email_v
 
 }
 
+function deleteFoto($cid, $codice_foto, $email)
+{
+	$risultato = array("status"=>"ok","msg"=>"", "contenuto"=>"");
+	print_r($risultato);
+	if ($cid == null || $cid->connect_errno) {
+		$risultato["status"]="ko";
+		if (!is_null($cid))
+		     $risultato["msg"]="errore nella connessione al db " . $cid->connect_error;
+		else $risultato["msg"]="errore nella connessione al db ";
+		return $risultato;
+	}
+
+	$msg="";
+	$errore=false;
+
+	if ($res["status"]=='ko')
+	{
+		$errore = true;
+		$msg .= "Problemi nella lettura dal database</br>";
+	}
+	
+
+	if (!$errore)
+	{
+	$sql = "DELETE FROM foto WHERE codice = '$codice_foto' and email = '$email' ;";
+	$res=$cid->query($sql);
+	if ($res==1)
+	{
+		$risultato["msg"]="Hai eliminato correttamente la foto";
+	}else
+	{
+		$risultato["status"]="ko";
+		$risultato["msg"]="L'eliminazione della foto non è andata a buon fine";
+	}		
+	}
+	else
+	{
+		$risultato["status"]="ko";
+		$risultato["msg"]=$msg;
+	}	
+	return $risultato;
+
+}
+
+function deleteTesto($cid, $codice_testo, $email)
+{
+	$risultato = array("status"=>"ok","msg"=>"", "contenuto"=>"");
+	print_r($risultato);
+	if ($cid == null || $cid->connect_errno) {
+		$risultato["status"]="ko";
+		if (!is_null($cid))
+		     $risultato["msg"]="errore nella connessione al db " . $cid->connect_error;
+		else $risultato["msg"]="errore nella connessione al db ";
+		return $risultato;
+	}
+
+	$msg="";
+	$errore=false;
+
+	if ($res["status"]=='ko')
+	{
+		$errore = true;
+		$msg .= "Problemi nella lettura dal database</br>";
+	}
+	
+
+	if (!$errore)
+	{
+	$sql = "DELETE FROM testo WHERE codice = '$codice_testo' and email = '$email' ;";
+	$res=$cid->query($sql);
+	if ($res==1)
+	{
+		$risultato["msg"]="Hai eliminato correttamente il testo";
+	}else
+	{
+		$risultato["status"]="ko";
+		$risultato["msg"]="L'eliminazione del testo non è andata a buon fine";
+	}		
+	}
+	else
+	{
+		$risultato["status"]="ko";
+		$risultato["msg"]=$msg;
+	}	
+	return $risultato;
+}
+
 ?>
