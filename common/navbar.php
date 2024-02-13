@@ -4,7 +4,7 @@ include_once "funzioni.php";
 ?>
 
 <link rel="stylesheet" href="../styles/navbar.css">
-<script src="../js/myscript.js"></script>
+<script src="../js/myscript.js"> </script>
 <nav class="side-nav">
     <ul>
          <!--LOGO-->
@@ -47,12 +47,15 @@ include_once "funzioni.php";
             <li id="home">
                 <a class="nav-link" href="notifications.php"  >
                     <img src="../images/notifications.jpeg" class="avatar" alt="Avatar">
+                    <span id="notificationCount"> </span>
+                    
                 </a>
             </li>
 
             <!--STATISTICS-->
             <li id="home">
                 <a class="nav-link" href="statistics.php"  >
+                <script> updateNotificationCount(); </script>
                     <img src="../images/statistics.png" class="avatar" alt="Avatar">
                 </a>
             </li>
