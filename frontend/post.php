@@ -113,9 +113,9 @@
                                                                 <button type="button"  class="goToProfileComment" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore . ": ");?></button>
                                                                 <?php echo(getCommento($cid, $codice_commento)[0])?>
                                                                 <?php if ($nickname_commentatore == getNickname($cid,$email)){?>
-                                                                <span><button onclick= "location.href='../backend/deleteComment-exe.php?codice=<?php echo $codice_commento ?>'">Delete comment</button></span>
+                                                                <span><button class="btn profile-edit-btn" onclick= "location.href='../backend/deleteComment-exe.php?codice=<?php echo $codice_commento ?>'">Delete comment</button></span>
                                                                 <?php }elseif (getValutazione($cid, $email, $codice_commento)!=0) { ?>
-                                                                <span><button onclick= "location.href='../backend/deleteValutazione-exe.php?codice=<?php echo $codice_commento ?>&utente=<?php echo $utente?>'">Delete valutazione</button></span>
+                                                                <span><button class="btn profile-edit-btn" onclick= "location.href='../backend/deleteValutazione-exe.php?codice=<?php echo $codice_commento ?>&utente=<?php echo $utente?>'">Delete valutazione</button></span>
                                                                 <?php } ?>
                                                                 <br><small>
                                                                 <br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?> 
@@ -139,7 +139,7 @@
                                                     <form method="POST" action="../backend/comment-exe_foto.php?utente=<?php echo $utente?>">
                                                         <div class="container">
                                                             <input type="text" placeholder="Inserisci un commento" name="commento">
-                                                            <input type="submit" value="invia">
+                                                            <input class="btn profile-edit-btn" type="submit" value="invia">
                                                         </div>
                                                     </form>
                                                 </div>
@@ -213,9 +213,9 @@
                                                             <button type="button"  class="goToProfileComment" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore . ": ");?></button>
                                                             <?php echo(getCommento($cid, $codice_commento)[0])?> 
                                                             <?php if ($nickname_commentatore == getNickname($cid,$email)){?>
-                                                                <span><button onclick = "location.href='../backend/deleteComment-exe.php?codice=<?php echo $codice_commento ?>'">Delete comment</button></span>
+                                                                <span><button class="btn profile-edit-btn" onclick = "location.href='../backend/deleteComment-exe.php?codice=<?php echo $codice_commento ?>'">Delete comment</button></span>
                                                             <?php }elseif (getValutazione($cid, $email, $codice_commento)!=0) { ?>
-                                                                <span><button onclick= "location.href='../backend/deleteValutazione-exe.php?codice=<?php echo $codice_commento ?>&utente=<?php echo $utente?>'">Delete valutazione</button></span>
+                                                                <span><button class="btn profile-edit-btn" onclick= "location.href='../backend/deleteValutazione-exe.php?codice=<?php echo $codice_commento ?>&utente=<?php echo $utente?>'">Delete valutazione</button></span>
                                                             <?php } ?>
                                                             <small><br><br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
                                                             <br>
