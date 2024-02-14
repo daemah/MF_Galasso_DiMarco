@@ -39,7 +39,7 @@
             }?>
                         <h2> Posts suggested for you </h2>
             </div>
-            <?php $utenti = getUtenti($cid); foreach($utenti as $utente){
+            <?php $utenti = getUtenti($cid , $email); foreach($utenti as $utente){
                 $codici = getCodiceFoto($cid, $utente); foreach($codici as $codice){
                     if ($codice != null){?> 
                         <div class="content"> 

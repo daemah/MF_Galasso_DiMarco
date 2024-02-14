@@ -107,10 +107,23 @@ if(isset($_SESSION['email'])){
 									<input id="CityRes" type="text" name="cityres"  value="<?php $cityr = getCittaResidenza($cid,$email); if (!empty($cityr)){ print_r($cityr);}?>" placeholder="City of residence">
 								</div>
 								
-								<div class="autocomplete">
+								<div class="col-md-6">
 									<label class="form-label">Hobby </label>
-									<input id="Hobby" type="text" name="hobby" value="<?php $hobby = getHaHobby($cid,$email); if (!empty($hobby)){ print_r($hobby);}?>" placeholder="Write your hobby">
+									<input id="Hobby" type="text" name="hobby" placeholder="Write your hobby">
 								</div>
+
+								<div class="col-md-6">
+									<label class="form-label">current hobbies </label>
+								</div>
+
+								<?php $hobbies = getHaHobby($cid , $email); foreach($hobbies as $hobby){?>
+									<div class="hobbies">
+									<p><?php print_r($hobby); ?> </p>
+									<button class="btn profile-edit-btn"  onclick="location.href='../backend/cancelhobby-exe.php?nome=<?php echo $hobby ?>'">Cancella</button>
+									</div>
+								<?php } ?>
+				
+								
 
 							</div> 
 						</div>
