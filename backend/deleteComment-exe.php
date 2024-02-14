@@ -1,14 +1,13 @@
 <?php
-session_start();
+//session_start();
 include_once "../common/connection.php";
 include_once "../common/funzioni.php";
 
-	$codice_commento = $_GET["codiceCommento"];
-    $email = $_SESSION["email"];
-    $gradimento = $_GET["valutazione"];
-    $utente = $_GET["utente"];
+	$codice = $_GET["codice"];
+    print_r($codice);
 
-	$ris = insertIndGradimento($cid, $codice_commento, $email, $gradimento, $utente);
+	$ris = deleteCommento($cid, $codice);
+    print_r($ris);
 
 	if ($ris["status"]=='ok')
 	{

@@ -9,23 +9,7 @@ $utenti = getUtenti($cid, $email);
 if(isset($_SESSION['email'])){
 ?>
     <?php require "../common/header.php"?> 
-
-    <script>
-    function search_profile() { 
-    let input = document.getElementById('search').value 
-    input=input.toLowerCase(); 
-    let x = document.getElementsByClassName('container'); 
-      
-    for (i = 0; i < x.length; i++) {  
-        if (!x[i].innerHTML.toLowerCase().includes(input)) { 
-            x[i].style.display="none"; 
-        } 
-        else { 
-            x[i].style.display="list-item";                  
-        } 
-    } 
-    } 
-    </script> 
+    <script src="../js/myscript.js"></script>
 
     <body>
         <link href="../styles/search.css" rel="stylesheet">
@@ -57,15 +41,15 @@ if(isset($_SESSION['email'])){
             <h2> Cerca i tuoi futuri amici: </h2>
             <div>
                 <form class="modulo-ricerca">
-                    <input id="search" type="text" placeholder="Cerca un amico" onkeyup="search_profile()" required>
+                    <input id="search" type="text" placeholder="Cerca un amico" onkeyup="search_profile();" required>
                 </form>
             </div>  
             <div>
                 <form class="modulo-ricerca">
                     <p> Cerca un amico in base a: </p>
-                    <button type="button"> hobby </button>
-                    <button type="button"> città nascita </button>
-                    <button type="button" > città residenza </button>
+                    <button type="button" id = "ricerca1" onclick = "changeColorBlu1(); "> hobby </button>
+                    <button type="button" id = "ricerca2" onclick = "changeColorBlu2(); "> città nascita </button>
+                    <button type="button" id = "ricerca3" onclick = "changeColorBlu3(); "> città residenza </button>
                 </form>
             </div>
             <link href="../styles/request.css" rel="stylesheet">
@@ -77,7 +61,7 @@ if(isset($_SESSION['email'])){
                     
                         <div class="nearby-user">
                             <div class="row">
-                                <div class="col-md-2 col-sm-2">
+                                <div class="col-md-2 col-sm-2" >
                                 <?php if (empty(getFotoProfilo($cid, $utente))){?>
                                     <img src="../images/profilo.jpeg" alt="user" class="profile-photo-lg">
                                 <?php } else { ?>
@@ -85,8 +69,8 @@ if(isset($_SESSION['email'])){
                                 <?php } ?>
                                 </div>
                                
-                                <div class="col-md-7 col-sm-7">
-                                    <h5> <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $utente ?>'"> <?php echo(getNickname($cid, $utente));?></button></h5>
+                                <div class="col-md-7 col-sm-7" >
+                                    <h5> <button type="button"  id = "comuni" class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $utente ?>'"> <?php echo(getNickname($cid, $utente));?></button></h5>
                                 </div>
 
                                 <?php

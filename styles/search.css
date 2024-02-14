@@ -7,3 +7,7 @@
     border-width:0ch;
     background-color: #e3e3e300;
 }
+
+.goToProfile:hover {
+    opacity: 0.5;
+  }
