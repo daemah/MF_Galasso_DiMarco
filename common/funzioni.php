@@ -104,11 +104,15 @@ function getHobby($cid)
 
 function getHaHobby($cid,$email)
 {
+
+	$hobby = array();
 	$sql = "SELECT nome from ha_hobby where `email` = '$email' ";
 	$res = $cid->query($sql);
-	$row = $res->fetch_assoc();
-	$hobby = $row["nome"];
+	while ($row = $res->fetch_assoc()){
+		$hobby[] = $row["nome"];
+	}
 	return $hobby;
+
 }
 
 
@@ -423,6 +427,39 @@ function createLocation($country, $region, $city, $email)
 	return $sql;
 }
 
+function cancelHobby($cid,$hobby,$email)
+{	
+	$risultato = array("status"=>"ko","msg"=>"");
+	$errore = false;
+	#ERRORE CONNESSIONE 
+	if ($cid == null || $cid->connect_errno) {
+		$risultato["status"]="ko";
+		if (!is_null($cid))
+		     $risultato["msg"]="errore nella connessione al db " . $cid->connect_error;
+		else $risultato["msg"]="errore nella connessione al db ";
+		return $risultato;
+	}
+	if ($cid->connect_error) {
+		$risultato["status"]="ko";
+		$risultato["msg"]="errore nella connessione al db " . $cid->connect_error;
+		return $risultato;
+	}
+
+	$sql = "DELETE FROM ha_hobby WHERE `ha_hobby`.`nome` = '$hobby' AND `ha_hobby`.`email` = '$email';";
+
+	$res=$cid->query($sql);
+		if ($res==1)
+		{
+			$risultato["status"]="ok";
+	    	$risultato["msg"]="Hai cancellato l'hobby correttamente";
+		}else{
+			$risultato["msg"]="Impossibile cancellare l'hobby". $sql . $cid->error;
+		}
+
+		return $risultato;
+
+}
+
 function updateLuogo($region,$city,$country, $whichone ,$email) 
 {
 	if ($whichone === 'residenza')
@@ -564,10 +601,10 @@ function updateProfile($cid,$email,$nickname,$name,$lname,$sex,$dateb, $countryR
 	
 }
 
-function getUtenti($cid)
+function getUtenti($cid ,$email)
 {
 	$utenti = array();
-	$sql= "SELECT email FROM utente;";
+	$sql= "SELECT email FROM utente where email <> '$email';";
 	$res= $cid->query($sql);
 	while ($row = $res->fetch_assoc()){
 		$utenti[] = $row["email"];
