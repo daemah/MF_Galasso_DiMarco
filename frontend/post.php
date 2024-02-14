@@ -39,7 +39,7 @@
             }?>
                         <h2> Posts suggested for you </h2>
             </div>
-            <?php $utenti = getUtenti($cid , $email); foreach($utenti as $utente){
+            <?php $utenti = getUsers($cid); foreach($utenti as $utente){
                 $codici = getCodiceFoto($cid, $utente); foreach($codici as $codice){
                     if ($codice != null){?> 
                         <div class="content"> 
@@ -111,7 +111,9 @@
                                                                 <a onclick="ValutaCommento('<?php echo $codice_commento;?>', '<?php echo $utente;?>');"> <img class = "iLikeIt" src="../images/i_like_it.jpeg"> </a>
                                                                 <?php } ?>
                                                                 <button type="button"  class="goToProfileComment" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore . ": ");?></button>
-                                                                <?php echo(getCommento($cid, $codice_commento)[0])?>
+                                                                <?php $commento = (getCommento($cid, $codice_commento)[0]); echo($commento); 
+                                                                $codici_foto = getPostsFoto($cid); foreach($codici_foto as $codice_foto){
+                                                                if (strpos($commento, '@'.$codice_foto)==true){?> <a onclick= popUp()> Clicca qui per andare a messaggio riferito </a> <?php }}?>
                                                                 <?php if ($nickname_commentatore == getNickname($cid,$email)){?>
                                                                 <span><button class="btn profile-edit-btn" onclick= "location.href='../backend/deleteComment-exe.php?codice=<?php echo $codice_commento ?>'">Delete comment</button></span>
                                                                 <?php }elseif (getValutazione($cid, $email, $codice_commento)!=0) { ?>
@@ -138,7 +140,7 @@
                                                    
                                                     <form method="POST" action="../backend/comment-exe_foto.php?utente=<?php echo $utente?>">
                                                         <div class="container">
-                                                            <input type="text" placeholder="Inserisci un commento" name="commento">
+                                                            <input type="text" placeholder="Inserisci un commento" name="commento" >
                                                             <input class="btn profile-edit-btn" type="submit" value="invia">
                                                         </div>
                                                     </form>

@@ -57,9 +57,8 @@
         
 
         <div class="box">
-            <div class="right-side">
                 <div class="info-utenti">
-                <h1> Numero di Foto e Testi pubblicati dagli utenti: </h2>
+                <b> Numero di Foto e Testi pubblicati dagli utenti: </b>
             <?php foreach ($utenti as $utente)
                 {$foto_utente = count(getCodiceFoto($cid, $utente)); 
                 if ($foto_utente != 0){?>
@@ -77,7 +76,7 @@
                     <br> <?php echo ("- ".getNickname($cid, $utente) . " non ha inserito testi"); 
                 } 
                 } ?>
-                </div>
+                
                     </div>
                     </div>
                 </div>

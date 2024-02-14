@@ -9,9 +9,13 @@
   }
   
   #grafico{
+    margin-top: 50px;
       margin-left: 20%;
   }
   
+  .right-side {
+    text-align:center;
+  }
   
   .home-section nav{
     display: flex;

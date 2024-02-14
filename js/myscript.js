@@ -65,8 +65,6 @@ function logOutConfirm() {
 }
 
 
-
-
 function changeColorBlu1() {
 	document.getElementById("ricerca1").style.backgroundColor = "lightblue";
 	var xttp = new ajaxRequest();
@@ -83,6 +81,7 @@ function changeColorBlu1() {
 			{
 			let x = document.getElementsByClassName('container');
 			utenti = risposta.contenuto;
+			console.log(utenti);
 			for (j=0; j < utenti.length; j++)
 		  	{
 				utente = utenti[j]; 
@@ -94,7 +93,7 @@ function changeColorBlu1() {
 						x[i].style.display="list-item";                  
 					} 
 				}
-				document.getElementById("comuni").innerHTML=utenti;
+				document.getElementById("comuni").innerHTML=utente;
 			}	
 			
 			}
@@ -210,36 +209,24 @@ function search_profile() {
 			x[i].style.display="list-item";                  
 		} 
 	} 
-} 
-
-
-/*
-function ValutaCommento()
-{
-	// var cognome = this.value;
-	
-	var xttp = new ajaxRequest();
-	xttp.onreadystatechange  = function()
-	{
-		// console.log(this.readyState + ' ' + this.status);
-      if (this.readyState == 4 && this.status == 200)
-	  {
-		  // console.log(this.response);
-		  risposta = JSON.parse(this.response);
-		  
-          if (risposta.status == "ok")		  
-		  {
-           valutazione = risposta.contenuto;
-           menu = document.getElementById('visualizza');	   
-		  }
-		  else
-		  {
-			  alert(risposta.msg);
-		  }
-		    
-	  }		  
-    };
-	xttp.open("GET","php/getRegioni.php",true);
-	xttp.send();
 }
-*/
+
+function popUp()
+{
+	window.open("notifications.php", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
+}
+/*
+function read_comment() { 
+	let input = document.getElementById('insertComment').value 
+	input=input.toLowerCase(); 
+	console.log(input);
+	for(i=0; i<input.length; i++){
+		var lettera = input[i];
+		console.log(lettera);
+		if (lettera == '@'){
+			document.write(Stringa.link("giorno.htm"));
+		}
+	}
+	
+} */
+
