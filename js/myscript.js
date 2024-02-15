@@ -11,6 +11,37 @@ function ajaxRequest()
   return request
 }
 
+function updateNotificationCount() {
+    var xttp = new ajaxRequest();
+	xttp.onreadystatechange  = function()
+	{
+	console.log(this.readyState + ' ' + this.status);
+      if (this.readyState == 4 && this.status == 200)
+	  {
+			console.log(this.response);
+			risposta = JSON.parse(this.response);
+			console.log(risposta.status);
+
+			if (risposta.status == "ok")		  
+			{
+			notifiche = risposta.contenuto;
+			console.log(notifiche)
+			document.getElementById("notificationCount").innerHTML=notifiche;	
+			
+			}
+			else
+			{
+				alert(risposta.msg);
+			}
+				
+		}		    
+    };
+	xttp.open("GET", "../api/notification_count.php", true);
+	xttp.send();
+}
+//updateNotificationCount();
+//setInterval(updateNotificationCount, 5000); // a timer
+
 
 function ValutaCommento(codice_commento, utente_commentato) {
     //var messaggio;

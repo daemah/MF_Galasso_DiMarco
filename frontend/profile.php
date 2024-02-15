@@ -69,6 +69,7 @@ if(isset($_SESSION['email'])){
                 <div class="gallery">
                     <?php $codici = getCodiceFoto($cid, $email); foreach($codici as $codice){ ?>
                     <div >  
+                        <button onclick="location.href='../backend/deleteFoto-exe.php?codice=<?php echo $codice ?>'"> Elimina Foto </button>
                         <p id = "luogo">
                             <?php echo getCitta($cid, $codice)." "; echo getStato($cid, $codice); ?>
                         </p>
@@ -85,24 +86,24 @@ if(isset($_SESSION['email'])){
                                     <?php
                                     $codici_commento = getCodiceCommentoFoto($cid, $codice);
                                     foreach($codici_commento as $codice_commento){
-                                                            $email_commentatore = getCommentatore($cid, $codice_commento);
-                                                            $nickname_commentatore = getNickname($cid, $email_commentatore);?>
-                                                            <br><br>
-                                                            <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore . ": ");?></button>
-                                                            <span><?php echo(getCommento($cid, $codice_commento)[0])?> </span>
-                                                            <small><br><br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
-                                                            <br>
-                                                                <?php  
-                                                                $gradimenti = getIndGradimento($cid, $codice_commento);
-                                                                $somma = 0;
-                                                                if (!empty($gradimenti)){
-                                                                    foreach ($gradimenti as $gradimento){$somma += $gradimento;}
-                                                                    echo("La media delle valutazioni di questo commento è (indice di gradimento): ". $somma/count($gradimenti));
-                                                                }else{
-                                                                    echo("Il commento non ha ricevuto valutazioni");
-                                                                }
-                                                                ?><br></small>  
-                                                        <?php } ?>
+                                        $email_commentatore = getCommentatore($cid, $codice_commento);
+                                        $nickname_commentatore = getNickname($cid, $email_commentatore);?>
+                                        <br><br>
+                                        <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore . ": ");?></button>
+                                        <span><?php echo(getCommento($cid, $codice_commento)[0])?> </span>
+                                        <small><br><br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
+                                        <br>
+                                        <?php  
+                                            $gradimenti = getIndGradimento($cid, $codice_commento);
+                                            $somma = 0;
+                                            if (!empty($gradimenti)){
+                                                foreach ($gradimenti as $gradimento){$somma += $gradimento;}
+                                                echo("La media delle valutazioni di questo commento è (indice di gradimento): ". $somma/count($gradimenti));
+                                                }else{
+                                                echo("Il commento non ha ricevuto valutazioni");
+                                                }
+                                                ?><br></small>  
+                                    <?php } ?>
                         </div>
                         <div class="text-muted small"><?php echo "Pubblicato il giorno ", getTimeFoto($cid, $codice); ?></div>
                     <?php } ?>
@@ -110,6 +111,7 @@ if(isset($_SESSION['email'])){
 
                 <div class="gallery-item" tabindex="0">
                 <?php $codici_t = getCodiceTesto($cid, $email); foreach($codici_t as $codice_t){ ?>
+                    <button onclick="location.href='../backend/deleteTesto-exe.php?codice=<?php echo $codice_t ?>'"> Elimina Testo </button>
                 <p id = "messaggio_testo"><?php echo getTesto($cid, $codice_t);?></p>
 
                         <div class="card-footer">
@@ -194,7 +196,17 @@ if(isset($_SESSION['email'])){
                         <?php } else {?>
                             <button class="btn profile-edit-btn"  onclick="location.href='../backend/unfollow-exe.php?utente=<?php echo $utente ?>'">Unfollow</button>
                         <?php }?>
+                        <span>
+                        <?php if (getAdmin($cid, $email)!=0){ $codice_foto = getCodiceFoto($cid, $email);?>
+                            <?php if (getDataBlocco($cid, $utente) == 0){?>
+                                <button class="btn profile-edit-btn" onclick="location.href='../backend/bloccaUtente-exe.php?utente=<?php echo $utente ?>'">Blocca utente</button>
+                            <?php } else { ?>
+                                <button class="btn profile-edit-btn" onclick="location.href='../backend/sbloccaUtente-exe.php?utente=<?php echo $utente ?>'">Sblocca utente</button>
+                            <?php } ?>                                            
+                                <button class="btn profile-edit-btn" onclick="location.href='../backend/deleteUtente-exe.php?utente=<?php echo $utente ?>'">Elimina utente</button>
+                            <?php } ?> </span>
                         <br><br>Indice di rispettabilità: <?php echo(getRispettabilità($cid, $utente)); ?>
+                        
                     </div>
 
                     <div class="profile-stats">
@@ -240,9 +252,16 @@ if(isset($_SESSION['email'])){
                                     $email_commentatore = getCommentatore($cid, $codice_commento);
                                     $nickname_commentatore = getNickname($cid, $email_commentatore);
                                 ?> <br><br> 
-                                <a onclick="ValutaCommento()"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a>
+                                <?php if ($nickname_commentatore != getNickname($cid,$email)){ ?>
+                                <a onclick="ValutaCommento('<?php echo $codice_commento;?>', '<?php echo $utente;?>')"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a>
+                                <?php } ?>
                                 <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore),": ";?></button>
                                 <span><?php echo(getCommento($cid, $codice_commento)[0])?></span><br><br>
+                                <?php if ($nickname_commentatore == getNickname($cid,$email)){?>
+                                    <span><button onclick= "location.href='../backend/deleteComment-exe.php?codice=<?php echo $codice_commento ?>'">Delete comment</button></span>
+                                    <?php }elseif (getValutazione($cid, $utente, $codice_commento)!=0) { ?>
+                                    <span><button onclick= "location.href='../backend/deleteValutazione-exe.php?codice=<?php echo $codice_commento ?>&utente=<?php echo $utente?>'">Delete valutazione</button></span>
+                                <?php } ?>
                                 <small><?php echo("Commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
                                 <br>
                                 <?php  
@@ -284,9 +303,16 @@ if(isset($_SESSION['email'])){
                                         $email_commentatore = getCommentatore($cid, $codice_commento);
                                         $nickname_commentatore = getNickname($cid, $email_commentatore);?>
                                         <br><br> 
-                                        <a onclick="ValutaCommento()"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a>
+                                        <?php if ($nickname_commentatore != getNickname($cid,$email)){ ?>
+                                        <a onclick="ValutaCommento('<?php echo $codice_commento;?>', '<?php echo $utente;?>')"><img class = "iLikeIt" src="../images/i_like_it.jpeg"></a>
+                                        <?php } ?>
                                         <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore. ": "); ?></button>
                                         <span><?php echo(getCommento($cid, $codice_commento)[0])?></span>
+                                        <?php if ($nickname_commentatore == getNickname($cid,$email)){?>
+                                            <span><button class="btn profile-edit-btn" onclick= "location.href='../backend/deleteComment-exe.php?codice=<?php echo $codice_commento ?>'">Delete comment</button></span>
+                                            <?php }elseif (getValutazione($cid, $email, $codice_commento)!=0) { ?>
+                                            <span><button class="btn profile-edit-btn" onclick= "location.href='../backend/deleteValutazione-exe.php?codice=<?php echo $codice_commento ?>&utente=<?php echo $utente?>'">Delete valutazione</button></span>
+                                        <?php } ?>
                                         <small><br><br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
                                         <br>
                                         <?php  
@@ -303,7 +329,7 @@ if(isset($_SESSION['email'])){
                         </div>
                 </div>
                 <div class="card-footer">
-                        <form method="POST" action="../backend/comment-exe_foto.php?utente=<?php echo $utente?>">
+                        <form method="POST" action="../backend/comment-exe_testo.php?utente=<?php echo $utente?>">
                             <div class="container">
                                 <input type="text" placeholder="Inserisci un commento" name="commento">
                                 <input type="submit" value="invia">
