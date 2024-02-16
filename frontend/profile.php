@@ -42,7 +42,8 @@ if(isset($_SESSION['email'])){
                         <h1 class="profile-user-name"><?php echo(getNickname($cid, $email)); ?></h1>
 
                         <button class="btn profile-edit-btn"  onclick="location.href='updateprofile.php'">Edit Profile</button>
-                        <br><span>Aggiungi post</span> <button class="btn add-message-btn"  onclick="location.href=''">+</button> 
+                        <br><span>Aggiungi foto </span> <button class="btn add-message-btn"  onclick="location.href='aggiungiFoto.php'">+</button> 
+                        <br><span>Aggiungi testo</span> <button class="btn add-message-btn"  onclick="location.href=''">+</button> 
                         <br><br>Indice di rispettabilità: <?php echo(getRispettabilità($cid, $email)); ?>
                         
                     </div>
@@ -89,6 +90,10 @@ if(isset($_SESSION['email'])){
                                         $email_commentatore = getCommentatore($cid, $codice_commento);
                                         $nickname_commentatore = getNickname($cid, $email_commentatore);?>
                                         <br><br>
+                                        <?php if ($nickname_commentatore != getNickname($cid,$email)){ ?>
+                                            <a onclick="ValutaCommento('<?php echo $codice_commento;?>', '<?php echo $email_commentatore;?>');"> <img class = "iLikeIt" src="../images/i_like_it.jpeg"> </a>
+                                        <?php } ?>
+
                                         <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore . ": ");?></button>
                                         <span><?php echo(getCommento($cid, $codice_commento)[0])?> </span>
                                         <small><br><br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
@@ -123,7 +128,11 @@ if(isset($_SESSION['email'])){
                                     foreach($codici_commento as $codice_commento){
                                         $email_commentatore = getCommentatore($cid, $codice_commento);
                                         $nickname_commentatore = getNickname($cid, $email_commentatore);
-                                        ?> <br><br> 
+                                        ?> <br><br>
+                                        <?php if ($nickname_commentatore != getNickname($cid,$email)){ ?>
+                                            <a onclick="ValutaCommento('<?php echo $codice_commento;?>', '<?php echo $email_commentatore;?>');"> <img class = "iLikeIt" src="../images/i_like_it.jpeg"> </a>
+                                        <?php } ?>
+
                                         <button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $email_commentatore ?>'"> <?php echo($nickname_commentatore . ": ");?></button>
                                         <span><?php echo(getCommento($cid, $codice_commento)[0])?></span><br><br>
                                         <small><?php echo("Commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
