@@ -28,6 +28,10 @@ body {
 	margin-top:20px;
 }
 
+.insertText{
+	width:100%;
+}
+
 /* box component */
 
 .box {

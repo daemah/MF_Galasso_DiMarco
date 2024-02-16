@@ -11,7 +11,7 @@
 
 
         <body>
-        <link rel='stylesheet' href='../styles/aggiungiFoto.css' >
+        <link rel='stylesheet' href='../styles/aggiungiTesto.css' >
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css'>
         <script src="../js/myscript.js"></script>
         <button type="button" class="cancelbtn" onclick="location.href='profile.php?utente=<?php echo $email?>'">X</button>
@@ -42,44 +42,19 @@
                    
                     <p>&nbsp;</p>
                     <hr>
-                    <h3 class="text-info">Insert an image</h3>
+                    <h3 class="text-info">Insert a Text</h3>
                     <div class="box">
-                    <!-- fileuploader view component -->
-                    <form action="#" method="post" class="text-center">
-                        <div class="margin-bottom-20"> 
-                        <img class="thumbnail box-center margin-top-20" alt="No image" src="http://www.washaweb.com/tutoriaux/fileupload/imgs/image-temp-220.png">
-                        </div>
-                        <p>
-                        <button type="submit" class="btn btn-sm" name="delete"><i class="icon-remove"></i> Remove</button>
-                        <button type="submit" class="btn btn-primary btn-sm" id="save" name="save"><i class="icon-ok icon-white"></i> Save</button>
-                        </p>
-                    </form>
-                        <!-- ./fileuploader view component -->
-                        <div class="row">
-                            <div class="col-sm-10">
-                            <span class="control-fileupload">
-                                <label for="file1" class="text-left">Please choose a file on your computer.</label>
-                                <input type="file" id="file1">
-                            </span>
-                            </div>
-                            <div class="col-sm-2">  
-                            <button type="button" class="btn btn-primary btn-block">
-                                <i class="icon-upload icon-white"></i> Upload
-                            </button>
-                            </div>
-                        </div>
-                        </div>
-                        <span>
-                            <label >Insert a description:</label>
-                            <input class="form-control" type="text" id="descriptionInput">
-                        </span>
-                        
-                            <button type="button" class="btn btn-primary btn-block">
+                    <div class="row">
+                    <div class="col">
+                              <div class="form-group">
+                                <label>Text</label>
+                                <textarea name="testo" rows="5" cols="40" maxlength = '500' class='insertText' >
+                                </textarea>
+                              </div>
+                              <button type="button" class="btn btn-primary btn-block">
                                 <i class="icon-upload icon-white"></i> Post 
                             </button>
-                       
-                        <hr>
-                        </div>
+                            </div>
                         </div>
                     </section>
                     </article>

@@ -43,7 +43,7 @@ if(isset($_SESSION['email'])){
 
                         <button class="btn profile-edit-btn"  onclick="location.href='updateprofile.php'">Edit Profile</button>
                         <br><span>Aggiungi foto </span> <button class="btn add-message-btn"  onclick="location.href='aggiungiFoto.php'">+</button> 
-                        <br><span>Aggiungi testo</span> <button class="btn add-message-btn"  onclick="location.href=''">+</button> 
+                        <br><span>Aggiungi testo</span> <button class="btn add-message-btn"  onclick="location.href='aggiungiTesto.php'">+</button> 
                         <br><br>Indice di rispettabilità: <?php echo(getRispettabilità($cid, $email)); ?>
                         
                     </div>
