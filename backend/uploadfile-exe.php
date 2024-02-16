@@ -38,13 +38,13 @@ if (!($errore)) {
     $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
 
     if ($didUpload) {
-      $msg .= "Tutto ok</br>";
+      $msg .= "Upload successes</br>";
       header('location: ../frontend/updateprofile.php?status=ok&msg='. urlencode($msg));
       /*exit();*/
     } else {
-      $msg .= "Tutto Sbagliato</br>";
-      // print_r($uploadPath);
-      // exit();
+      $msg .= "Upload fails</br>";
+       print_r($_FILES);
+       exit();
       header('location: ../frontend/updateprofile.php?status=ko&msg='. urlencode($msg));
   
     }
