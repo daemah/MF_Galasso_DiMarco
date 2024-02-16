@@ -268,7 +268,7 @@ function getCodiceTesto($cid, $email)
 function getCodiceCommentoFoto($cid, $codice_foto)
 {
 	$codici_commento_foto = array();
-	$sql = "SELECT codice from commenti where codice_foto = '$codice_foto';";
+	$sql = "SELECT codice from commenti where codice_foto = '$codice_foto' order by timestamp asc;";
 	$res = $cid->query($sql);
 	while ($row = $res->fetch_assoc()){
 		$codici_commento_foto[] = $row["codice"];
@@ -279,7 +279,7 @@ function getCodiceCommentoFoto($cid, $codice_foto)
 function getCodiceCommentoTesto($cid, $codice_testo)
 {
 	$codici_commento_testo = array();
-	$sql = "SELECT codice from commenti where codice_testo = '$codice_testo';";
+	$sql = "SELECT codice from commenti where codice_testo = '$codice_testo' order by timestamp asc;";
 	$res = $cid->query($sql);
 	while ($row = $res->fetch_assoc()){
 		$codici_commento_testo[] = $row["codice"];
