@@ -12,6 +12,7 @@ if(isset($_SESSION['email'])){
 <head>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css'>
+<link rel='stylesheet' href='../styles/updateprofile.css' >
 <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js'></script>
 <script src="../js/places.js"></script>
 </head>
@@ -40,7 +41,7 @@ if(isset($_SESSION['email'])){
               <div class="row">
                 <div class="col-12 col-sm-auto mb-3">
                   <div class="mx-auto" style="width: 140px;">
-                    <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
+                    <div class="d-flex justify-content-center align-items-center rounded">
                       <img src=<?php echo(getFotoProfilo($cid, $email));?> class="avatar" alt="Avatar">
                     </div>
                   </div>
