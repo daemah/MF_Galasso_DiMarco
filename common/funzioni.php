@@ -183,12 +183,63 @@ function getFoto($cid,$codice)
 	$foto = $row["posizione"];
 	return $foto;
 }
+
 function getTesto($cid,$codice)
 {
 	$sql = "SELECT testo from testo where codice = '$codice';";
 	$res = $cid->query($sql);
 	$row = $res->fetch_assoc();
 	$testo = $row["testo"];
+	return $testo;
+}
+
+function getGradimenti($cid, $email)
+{
+	$gradimenti = array();
+	$sql = "SELECT gradimento from valuta where email_commento = '$email';";
+	$res = $cid->query($sql);
+	while ($row = $res->fetch_assoc()){
+			$gradimenti[] = $row["gradimento"];
+	}
+	return $gradimenti;
+}
+
+
+function getPostsFoto($cid){
+	$foto = array();
+	$sql = "SELECT codice from foto;";
+	$res = $cid->query($sql);
+	while ($row = $res->fetch_assoc()){
+		$foto[] = $row["codice"];
+	}
+	return $foto;
+}
+
+function getUtenteFromCodeFoto($cid, $codice)
+{
+	$sql = "SELECT email from foto where codice = '$codice';";
+	$res = $cid->query($sql);
+	$row = $res->fetch_assoc();
+	$utente = $row["email"];
+	return $utente;
+}
+
+function getUtenteFromCodeTesto($cid, $codice)
+{
+	$sql = "SELECT email from testo where codice = '$codice';";
+	$res = $cid->query($sql);
+	$row = $res->fetch_assoc();
+	$utente = $row["email"];
+	return $utente;
+}
+
+function getPostsTesto($cid){
+	$testo = array();
+	$sql = "SELECT codice from testo;";
+	$res = $cid->query($sql);
+	while ($row = $res->fetch_assoc()){
+		$testo[] = $row["codice"];
+	}
 	return $testo;
 }
 
@@ -319,6 +370,17 @@ function getFollowers($cid, $email)
 		$followers[] = $row["utente_richiedente"];
 	}
 	return $followers;
+}
+
+function get5UtentiGradPositivo($cid)
+{
+	$utenti = array();
+	$sql = "SELECT DISTINCT email_commento FROM valuta WHERE gradimento > '0' ORDER BY gradimento DESC LIMIT 5;";
+	$res= $cid->query($sql);
+	while ($row = $res->fetch_assoc()){
+		$utenti[] = $row["email_commento"];
+	}
+	return $utenti;
 }
 
 function getFollowing($cid, $email)
@@ -651,6 +713,17 @@ function getUtenti($cid ,$email)
 {
 	$utenti = array();
 	$sql= "SELECT email FROM utente where email <> '$email';";
+	$res= $cid->query($sql);
+	while ($row = $res->fetch_assoc()){
+		$utenti[] = $row["email"];
+	}
+	return $utenti;
+}
+
+function getUsers($cid)
+{
+	$utenti = array();
+	$sql= "SELECT email FROM utente ;";
 	$res= $cid->query($sql);
 	while ($row = $res->fetch_assoc()){
 		$utenti[] = $row["email"];
