@@ -211,22 +211,8 @@ function search_profile() {
 	} 
 }
 
-function popUp()
+function popUp(codice)
 {
-	window.open("notifications.php", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
+	window.open("messaggioRiferito.php?codice="+codice, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
 }
-/*
-function read_comment() { 
-	let input = document.getElementById('insertComment').value 
-	input=input.toLowerCase(); 
-	console.log(input);
-	for(i=0; i<input.length; i++){
-		var lettera = input[i];
-		console.log(lettera);
-		if (lettera == '@'){
-			document.write(Stringa.link("giorno.htm"));
-		}
-	}
-	
-} */
 

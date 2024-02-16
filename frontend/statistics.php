@@ -40,20 +40,13 @@
         </div>
         <div class="sales-boxes">
             <div class="recent-sales box">
-            <canvas id="grafico" width="600" height="400"></canvas>
+            <canvas id="grafico" width="900" height="400"></canvas>
             
         <?php 
-            $utenti_graditi = array();
-            foreach($utenti as $utente){ 
-                $gradimenti_utente = getGradimenti($cid, $utente);
-                foreach($gradimenti_utente as $gradimento_utente){
-                    if ($gradimento_utente > 0)
-                    array_push($utenti_graditi, $utente);
-                }
-            }
-            
+            $utenti_graditi = get5UtentiGradPositivo($cid);
+            $valore_uguale = 1;
 
-            ?> 
+        ?> 
         
 
         <div class="box">
@@ -62,18 +55,18 @@
             <?php foreach ($utenti as $utente)
                 {$foto_utente = count(getCodiceFoto($cid, $utente)); 
                 if ($foto_utente != 0){?>
-                    <br> <?php echo "- ". (getNickname($cid, $utente) . " ha inserito " . $foto_utente ." foto"); 
+                    <br><br> <?php echo "- ". (getNickname($cid, $utente) . " ha inserito " . $foto_utente ." foto"); 
                 } else { ?>
-                    <br> <?php echo "- ".(getNickname($cid, $utente) . " non ha inserito foto"); 
+                    <br><br><?php echo "- ".(getNickname($cid, $utente) . " non ha inserito foto"); 
                 }
                 } 
 
             foreach ($utenti as $utente)
                 {$testo_utente = count(getCodiceTesto($cid, $utente)); 
                     if ($testo_utente != 0){?>
-                    <br> <?php echo "- ".(getNickname($cid, $utente) . " ha inserito " . $testo_utente ." testo"); 
+                    <br><br> <?php echo "- ".(getNickname($cid, $utente) . " ha inserito " . $testo_utente ." testo"); 
                 } else { ?>
-                    <br> <?php echo ("- ".getNickname($cid, $utente) . " non ha inserito testi"); 
+                    <br><br> <?php echo ("- ".getNickname($cid, $utente) . " non ha inserito testi"); 
                 } 
                 } ?>
                 
@@ -82,12 +75,11 @@
                 </div>
 
     </section>
-   
     <script>
-    let sidebar = document.querySelector(".sidebar");
-        let sidebarBtn = document.querySelector(".sidebarBtn");
-        var categories = ["Roma", "Milano", "Napoli", "Torino", "Palermo"];
-            var values = [200, 150, 120, 90, 75];
+    let sidebarBtn = document.querySelector(".sidebarBtn");
+    var categories = <?php echo json_encode($utenti_graditi); ?>;
+    var values = Array(categories.length).fill(<?php echo $valore_uguale; ?>);
+        
             var colors = ["red", "#33ff57", "#5733ff", "#ff33aa", "#33aaff"];
 
             // Funzione per disegnare il grafico a torta
@@ -109,7 +101,7 @@
             // Disegna l'intestazione
             ctx.fillStyle = 'black';
             ctx.font = 'bold 16px Arial';
-            ctx.fillText('Città più popolate', 5, 15);
+            ctx.fillText('I 5 utenti con indici di gradimento più alti', 5, 15);
 
             for (var i = 0; i < values.length; i++) {
                 endAngle = startAngle + (values[i] / total) * (2 * Math.PI);

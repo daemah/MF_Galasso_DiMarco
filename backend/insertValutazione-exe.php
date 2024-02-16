@@ -9,7 +9,6 @@ include_once "../common/funzioni.php";
     $utente = $_GET["utente"];
 
 	$ris = insertIndGradimento($cid, $codice_commento, $email, $gradimento, $utente);
-
 	if ($ris["status"]=='ok')
 	{
 		header("location: ../frontend/post.php?status=ok&msg=" . urlencode($ris["msg"]));
