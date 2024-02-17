@@ -25,6 +25,19 @@ body {
 }
 
 .btn-block{
+	background-color:#dfdfdf !important;
+	color: black !important
+	
+}
+
+
+.alert-warning{
+    background-color: rgba(255, 0, 0, 0.641) !important;
+    color:white !important;
+  
+  }
+
+.btn-block{
 	margin-top:20px;
 }
 

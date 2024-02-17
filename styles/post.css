@@ -15,6 +15,16 @@
     background-color: #e3e3e366;
 }
 
+.post-edit-btn{
+    margin-top:4px;
+    font-size: 12px;
+    width: 120px;
+      line-height: 1.9;
+    border: 0.1rem solid #b9b8b8;
+    border-radius: 0.3rem;
+    background-color: white
+}
+
 #name{
     font-size: 1.5rem;
     margin-left: 3%;

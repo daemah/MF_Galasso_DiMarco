@@ -11,6 +11,17 @@
 
 
         <body>
+        <button type="button" class="cancelbtn" onclick="location.href='profile.php?utente=<?php echo $email?>'">X</button>
+        <link rel='stylesheet' href='../styles/aggiungiTesto.css' >
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css'>
+        <script src="../js/myscript.js"></script>
+        
+        <div class = "content">
+        <div class="text-center text-sm-right">
+            <div class="text-muted"><small>All is art ©</small></div>
+        </div>
+        
+        <div>
         <?php
                 if (isset($_GET["status"])) {
                     if ($_GET["status"]=='ko')
@@ -33,17 +44,10 @@
                                 echo "</div>";
                             }
                       
-            }?>
-        <link rel='stylesheet' href='../styles/aggiungiTesto.css' >
-        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css'>
-        <script src="../js/myscript.js"></script>
-        <button type="button" class="cancelbtn" onclick="location.href='profile.php?utente=<?php echo $email?>'">X</button>
-        <div class = "content">
+            }?></div>
         <article id="main-content" role="main">  
             <section class="container">
-                  <div class="text-center text-sm-right">
-                    <div class="text-muted"><small>All is art ©</small></div>
-                  </div>
+                  
                     <p>&nbsp;</p>
                     <hr>
                     <h3 class="text-info">Insert a Text</h3>

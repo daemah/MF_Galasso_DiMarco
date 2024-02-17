@@ -70,20 +70,20 @@
                                             $data_accettazione = getDataAccettazione($cid, $utente, $email);
                                             if ($data_richiesta==0){
                                         ?>
-                                            <button class="btn profile-edit-btn"  onclick="location.href='../backend/request_friendship-exe.php?utente=<?php echo $utente ?>'">Invia Richiesta</button>
+                                            <button class="btn post-edit-btn"  onclick="location.href='../backend/request_friendship-exe.php?utente=<?php echo $utente ?>'">Invia Richiesta</button>
                                         <?php } elseif (($data_richiesta!=0) && ($data_accettazione==0)) { ?>
-                                            <button class="btn profile-edit-btn" onclick="location.href='../backend/eliminateRequest-exe.php?utente=<?php echo $utente ?>'">Richiesta Inviata</button>
+                                            <button class="btn post-edit-btn" onclick="location.href='../backend/eliminateRequest-exe.php?utente=<?php echo $utente ?>'">Richiesta Inviata</button>
                                         <?php } else {?>
-                                            <button class="btn profile-edit-btn"  onclick="location.href='../backend/unfollow-exe.php?utente=<?php echo $utente ?>'">Unfollow</button>
+                                            <button class="btn post-edit-btn"  onclick="location.href='../backend/unfollow-exe.php?utente=<?php echo $utente ?>'">Unfollow</button>
                                         <?php }}?>
 
                                         <?php if (($utente != $email) & getAdmin($cid, $email)!=0){?>
                                             <?php if (getDataBlocco($cid, $utente) == 0){?>
-                                                <button class="btn profile-edit-btn" onclick="location.href='../backend/bloccaUtente-exe.php?utente=<?php echo $utente ?>'">Blocca utente</button>
+                                                <button class="btn post-edit-btn" onclick="location.href='../backend/bloccaUtente-exe.php?utente=<?php echo $utente ?>'">Blocca utente</button>
                                             <?php } else { ?>
-                                                <button class="btn profile-edit-btn" onclick="location.href='../backend/sbloccaUtente-exe.php?utente=<?php echo $utente ?>'">Sblocca utente</button>
+                                                <button class="btn post-edit-btn" onclick="location.href='../backend/sbloccaUtente-exe.php?utente=<?php echo $utente ?>'">Sblocca utente</button>
                                             <?php } ?>                                            
-                                            <button class="btn profile-edit-btn" onclick="location.href='../backend/deleteUtente-exe.php?utente=<?php echo $utente ?>'">Elimina utente</button>
+                                            <button class="btn post-edit-btn" onclick="location.href='../backend/deleteUtente-exe.php?utente=<?php echo $utente ?>'">Elimina utente</button>
                                         <?php } ?>
                                         
                                         </span>
@@ -125,9 +125,9 @@
                                                                 if (strpos($commento, '@'.$codice_testo)==true){?> <button onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php }}?>
 
                                                                 <?php if ($nickname_commentatore == getNickname($cid,$email)){?>
-                                                                <br><button class="btn profile-edit-btn" onclick= "location.href='../backend/deleteComment-exe.php?codice=<?php echo $codice_commento ?>'">Delete comment</button>
+                                                                <br><button class="btn post-edit-btn" onclick= "location.href='../backend/deleteComment-exe.php?codice=<?php echo $codice_commento ?>'">Delete comment</button>
                                                                 <?php }elseif (getValutazione($cid, $email, $codice_commento)!=0) { ?>
-                                                                <br><button class="btn profile-edit-btn" onclick= "location.href='../backend/deleteValutazione-exe.php?codice=<?php echo $codice_commento ?>&utente=<?php echo $utente?>'">Delete valutazione</button>
+                                                                <br><button class="btn post-edit-btn" onclick= "location.href='../backend/deleteValutazione-exe.php?codice=<?php echo $codice_commento ?>&utente=<?php echo $utente?>'">Delete valutazione</button>
                                                                 <?php } ?>
                                                                 <br><small>
                                                                 <br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?> 
@@ -190,20 +190,20 @@
                                                 $data_accettazione = getDataAccettazione($cid, $utente, $email);
                                             if ($data_richiesta==0){
                                             ?>
-                                                <button class="btn profile-edit-btn"  onclick="location.href='../backend/request_friendship-exe.php?utente=<?php echo $utente ?>'">Invia Richiesta</button>
+                                                <button class="btn post-edit-btn"  onclick="location.href='../backend/request_friendship-exe.php?utente=<?php echo $utente ?>'">Invia Richiesta</button>
                                             <?php } elseif (($data_richiesta!=0) && ($data_accettazione==0)) { ?>
-                                                <button class="btn profile-edit-btn" onclick="location.href='../backend/eliminateRequest-exe.php?utente=<?php echo $utente ?>'">Richiesta Inviata</button>
+                                                <button class="btn post-edit-btn" onclick="location.href='../backend/eliminateRequest-exe.php?utente=<?php echo $utente ?>'">Richiesta Inviata</button>
                                             <?php } else {?>
-                                                <button class="btn profile-edit-btn"  onclick="location.href='../backend/unfollow-exe.php?utente=<?php echo $utente ?>'">Unfollow</button>
+                                                <button class="btn post-edit-btn"  onclick="location.href='../backend/unfollow-exe.php?utente=<?php echo $utente ?>'">Unfollow</button>
                                             <?php }}?>
 
                                             <?php if (($utente != $email) & getAdmin($cid, $email)!=0){?>
                                                 <?php if (getDataBlocco($cid, $utente) == 0){?>
-                                                    <button class="btn profile-edit-btn" onclick="location.href='../backend/bloccaUtente-exe.php?utente=<?php echo $utente ?>'">Blocca utente</button>
+                                                    <button class="btn post-edit-btn" onclick="location.href='../backend/bloccaUtente-exe.php?utente=<?php echo $utente ?>'">Blocca utente</button>
                                                 <?php } else { ?>
-                                                    <button class="btn profile-edit-btn" onclick="location.href='../backend/sbloccaUtente-exe.php?utente=<?php echo $utente ?>'">Sblocca utente</button>
+                                                    <button class="btn post-edit-btn" onclick="location.href='../backend/sbloccaUtente-exe.php?utente=<?php echo $utente ?>'">Sblocca utente</button>
                                                 <?php } ?>
-                                                <button class="btn profile-edit-btn" onclick="location.href='../backend/deleteUtente-exe.php?utente=<?php echo $utente ?>'">Elimina utente</button>
+                                                <button class="btn post-edit-btn" onclick="location.href='../backend/deleteUtente-exe.php?utente=<?php echo $utente ?>'">Elimina utente</button>
                                                 <?php } ?>
                                             </span>
                                             </div>
@@ -233,9 +233,9 @@
                                                                 if (strpos($commento, '@'.$codice_testo)==true){?> <button onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php }}?>
 
                                                             <?php if ($nickname_commentatore == getNickname($cid,$email)){?>
-                                                                <br><button class="btn profile-edit-btn" onclick = "location.href='../backend/deleteComment-exe.php?codice=<?php echo $codice_commento ?>'">Delete comment</button>
+                                                                <br><button class="btn post-edit-btn" onclick = "location.href='../backend/deleteComment-exe.php?codice=<?php echo $codice_commento ?>'">Delete comment</button>
                                                             <?php }elseif (getValutazione($cid, $email, $codice_commento)!=0) { ?>
-                                                                <br><button class="btn profile-edit-btn" onclick= "location.href='../backend/deleteValutazione-exe.php?codice=<?php echo $codice_commento ?>&utente=<?php echo $utente?>'">Delete valutazione</button>
+                                                                <br><button class="btn post-edit-btn" onclick= "location.href='../backend/deleteValutazione-exe.php?codice=<?php echo $codice_commento ?>&utente=<?php echo $utente?>'">Delete valutazione</button>
                                                             <?php } ?>
                                                             <small><br><br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
                                                             <br>

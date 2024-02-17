@@ -1081,12 +1081,7 @@ function insertText($cid, $codice_testo, $email, $testo)
 
 	if (getDataBlocco($cid, $email)!= 0){
 		$errore = true;
-		$msg .= "Non puoi inserire il commento perchè sei stato bloccato!</br>";
-	}
-
-	if (contaCommenti($cid, $email, $codice_foto)>4){
-		$errore = true;
-		$msg .= "Non puoi inserire il commento perchè ne hai già inseriti 5!</br>";
+		$msg .= "Non puoi pubblicare il testo perchè sei stato bloccato!</br>";
 	}	
 
 	if (!$errore)
