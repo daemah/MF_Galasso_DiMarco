@@ -57,7 +57,7 @@ if(isset($_SESSION['email'])){
                                         </div>
                                         <?php } else { ?>
                                         <div class="col-md-3 col-sm-3">
-                                            <button class="btn profile-edit-btn" >Richiesta Accettata</button>
+                                            <button class="btn profile-edit-btn" onclick="location.href='../backend/deleteAccettazione-exe.php?utente=<?php echo $richiesta ?>'" >Richiesta Accettata</button>
                                             <div class="text-muted small"><?php echo "Richiesta accettata il: ", $data_accettazione ?></div>
                                         </div>
                                         <?php }?>

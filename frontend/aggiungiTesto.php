@@ -48,7 +48,7 @@
                     <div class="col">
                               <div class="form-group">
                                 <label>Text</label>
-                                <textarea name="testo" rows="5" cols="40" maxlength = '500' class='insertText' >
+                                <textarea name="testo" rows="5" cols="40"  class='insertText' >
                                 </textarea>
                               </div>
                               <button type="button" class="btn btn-primary btn-block">

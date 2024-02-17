@@ -22,7 +22,7 @@ input[type=text], input[type=password], input[type=nickname] {
 }
 
 #login {
-  background-color: #04AA6D;
+  background-color: #007BFF;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;

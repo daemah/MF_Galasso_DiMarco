@@ -114,9 +114,9 @@
                                                                 <?php $commento = (getCommento($cid, $codice_commento)[0]); echo($commento); 
                                             
                                                                 $codici_foto = getPostsFoto($cid); $codici_testo = getPostsTesto($cid); 
-                                                                foreach($codici_foto as $codice_foto){ print_r(" ".strpos($commento, '@'.$codice_foto));
+                                                                foreach($codici_foto as $codice_foto){
                                                                 if (strpos($commento, '@'.$codice_foto)==true){?> <button onclick= "popUp('<?php echo $codice_foto;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php }}
-                                                                foreach($codici_testo as $codice_testo){ print_r(" ".strpos($commento, '@'.$codice_testo));
+                                                                foreach($codici_testo as $codice_testo){ 
                                                                 if (strpos($commento, '@'.$codice_testo)==true){?> <button onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php }}?>
 
                                                                 <?php if ($nickname_commentatore == getNickname($cid,$email)){?>
@@ -151,6 +151,7 @@
                                                     </form>
                                                 </div>
                                                 <div class="text-muted small"><?php echo "Postato il giorno ", getTimeFoto($cid, $codice); ?></div>
+                                                <div class="text-muted small"><?php echo "Codice della foto: ". $codice; ?></div>
                                     </div>
                                     </div>
                                 </div>
@@ -221,9 +222,9 @@
                                                             <?php $commento = (getCommento($cid, $codice_commento)[0]); echo($commento); 
 
                                                             $codici_foto = getPostsFoto($cid); $codici_testo = getPostsTesto($cid); 
-                                                            foreach($codici_foto as $codice_foto){ 
+                                                            foreach($codici_foto as $codice_foto){ print_r(" ".$codice_foto. " ");
                                                                 if (strpos($commento, '@'.$codice_foto)==true){?><button onclick= "popUp('<?php echo $codice_foto;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php }}
-                                                            foreach($codici_testo as $codice_testo){ 
+                                                            foreach($codici_testo as $codice_testo){ print_r(" ".$codice_testo." ");
                                                                 if (strpos($commento, '@'.$codice_testo)==true){?> <button onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php }}?>
 
                                                             <?php if ($nickname_commentatore == getNickname($cid,$email)){?>
@@ -255,6 +256,7 @@
                                                     </form>
                                                     </div>
                                                     <div class="text-muted small"><?php echo "Postato il giorno ", getTimeTesto($cid, $codice); ?></div>
+                                                    <div class="text-muted small"><?php echo "Codice del testo: ". $codice; ?></div>
                                         </div>
                                         </div>
                                     </div>

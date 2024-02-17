@@ -13,7 +13,6 @@
    
         
     <section class="content">
-    <h1>Admin Statistics:</h2>
         <div class="home-content">
         <div class="overview-boxes">
             <div class="box">
@@ -101,7 +100,7 @@
             // Disegna l'intestazione
             ctx.fillStyle = 'black';
             ctx.font = 'bold 16px Arial';
-            ctx.fillText('I 5 utenti con indici di gradimento più alti', 5, 15);
+            ctx.fillText('I '+ categories.length + ' utenti con indici di gradimento più alti', 5, 15);
 
             for (var i = 0; i < values.length; i++) {
                 endAngle = startAngle + (values[i] / total) * (2 * Math.PI);

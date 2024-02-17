@@ -29,8 +29,9 @@ if(isset($_SESSION['email'])){
                     }
 				}
 ?>
-<div class="container">
 <button type="button" class="cancelbtn" onclick="location.href='profile.php?utente=<?php echo $email?>'">X</button>
+<div class="container">
+
 <div class="row flex-lg-nowrap">
   
   <div class="col">

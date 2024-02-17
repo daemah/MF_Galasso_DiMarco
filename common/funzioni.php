@@ -989,6 +989,37 @@ function deleteCommento($cid, $codice)
 	return $risultato;
 }
 
+function deleteAccettazione($cid, $utente_ricevente, $utente_richiedente)
+{
+	$risultato = array("status"=>"ko","msg"=>"");
+	$errore = false;
+
+	if ($cid == null || $cid->connect_errno) {
+		$risultato["status"]="ko";
+		if (!is_null($cid))
+		     $risultato["msg"]="errore nella connessione al db " . $cid->connect_error;
+		else $risultato["msg"]="errore nella connessione al db ";
+		return $risultato;
+	}
+	if ($cid->connect_error) {
+		$risultato["status"]="ko";
+		$risultato["msg"]="errore nella connessione al db " . $cid->connect_error;
+		return $risultato;
+	}
+
+	$sql = "UPDATE `chiede_amicizia` SET `data_accettazione` = NULL WHERE `chiede_amicizia`.`utente_richiedente` = '$utente_richiedente' AND `chiede_amicizia`.`utente_ricevente` = '$utente_ricevente';";
+	$res=$cid->query($sql);
+		if ($res==1)
+		{
+			$risultato["status"]="ok";
+	    	$risultato["msg"]="Hai eliminato l'accettazione alla richiesta";
+		}else{
+			$risultato["msg"]="L'eliminazione dell'accettazione è fallita". $sql . $cid->error;
+		}
+
+	return $risultato;
+}
+
 function unfollow($cid, $utente_ricevente, $utente_richiedente)
 {
 	$risultato = array("status"=>"ko","msg"=>"");
