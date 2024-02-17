@@ -27,6 +27,10 @@ function updateNotificationCount() {
 			notifiche = risposta.contenuto;
 			console.log(notifiche)
 			document.getElementById("notificationCount").innerHTML=notifiche;	
+
+			if (notifiche == 0) {
+                    document.getElementById("notificationCount").style.display = "none";
+			}
 			
 			}
 			else
@@ -39,8 +43,7 @@ function updateNotificationCount() {
 	xttp.open("GET", "../api/notification_count.php", true);
 	xttp.send();
 }
-//updateNotificationCount();
-//setInterval(updateNotificationCount, 5000); // a timer
+
 
 
 function ValutaCommento(codice_commento, utente_commentato) {

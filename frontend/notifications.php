@@ -29,6 +29,9 @@ if(isset($_SESSION['email'])){
                     } 
                 }
 ?>
+<div class="text-center text-sm-right">
+    <div class="text-muted"><small>All is art ©</small></div>
+</div>
    <?php foreach ($richieste as $richiesta){?>
             <div class="container">
                 <div class="row">

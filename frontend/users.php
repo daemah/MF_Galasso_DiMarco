@@ -18,12 +18,17 @@
         $users = getFollowing($cid, $utente);
     }
     ?>
+    
     <button type="button" class="cancelbtn" onclick="location.href='profile.php?utente=<?php echo $utente?>'">X</button>
+
 
 <link href="../styles/request.css" rel="stylesheet">
 <body>
 
 <div class = "content">
+<div class="text-center text-sm-right">
+        <div class="text-muted"><small>All is art ©</small></div>
+    </div>
    <?php foreach ($users as $user){?>
             <div class="container">
               

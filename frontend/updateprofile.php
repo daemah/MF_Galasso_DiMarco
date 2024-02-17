@@ -59,7 +59,7 @@ if(isset($_SESSION['email'])){
                                     <input type="submit" class="form-control" value="Submit" name="submit">
                                   </div>
                   </form> 
-  <form  method="POST" action="../backend/updateprofile-exe.php" autocomplete="off">
+          <form  method="POST" action="../backend/updateprofile-exe.php" autocomplete="off">
                   </div>
                   <div class="text-center text-sm-right">
                     <div class="text-muted"><small>All is art ©</small></div>

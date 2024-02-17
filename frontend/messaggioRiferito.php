@@ -17,7 +17,6 @@ $email = $_SESSION["email"];?>
 <link href="../styles/profile.css" rel="stylesheet">
 <script src="../js/myscript.js"></script>
 <div class="container">
-               
                 <div class="profile">
                     <div class="profile-image">
 

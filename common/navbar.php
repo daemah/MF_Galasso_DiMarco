@@ -24,7 +24,7 @@ include_once "funzioni.php";
             <li id="profile">
                 <a  href="profile.php?utente=<?php echo $email ?>"> 
                     <?php if (empty(getFotoProfilo($cid, $email))){?>
-                        <img src="../images/profilo.jpeg"class="avatar" alt="Avatar">
+                        <img src="../images/profilo.jpeg" class="avatar" alt="Avatar">
                     <?php } else { ?>
                     <img src=<?php echo(getFotoProfilo($cid, $email));?>class="avatar" alt="Avatar">
                     <?php } ?>
@@ -48,7 +48,7 @@ include_once "funzioni.php";
             <li id="home">
                 <a class="nav-link" href="notifications.php"  >
                     <img src="../images/notifications.jpeg" class="avatar" alt="Avatar">
-                    <span id="notificationCount"> </span>
+                    <span id="notificationCount">  <script> updateNotificationCount(); </script> </span>
                     
                 </a>
             </li>
@@ -84,8 +84,9 @@ include_once "funzioni.php";
             <!--NOTIFICATION-->
             <li id="home">
                 <a class="nav-link" href="notifications.php"  >
+               
                     <img src="../images/notifications.jpeg" class="avatar" alt="Avatar">
-                    <span id="notificationCount"> </span>
+                    <span id="notificationCount">  <script> updateNotificationCount(); </script> </span>
                     
                 </a>
             </li>
@@ -93,7 +94,6 @@ include_once "funzioni.php";
             <!--STATISTICS-->
             <li id="home">
                 <a class="nav-link" href="statistics.php"  >
-                <script> updateNotificationCount(); </script>
                     <img src="../images/statistics.png" class="avatar" alt="Avatar">
                 </a>
             </li>

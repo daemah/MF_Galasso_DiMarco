@@ -2,6 +2,9 @@
 <html lang="en">
     <?php require "../common/header.php"?>
     <body>
+    <div class="text-center text-sm-right">
+        <div class="text-muted"><small>All is art ©</small></div>
+    </div>
         <div class= "container" id = "login-container">
         <?php
         if (isset($_GET["status"])) {

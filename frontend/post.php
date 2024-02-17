@@ -14,6 +14,9 @@
             <link href="../styles/post.css" rel="stylesheet">
             <script src="../js/myscript.js"></script>
             <div class = "content">
+            <div class="text-center text-sm-right">
+                <div class="text-muted"><small>All is art ©</small></div>
+            </div>
             <?php
                 if (isset($_GET["status"])) {
                     if ($_GET["status"]=='ko')
@@ -38,7 +41,9 @@
                       
             }?>
                         <h2> Posts suggested for you </h2>
+                       
             </div>
+            
             <?php $utenti = getUsers($cid); foreach($utenti as $utente){
                 $codici = getCodiceFoto($cid, $utente); foreach($codici as $codice){
                     if ($codice != null){?> 

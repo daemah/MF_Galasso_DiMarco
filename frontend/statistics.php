@@ -13,6 +13,9 @@
    
         
     <section class="content">
+    <div class="text-center text-sm-right">
+        <div class="text-muted"><small>All is art ©</small></div>
+    </div>
         <div class="home-content">
         <div class="overview-boxes">
             <div class="box">

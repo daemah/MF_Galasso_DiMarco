@@ -38,6 +38,9 @@ if(isset($_SESSION['email'])){
                     }
                       
                     }?>
+             <div class="text-center text-sm-right">
+                <div class="text-muted"><small>All is art ©</small></div>
+            </div>
             <h2> Cerca i tuoi futuri amici: </h2>
             <div>
                 <form class="modulo-ricerca">

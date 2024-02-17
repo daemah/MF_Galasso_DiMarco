@@ -18,6 +18,9 @@ if(isset($_SESSION['email'])){
         <link href="../styles/profile.css" rel="stylesheet">
         <script src="../js/myscript.js"></script>
         <div class = "content">
+        <div class="text-center text-sm-right">
+            <div class="text-muted"><small>All is art ©</small></div>
+        </div>
         <?php
         if (isset($_GET["status"])) {
             if ($_GET["status"]=='ok')
@@ -187,6 +190,9 @@ if(isset($_SESSION['email'])){
                     } 
         }
         ?>
+         <div class="text-center text-sm-right">
+            <div class="text-muted"><small>All is art ©</small></div>
+        </div>
         <div class="container">
                 <div class="profile">
                     <div class="profile-image">

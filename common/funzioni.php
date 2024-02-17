@@ -731,6 +731,11 @@ function getUsers($cid)
 	return $utenti;
 }
 
+function setAdmin($cid, $email, $utente)
+{
+	$sql= "UPDATE `utente` SET `amministratore` = '$email' WHERE `utente`.`email` = '$utente';"; 
+}
+
 function requestFriendship($cid, $utente_richiedente, $utente_ricevente)
 {
 	$risultato = array("status"=>"ko","msg"=>"");
@@ -895,6 +900,8 @@ function signIn($cid,$email,$pwd, $nickname)
 	return $risultato;
 }
 
+
+
 function acceptRequest($cid, $utente_ricevente, $utente_richiedente)
 {
 	$risultato = array("status"=>"ko","msg"=>"");
@@ -1049,6 +1056,60 @@ function unfollow($cid, $utente_ricevente, $utente_richiedente)
 		}
 
 		return $risultato;
+}
+
+function insertText($cid, $codice_testo, $email, $testo)
+{
+	$risultato = array("status"=>"ok","msg"=>"", "contenuto"=>"");
+	print_r($risultato);
+	if ($cid == null || $cid->connect_errno) {
+		$risultato["status"]="ko";
+		if (!is_null($cid))
+		     $risultato["msg"]="errore nella connessione al db " . $cid->connect_error;
+		else $risultato["msg"]="errore nella connessione al db ";
+		return $risultato;
+	}
+
+	$msg="";
+	$errore=false;
+
+	if ($res["status"]=='ko')
+	{
+		$errore = true;
+		$msg .= "Problemi nella lettura dal database</br>";
+	}
+
+	if (getDataBlocco($cid, $email)!= 0){
+		$errore = true;
+		$msg .= "Non puoi inserire il commento perchè sei stato bloccato!</br>";
+	}
+
+	if (contaCommenti($cid, $email, $codice_foto)>4){
+		$errore = true;
+		$msg .= "Non puoi inserire il commento perchè ne hai già inseriti 5!</br>";
+	}	
+
+	if (!$errore)
+	{
+		$sql= "INSERT INTO testo(codice, email, testo, timestamp) VALUES('$codice_testo', '$email','$testo',CURRENT_TIMESTAMP);";
+		$res=$cid->query($sql);
+		if ($res==1)
+		{
+	    	$risultato["msg"]="Hai pubblicato correttamente il testo";
+			print_r($res);
+		}else
+		{
+			$risultato["status"]="ko";
+			$risultato["msg"]="La pubblicazione del testo non è andata a buon fine". $sql . $cid->error;
+		}		
+	}
+	else
+	{
+		$risultato["status"]="ko";
+		$risultato["msg"]=$msg;
+	}	
+	return $risultato;
+
 }
 
 function insertCommentFoto($cid, $email, $codice, $commento, $codice_foto, $email_foto)

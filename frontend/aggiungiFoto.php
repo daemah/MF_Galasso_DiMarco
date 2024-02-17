@@ -18,6 +18,9 @@
         <div class = "content">
         <article id="main-content" role="main">  
             <section class="container">
+            <div class="text-center text-sm-right">
+                    <div class="text-muted"><small>All is art ©</small></div>
+                  </div>
                         <div class="row">
                             <div class="col">
                               <div class="form-group">
