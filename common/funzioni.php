@@ -57,6 +57,14 @@ function getNome($cid,$email)
 	$nome = $row["nome"];
 	return $nome;
 }
+function getPw($cid,$email)
+{
+	$sql = "SELECT `password` from `utente` where email = '$email';";
+	$res = $cid->query($sql);
+	$row = $res->fetch_assoc();
+	$pw = $row["password"];
+	return $pw;
+}
 function getCognome($cid,$email)
 {
 	$sql = "SELECT cognome from utente where email = '$email';";
@@ -591,6 +599,20 @@ function updateLuogo($region,$city,$country, $whichone ,$email)
 
 
 }
+
+function ControllaPW($cid, $email, $currentpw){
+	$pw = getPw($cid,$email);
+	if ($pw == md5($currentpw)){
+		return true;
+	}
+	else{
+		return false;
+	}
+
+	
+
+}
+
 /*
 function debug_to_console($data) {
     $output = $data;
@@ -600,7 +622,8 @@ function debug_to_console($data) {
     echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
 }
 */
-function updateProfile($cid,$email,$nickname,$name,$lname,$sex,$dateb, $countryRes , $regionRes, $cityRes,$countryBir , $regionBir, $cityBir , $hobby)
+function updateProfile($cid,$email,$nickname,$name,$lname,$sex,$dateb, $countryRes , 
+$regionRes, $cityRes,$countryBir , $regionBir, $cityBir , $hobby,$currentpw,$changepw1,$changepw2)
 
 {
 	$risultato = array("status"=>"ok","msg"=>"");
@@ -629,6 +652,17 @@ function updateProfile($cid,$email,$nickname,$name,$lname,$sex,$dateb, $countryR
 		$msg .= "Il cognome non può contenere alcun carattere speciale</br>";
 	}
 
+	/*if (ControllaPW($cid,$email,$currentpw)){
+		if ($changepw1 != $changepw2){
+			$errore = true;
+			$msg .= "Two changing passwords don't match";
+		}
+	}
+	else {
+		$errore = true;
+		$msg .= "Current password is not correct";
+	}*/
+
 	if (!$errore){
 
 		$risposte = array();
@@ -651,6 +685,11 @@ function updateProfile($cid,$email,$nickname,$name,$lname,$sex,$dateb, $countryR
 		$sql = updateCampo($dateb,'data_nascita',$email);
 		$ris_dateb= controllaCampo($cid,$sql);
 		array_push($risposte,$ris_dateb);
+
+		/*$md5Change = $changepw1;
+		$sql = updatecampo($md5Change,$email);
+		$ris_pw= controllaCampo($cid,$sql);
+		array_push($risposte,$ris_pw);*/
 
 		if (!empty($hobby)){
 			if (!(in_array($hobby,getHobby($cid))))
@@ -688,6 +727,9 @@ function updateProfile($cid,$email,$nickname,$name,$lname,$sex,$dateb, $countryR
 		$sql = updateLuogo($regionBir,$cityBir,$countryBir , 'nascita',$email);
 		$ris_bir= controllaCampo($cid,$sql);
 		array_push($risposte,$ris_bir);
+
+	
+
 
 		
 		foreach ($risposte as $ris){

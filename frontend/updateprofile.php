@@ -213,7 +213,7 @@ if(isset($_SESSION['email'])){
                           <div class="col">
                             <div class="form-group">
                               <label>Current Password</label>
-                              <input class="form-control" type="password" placeholder="••••••">
+                              <input class="form-control" type="password" name='currentpw' placeholder="••••••">
                             </div>
                           </div>
                         </div>
@@ -221,7 +221,7 @@ if(isset($_SESSION['email'])){
                           <div class="col">
                             <div class="form-group">
                               <label>New Password</label>
-                              <input class="form-control" type="password" placeholder="••••••">
+                              <input class="form-control" type="password" name='changepw1' placeholder="••••••">
                             </div>
                           </div>
                         </div>
@@ -229,7 +229,7 @@ if(isset($_SESSION['email'])){
                           <div class="col">
                             <div class="form-group">
                               <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
-                              <input class="form-control" type="password" placeholder="••••••"></div>
+                              <input class="form-control" type="password" name='changepw2' placeholder="••••••"></div>
                           </div>
                         </div>
                       </div>

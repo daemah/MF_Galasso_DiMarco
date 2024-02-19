@@ -16,9 +16,13 @@ $countryBir = $_POST["countrybir"] ;
 $regionBir = $_POST["regionbir"]; 
 $cityBir = $_POST["citybir"];
 $hobby = $_POST["hobby"];
+$currentpw = $_POST["currentpw"];
+$changepw1 = $_POST["changepw1"];
+$changepw2 = $_POST["changepw2"];
 
 
-$ris = updateProfile($cid, $email, $nickname, $name, $lname, $sex, $dateb, $countryRes, $regionRes, $cityRes, $countryBir, $regionBir, $cityBir,$hobby);
+$ris = updateProfile($cid, $email, $nickname, $name, $lname, $sex, $dateb, $countryRes, $regionRes, 
+$cityRes, $countryBir, $regionBir, $cityBir,$hobby,$currentpw,$changepw1,$changepw2);
     
     if ($ris["status"]=='ok')
     {
