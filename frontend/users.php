@@ -6,6 +6,7 @@
     session_start();
     include_once "../common/connection.php";
     include_once "../common/funzioni.php";
+    if(isset($_SESSION['email'])){
     $email = $_SESSION["email"];
     
     $utente = $_GET["utente"];
@@ -82,5 +83,10 @@
         <?php require "../common/footer.php"?>
         </div>   
     </body>
-    
+    <?php
+    }
+    else{
+        header("location:../index.php");
+    }
+    ?>   
 </html>

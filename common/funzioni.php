@@ -177,7 +177,7 @@ function getNickname($cid,$email)
 }
 function getFoto($cid,$codice)
 {	
-	$sql = "SELECT posizione from foto where codice = '$codice';";
+	$sql = "SELECT posizione from foto where codice = '$codice' ;";
 	$res = $cid->query($sql);
 	$row = $res->fetch_assoc();
 	$foto = $row["posizione"];
@@ -186,7 +186,7 @@ function getFoto($cid,$codice)
 
 function getTesto($cid,$codice)
 {
-	$sql = "SELECT testo from testo where codice = '$codice';";
+	$sql = "SELECT testo from testo where codice = '$codice' ;";
 	$res = $cid->query($sql);
 	$row = $res->fetch_assoc();
 	$testo = $row["testo"];
@@ -246,7 +246,7 @@ function getPostsTesto($cid){
 function getCodiceFoto($cid, $email)
 {
 	$codici_foto = array();
-	$sql = "SELECT codice from foto where email = '$email';";
+	$sql = "SELECT codice from foto where email = '$email' order by timestamp asc;";
 	$res = $cid->query($sql);
 	while ($row = $res->fetch_assoc()){
 		$codici_foto[] = $row["codice"];
@@ -257,7 +257,7 @@ function getCodiceFoto($cid, $email)
 function getCodiceTesto($cid, $email)
 {
 	$codici_testo = array();
-	$sql = "SELECT codice from testo where email = '$email';";
+	$sql = "SELECT codice from testo where email = '$email' order by timestamp asc;";
 	$res = $cid->query($sql);
 	while ($row = $res->fetch_assoc()){
 		$codici_testo[] = $row["codice"];
@@ -407,7 +407,7 @@ function getFotoProfilo($cid, $email)
 	if($row != NULL){
 		return $posizione_foto_profilo = $row["posizione"]; 
 	}
-	$defaul_path = "\"../images/profilo.jpeg\"";
+	$defaul_path = "../images/profilo.jpeg";
 	return $defaul_path;
 }
 
@@ -533,6 +533,27 @@ function createLocation($country, $region, $city, $email)
 {
 	$sql = "INSERT INTO `città` (`regione`, `nome`, `stato`, `provincia`) VALUES ('$region', '$city', '$country', NULL);";
 	return $sql;
+}
+
+function updateRispettabilità($cid, $email){
+	$rispettabilità = getRispettabilità($cid, $email); 
+
+	$gradimenti = array();
+	$sql = "SELECT gradimento from valuta where email_commento = '$email' order by timestamp asc;";
+	$res= $cid->query($sql);
+	while ($row = $res->fetch_assoc()){
+		$gradimenti[] = $row["gradimento"];
+	}
+	$length_grad = count($gradimenti);
+	$last_gradimento = $gradimenti[$length_grad -1];
+	
+	$nuova_rispettabilità = number_format((($rispettabilità*($length_grad-1) + ($rispettabilità + $last_gradimento))/$length_grad),1);
+	print_r($nuova_rispettabilità);
+	
+	$sql2 = "UPDATE `utente` SET `rispettabilità` = '$nuova_rispettabilità' WHERE `utente`.`email` = '$email';";
+	$res=$cid->query($sql2);
+	
+	return $sql2;
 }
 
 function cancelHobby($cid,$hobby,$email)
@@ -933,6 +954,35 @@ function acceptRequest($cid, $utente_ricevente, $utente_richiedente)
 		return $risultato;
 }
 
+function referFoto($cid, $email, $utente, $codice_commento, $codice_foto)
+{
+	$risultato = array("status"=>"ok","msg"=>"", "contenuto"=>"");
+	print_r($risultato);
+	if ($cid == null || $cid->connect_errno) {
+		$risultato["status"]="ko";
+		if (!is_null($cid))
+		     $risultato["msg"]="errore nella connessione al db " . $cid->connect_error;
+		else $risultato["msg"]="errore nella connessione al db ";
+		return $risultato;
+	}
+
+	$msg="";
+	$errore=false;
+
+	if ($res["status"]=='ko')
+	{
+		$errore = true;
+		$msg .= "Problemi nella lettura dal database</br>";
+	}	
+
+	if (!$errore)
+	{
+		$sql= "INSERT INTO riferisce_foto(codice_commento, email_commento, codice_foto, email_foto) VALUES('$codice_commento', '$email','$codice_foto','$utente');";
+		$res=$cid->query($sql);
+	}	
+	return $sql;	
+}
+
 function eliminateRequest($cid, $utente_ricevente, $utente_richiedente)
 {
 	$risultato = array("status"=>"ko","msg"=>"");
@@ -950,8 +1000,7 @@ function eliminateRequest($cid, $utente_ricevente, $utente_richiedente)
 		$risultato["msg"]="errore nella connessione al db " . $cid->connect_error;
 		return $risultato;
 	}
-	print_r($utente_ricevente);
-	print_r($utente_richiedente);
+	
 	$sql = "DELETE from chiede_amicizia where utente_ricevente = '$utente_ricevente' and utente_richiedente = '$utente_richiedente';";
 	$res=$cid->query($sql);
 		if ($res==1)
@@ -1084,6 +1133,11 @@ function insertText($cid, $codice_testo, $email, $testo)
 		$msg .= "Non puoi pubblicare il testo perchè sei stato bloccato!</br>";
 	}	
 
+	if (getRispettabilità($cid, $email) <= -1){
+		$errore = true;
+		$msg .= "Non puoi postare il testo perchè hai indice di rispettabilità minore o uguale a -1!</br>";
+	}
+
 	if (!$errore)
 	{
 		$sql= "INSERT INTO testo(codice, email, testo, timestamp) VALUES('$codice_testo', '$email','$testo',CURRENT_TIMESTAMP);";
@@ -1132,6 +1186,11 @@ function insertCommentFoto($cid, $email, $codice, $commento, $codice_foto, $emai
 	if (getDataBlocco($cid, $email)!= 0){
 		$errore = true;
 		$msg .= "Non puoi inserire il commento perchè sei stato bloccato!</br>";
+	}
+
+	if (getRispettabilità($cid, $email) <= -1){
+		$errore = true;
+		$msg .= "Non puoi inserire il commento perchè hai indice di rispettabilità minore o uguale a -1!</br>";
 	}
 
 	if (contaCommenti($cid, $email, $codice_foto)>4){
@@ -1187,6 +1246,11 @@ function insertCommentTesto($cid, $email, $codice, $commento, $codice_testo, $em
 	if (getDataBlocco($cid, $email)!= 0){
 		$errore = true;
 		$msg .= "Non puoi inserire il commento perchè sei stato bloccato</br>";
+	}
+
+	if (getRispettabilità($cid, $email) <= -1){
+		$errore = true;
+		$msg .= "Non puoi inserire il commento perchè hai indice di rispettabilità minore o uguale a -1!</br>";
 	}
 
 	if (contaCommenti($cid, $email, $codice_testo)>4){

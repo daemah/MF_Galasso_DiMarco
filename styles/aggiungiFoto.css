@@ -20,6 +20,12 @@ body {
 	margin-top: 20px;
 }
 
+.btn-block{
+	background-color:#dfdfdf !important;
+	color: black !important
+	
+}
+
 .no-margin {
 	margin: 0px;
 }

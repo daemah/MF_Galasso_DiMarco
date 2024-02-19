@@ -6,6 +6,7 @@
     include_once "../common/funzioni.php";
     require "../common/header.php";
     $email = $_SESSION["email"];
+    if(isset($_SESSION['email'])){
     /* sdfsdhgghgggsf */ 
     ?>
 
@@ -88,4 +89,10 @@
                     </article>
         </div>
     </body>
+    <?php
+    }
+    else{
+        header("location:../index.php");
+    }
+    ?>
 </html>

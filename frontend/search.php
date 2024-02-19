@@ -65,11 +65,9 @@ if(isset($_SESSION['email'])){
                         <div class="nearby-user">
                             <div class="row">
                                 <div class="col-md-2 col-sm-2" >
-                                <?php if (empty(getFotoProfilo($cid, $utente))){?>
-                                    <img src="../images/profilo.jpeg" alt="user" class="profile-photo-lg">
-                                <?php } else { ?>
-                                    <img src=<?php echo(getFotoProfilo($cid, $utente));?>alt="user" class="profile-photo-lg">
-                                <?php } ?>
+                            
+                                    <img src="<?php echo(getFotoProfilo($cid, $utente));?>" alt="user" class="profile-photo-lg">
+                                
                                 </div>
                                
                                 <div class="col-md-7 col-sm-7" >

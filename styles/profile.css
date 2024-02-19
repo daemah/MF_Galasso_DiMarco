@@ -115,7 +115,12 @@ span{color: black;}
     margin-left: 1rem;
 }
 
+.container{
+    padding-left: 0px;
+}
+
 .post-edit-btn{
+    color: black;
     margin-top:4px;
     font-size: 12px;
     width: 120px;

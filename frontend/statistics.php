@@ -4,7 +4,8 @@
     session_start(); 
     include_once "../common/connection.php";
     include_once "../common/funzioni.php";
-    require "../common/header.php"
+    require "../common/header.php";
+    if(isset($_SESSION['email'])){
     ?>
     <body>
     <div><?php require "../common/navbar.php";?></div>
@@ -156,5 +157,11 @@
     </script>
  
 </body>
+<?php
+    }
+    else{
+        header("location:../index.php");
+    }
+    ?>
 </html>
 

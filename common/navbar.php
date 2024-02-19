@@ -26,7 +26,7 @@ include_once "funzioni.php";
                     <?php if (empty(getFotoProfilo($cid, $email))){?>
                         <img src="../images/profilo.jpeg" class="avatar" alt="Avatar">
                     <?php } else { ?>
-                    <img src=<?php echo(getFotoProfilo($cid, $email));?>class="avatar" alt="Avatar">
+                    <img src="<?php echo(getFotoProfilo($cid, $email));?>"class="avatar" alt="Avatar">
                     <?php } ?>
                 </a>
             </li>
@@ -63,7 +63,7 @@ include_once "funzioni.php";
                     <?php if (empty(getFotoProfilo($cid, $email))){?>
                         <img src="../images/profilo.jpeg"class="avatar" alt="Avatar">
                     <?php } else { ?>
-                    <img src=<?php echo(getFotoProfilo($cid, $email));?>class="avatar" alt="Avatar">
+                    <img src="<?php echo(getFotoProfilo($cid, $email));?>"class="avatar" alt="Avatar">
                     <?php } ?>
                 </a>
             </li>

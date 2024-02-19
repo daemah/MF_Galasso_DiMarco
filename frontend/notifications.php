@@ -13,6 +13,9 @@ if(isset($_SESSION['email'])){
 <body>
 <?php require "../common/navbar.php"?>   
 <div class = "content">
+<div class="text-center text-sm-right">
+    <div class="text-muted"><small>All is art ©</small></div>
+</div>
 <?php
     if (isset($_GET["status"])) {
         if ($_GET["status"]=='ok')
@@ -29,9 +32,6 @@ if(isset($_SESSION['email'])){
                     } 
                 }
 ?>
-<div class="text-center text-sm-right">
-    <div class="text-muted"><small>All is art ©</small></div>
-</div>
    <?php foreach ($richieste as $richiesta){?>
             <div class="container">
                 <div class="row">
@@ -41,11 +41,9 @@ if(isset($_SESSION['email'])){
                             <div class="nearby-user">
                                 <div class="row">
                                     <div class="col-md-2 col-sm-2">
-                                    <?php if (empty(getFotoProfilo($cid, $richiesta))){?>
-                                        <img src="../images/profilo.jpeg" alt="user" class="profile-photo-lg">
-                                    <?php } else { ?>
-                                        <img src=<?php echo(getFotoProfilo($cid, $richiesta));?>alt="user" class="profile-photo-lg">
-                                    <?php } ?>
+                            
+                                        <img src="<?php echo(getFotoProfilo($cid, $richiesta));?>" alt="user" class="profile-photo-lg">
+                               
                                     </div>
                                    
                                     <div class="col-md-7 col-sm-7">

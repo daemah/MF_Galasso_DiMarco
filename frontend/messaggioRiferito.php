@@ -4,6 +4,7 @@
 session_start();
 include_once "../common/connection.php";
 include_once "../common/funzioni.php";
+if(isset($_SESSION['email'])){
 ?>
 <link href="../styles/request.css" rel="stylesheet">
 <?php require "../common/header.php";
@@ -69,5 +70,10 @@ $email = $_SESSION["email"];?>
             </div>
 
 </body>
-
+<?php
+    }
+    else{
+        header("location:../index.php");
+    }
+    ?>
 </html>

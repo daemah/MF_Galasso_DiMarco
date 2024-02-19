@@ -46,16 +46,17 @@ function updateNotificationCount() {
 
 
 
-function ValutaCommento(codice_commento, utente_commentato) {
+function ValutaCommento(codice_commento, utente_commentato, $cid) {
     //var messaggio;
+	console.log($cid);
 	console.log(codice_commento);
+	
     var valutazione = window.prompt("Inserisci una valutazione da -3 a +3:");
-	//document.write("Valutazione: "+$codice_commento);
 	console.log(valutazione);
 
-    //messaggio = valutazione;
-    //document.getElementById("visualizza").innerHTML = codiceCommento;
-	if (valutazione != null){location.href='../backend/insertValutazione-exe.php?valutazione='+valutazione+'&codiceCommento='+codice_commento+'&utente='+utente_commentato;}
+	if (valutazione != null){
+		location.href='../backend/insertValutazione-exe.php?valutazione='+valutazione+'&codiceCommento='+codice_commento+'&utente='+utente_commentato;
+	}
 	
 }
 
