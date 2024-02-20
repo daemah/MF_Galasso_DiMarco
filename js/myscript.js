@@ -60,6 +60,34 @@ function ValutaCommento(codice_commento, utente_commentato, $cid) {
 	
 }
 
+function ValutaCommentoDaProfile(codice_commento, utente_commentato, $cid) {
+    //var messaggio;
+	console.log($cid);
+	console.log(codice_commento);
+	
+    var valutazione = window.prompt("Inserisci una valutazione da -3 a +3:");
+	console.log(valutazione);
+
+	if (valutazione != null){
+		location.href='../backend/insertValutazioneDaProfile.php?valutazione='+valutazione+'&codiceCommento='+codice_commento+'&utente='+utente_commentato;
+	}
+	
+}
+
+function ValutaCommentoDaProfileAut(codice_commento, utente_commentato, $cid) {
+    //var messaggio;
+	console.log($cid);
+	console.log(codice_commento);
+	
+    var valutazione = window.prompt("Inserisci una valutazione da -3 a +3:");
+	console.log(valutazione);
+
+	if (valutazione != null){
+		location.href='../backend/insertValutazioneDaProfileAut.php?valutazione='+valutazione+'&codiceCommento='+codice_commento+'&utente='+utente_commentato;
+	}
+	
+}
+
 
 function logOutConfirm() {
     var conferma = window.confirm("Sicuro che vuoi sloggarti?");
@@ -69,50 +97,64 @@ function logOutConfirm() {
 }
 
 
-function changeColorBlu1() {
-	document.getElementById("ricerca1").style.backgroundColor = "lightblue";
+function sameHobbies() {
 	var xttp = new ajaxRequest();
-	xttp.onreadystatechange  = function()
-	{
-	console.log(this.readyState + ' ' + this.status);
-      if (this.readyState == 4 && this.status == 200)
-	  {
-			console.log(this.response);
-			risposta = JSON.parse(this.response);
-			console.log(risposta.status);
+	if (document.getElementById("ricerca1").style.backgroundColor=="white"){
+		document.getElementById("ricerca1").style.backgroundColor = "lightblue";
+		xttp.onreadystatechange  = function()
+		{
+		console.log(this.readyState + ' ' + this.status);
+		if (this.readyState == 4 && this.status == 200)
+		{
+				console.log(this.response);
+				risposta = JSON.parse(this.response);
+				console.log(risposta.status);
 
-			if (risposta.status == "ok")		  
-			{
-			let x = document.getElementsByClassName('container');
-			utenti = risposta.contenuto;
-			utenti=utenti.toLowerCase(); 
-			console.log(utenti);
-				for (i = 0; i < x.length; i++) { 
-					if (!x[i].innerHTML.toLowerCase().includes(utenti)) { 
-						console.log(x[i].innerHTML.toLowerCase().includes(utenti));
-						x[i].style.display="none"; 
-					} 
-					else { 
-						x[i].style.display="list-item";                  
-					} 
-				}
-			
-			}
-			else
-			{
-				alert(risposta.msg);
-			}
+				if (risposta.status == "ok")		  
+				{
+				const userListItems = document.querySelectorAll('.container');
+				console.log(userListItems);
+				utenti = risposta.contenuto;
+				console.log(utenti)
+				userListItems.forEach((item, index) => {
+					const user = utenti[index];
+					if (user) {
+						item.style.display = 'list-item'; // Mostra l'elemento se esiste un utente corrispondente
+					} else {
+						item.style.display = 'none'; // Nasconde l'elemento se non esiste un utente corrispondente
+					}
+				});
 				
-		}		    
-    };
+				}
+				else
+				{
+					alert(risposta.msg);
+				}
+					
+			}		    
+		};
+	} else {
+		document.getElementById("ricerca1").style.backgroundColor = "white";
+		
+		
+				if (risposta.status == "ok")		  
+				{
+					const userListItems = document.querySelectorAll('.container');
+					userListItems.forEach((item) => {
+					item.style.display = 'list-item';
+					});
+				}
+	}
+
 	xttp.open("GET", "../api/hobby.php", true);
 	xttp.send();
 }
 
-
-function changeColorBlu2() {
-	document.getElementById("ricerca2").style.backgroundColor = "lightblue";
+function sameCityBir() {
+	
 	var xttp = new ajaxRequest();
+	if (document.getElementById("ricerca2").style.backgroundColor=="white"){
+		document.getElementById("ricerca2").style.backgroundColor = "lightblue";
 	xttp.onreadystatechange  = function()
 	{
 	console.log(this.readyState + ' ' + this.status);
@@ -124,37 +166,46 @@ function changeColorBlu2() {
 
 			if (risposta.status == "ok")		  
 			{
-			let x = document.getElementsByClassName('container');
-			utenti = risposta.contenuto;
-			console.log(utenti.length)
-			for (j=0; j < utenti.length; j++)
-		  	{
-				utente = utenti[j]; 
-				for (i = 0; i < x.length; i++) { 
-					if (!x[i].innerHTML.toLowerCase().includes(utente)) { 
-						x[i].style.display="none"; 
-					} 
-					else { 
-						x[i].style.display="list-item";                  
-					} 
+				const userListItems = document.querySelectorAll('.container');;
+				console.log(userListItems);
+				utenti = risposta.contenuto;
+				console.log(utenti)
+				userListItems.forEach((item, index) => {
+					const user = utenti[index];
+					if (user) {
+						item.style.display = 'list-item'; // Mostra l'elemento se esiste un utente corrispondente
+					} else {
+						item.style.display = 'none'; // Nasconde l'elemento se non esiste un utente corrispondente
+					}
+				});
+				
 				}
-				document.getElementById("comuni").innerHTML=utente;
-			}	
-			
-			}
-			else
-			{
-				alert(risposta.msg);
-			}
+				else
+				{
+					alert(risposta.msg);
+				}
 				
 		}		    
     };
+		} else {
+			document.getElementById("ricerca2").style.backgroundColor = "white";
+			
+			
+					if (risposta.status == "ok")		  
+					{
+						const userListItems = document.querySelectorAll('.container');
+						userListItems.forEach((item) => {
+						item.style.display = 'list-item';
+						});
+					}
+		}
 	xttp.open("GET", "../api/citta_nascita.php", true);
 	xttp.send();
 }
 
 
-function changeColorBlu3() {
+function sameCityRes() {
+	if (document.getElementById("ricerca3").style.backgroundColor=="white"){
 	document.getElementById("ricerca3").style.backgroundColor = "lightblue";
 	var xttp = new ajaxRequest();
 	xttp.onreadystatechange  = function()
@@ -168,30 +219,39 @@ function changeColorBlu3() {
 
 			if (risposta.status == "ok")		  
 			{
-			let x = document.getElementsByClassName('container');
-			utenti = risposta.contenuto;
-			for (j=0; j < utenti.length; j++)
-		  	{
-				utente = utenti[j]; 
-				for (i = 0; i < x.length; i++) { 
-					if (!x[i].innerHTML.toLowerCase().includes(utente)) { 
-						x[i].style.display="none"; 
-					} 
-					else { 
-						x[i].style.display="list-item";                  
-					} 
+				const userListItems = document.querySelectorAll('.container');;
+				console.log(userListItems);
+				utenti = risposta.contenuto;
+				console.log(utenti)
+				userListItems.forEach((item, index) => {
+					const user = utenti[index];
+					if (user) {
+						item.style.display = 'list-item'; // Mostra l'elemento se esiste un utente corrispondente
+					} else {
+						item.style.display = 'none'; // Nasconde l'elemento se non esiste un utente corrispondente
+					}
+				});
+				
 				}
-				document.getElementById("comuni").innerHTML=utente;
-			}	
-			
-			}
-			else
-			{
-				alert(risposta.msg);
-			}
+				else
+				{
+					alert(risposta.msg);
+				}
 				
 		}		    
     };
+	} else {
+	document.getElementById("ricerca3").style.backgroundColor = "white";
+	
+	
+			if (risposta.status == "ok")		  
+			{
+				const userListItems = document.querySelectorAll('.container');
+				userListItems.forEach((item) => {
+				item.style.display = 'list-item';
+				});
+			}
+	}
 	xttp.open("GET", "../api/citta_residenza.php", true);
 	xttp.send();
 }
@@ -201,13 +261,14 @@ function search_profile() {
 	input=input.toLowerCase(); 
 	console.log(input)
 	let x = document.getElementsByClassName('container'); 
-	console.log(x)
 	for (i = 0; i < x.length; i++) {  
 		if (!x[i].innerHTML.toLowerCase().includes(input)) { 
+			console.log(x[i].innerHTML.toLowerCase().includes(input));
 			x[i].style.display="none"; 
 		} 
 		else { 
-			x[i].style.display="list-item";                  
+			x[i].style.display="list-item";    
+			console.log(x[i].innerHTML.toLowerCase().includes(input));              
 		} 
 	} 
 }

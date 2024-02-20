@@ -70,11 +70,11 @@
                                             $data_accettazione = getDataAccettazione($cid, $utente, $email);
                                             if ($data_richiesta==0){
                                         ?>
-                                            <button class="btn post-edit-btn"  onclick="location.href='../backend/request_friendship-exe.php?utente=<?php echo $utente ?>'">Invia Richiesta</button>
+                                            <button class="btn post-edit-btn"  onclick="location.href='../backend/request_friendshipDaPost.php?utente=<?php echo $utente ?>'">Invia Richiesta</button>
                                         <?php } elseif (($data_richiesta!=0) && ($data_accettazione==0)) { ?>
-                                            <button class="btn post-edit-btn" onclick="location.href='../backend/eliminateRequest-exe.php?utente=<?php echo $utente ?>'">Richiesta Inviata</button>
+                                            <button class="btn post-edit-btn" onclick="location.href='../backend/eliminateRequestDaPost.php?utente=<?php echo $utente ?>'">Richiesta Inviata</button>
                                         <?php } else {?>
-                                            <button class="btn post-edit-btn"  onclick="location.href='../backend/unfollow-exe.php?utente=<?php echo $utente ?>'">Unfollow</button>
+                                            <button class="btn post-edit-btn"  onclick="location.href='../backend/unfollowDaPost.php?utente=<?php echo $utente ?>'">Unfollow</button>
                                         <?php }}?>
 
                                         <?php if (($utente != $email) & getAdmin($cid, $email)!=0){?>
@@ -147,6 +147,8 @@
                                                     ?>
                                                 </div>
                                             </div>
+                                           
+                                                <?php if ($utente != $email) {?>
                                                 <div class="card-footer">
                                                    
                                                     <form method="POST" action="../backend/comment-exe_foto.php?utente=<?php echo $utente?>">
@@ -156,6 +158,7 @@
                                                         </div>
                                                     </form>
                                                 </div>
+                                                <?php } ?>
                                                 <div class="text-muted small"><?php echo "Postato il giorno ", getTimeFoto($cid, $codice); ?></div>
                                                 <div class="text-muted small"><?php echo "Codice della foto: ". $codice; ?></div>
                                     </div>
@@ -189,11 +192,11 @@
                                                 $data_accettazione = getDataAccettazione($cid, $utente, $email);
                                             if ($data_richiesta==0){
                                             ?>
-                                                <button class="btn post-edit-btn"  onclick="location.href='../backend/request_friendship-exe.php?utente=<?php echo $utente ?>'">Invia Richiesta</button>
+                                                <button class="btn post-edit-btn"  onclick="location.href='../backend/request_friendshipDaPost.php?utente=<?php echo $utente ?>'">Invia Richiesta</button>
                                             <?php } elseif (($data_richiesta!=0) && ($data_accettazione==0)) { ?>
-                                                <button class="btn post-edit-btn" onclick="location.href='../backend/eliminateRequest-exe.php?utente=<?php echo $utente ?>'">Richiesta Inviata</button>
+                                                <button class="btn post-edit-btn" onclick="location.href='../backend/eliminateRequestDaPost.php?utente=<?php echo $utente ?>'">Richiesta Inviata</button>
                                             <?php } else {?>
-                                                <button class="btn post-edit-btn"  onclick="location.href='../backend/unfollow-exe.php?utente=<?php echo $utente ?>'">Unfollow</button>
+                                                <button class="btn post-edit-btn"  onclick="location.href='../backend/unfollowDaPost.php?utente=<?php echo $utente ?>'">Unfollow</button>
                                             <?php }}?>
 
                                             <?php if (($utente != $email) & getAdmin($cid, $email)!=0){?>
@@ -251,6 +254,7 @@
                                                         <?php } ?>
                                                     </div>
                                             </div>
+                                            <?php if ($utente != $email) {?>
                                                     <div class="card-footer">
                                                     <form method="POST" action="../backend/comment-exe_testo.php?utente=<?php echo $utente ?>">
                                                         <div class="container">
@@ -259,6 +263,7 @@
                                                         </div>
                                                     </form>
                                                     </div>
+                                            <?php } ?>
                                                     <div class="text-muted small"><?php echo "Postato il giorno ", getTimeTesto($cid, $codice); ?></div>
                                                     <div class="text-muted small"><?php echo "Codice del testo: ". $codice; ?></div>
                                         </div>

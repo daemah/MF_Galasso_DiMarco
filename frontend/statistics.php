@@ -56,7 +56,8 @@
                 <div class="info-utenti">
                 <b> Numero di Foto e Testi pubblicati dagli utenti: </b>
             <?php foreach ($utenti as $utente)
-                {$foto_utente = count(getCodiceFoto($cid, $utente)); 
+                {
+                $foto_utente = count(getCodiceFoto($cid, $utente)); 
                 if ($foto_utente != 0){?>
                     <br><br> <?php echo "- ". (getNickname($cid, $utente) . " ha inserito " . $foto_utente ." foto"); 
                 } else { ?>
@@ -65,13 +66,15 @@
                 } 
 
             foreach ($utenti as $utente)
-                {$testo_utente = count(getCodiceTesto($cid, $utente)); 
-                    if ($testo_utente != 0){?>
-                    <br><br> <?php echo "- ".(getNickname($cid, $utente) . " ha inserito " . $testo_utente ." testo"); 
+                {
+                $testo_utente = count(getCodiceTesto($cid, $utente)); 
+                if ($testo_utente == 1){?>
+                    <br><br> <?php echo "- ".(getNickname($cid, $utente) . " ha inserito 1 testo");
+                } elseif ($testo_utente > 1){ ?>
+                    <br><br> <?php echo ("- ".getNickname($cid, $utente) . " ha inserito ".$testo_utente." testi"); 
                 } else { ?>
-                    <br><br> <?php echo ("- ".getNickname($cid, $utente) . " non ha inserito testi"); 
-                } 
-                } ?>
+                    <br><br> <?php echo ("- ".getNickname($cid, $utente) . " non ha inserito testi");
+                }} ?>
                 
                     </div>
                     </div>

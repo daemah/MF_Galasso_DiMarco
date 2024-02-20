@@ -39,11 +39,7 @@
                         
                             <div class="nearby-user">
                                 <div class="row">
-                                    <?php if (empty(getFotoProfilo($cid, $user))){?>
-                                        <img src="../images/profilo.jpeg" alt="user" class="profile-photo-lg">
-                                    <?php } else { ?>
-                                        <img src=<?php echo getFotoProfilo($cid, $user);?>alt="user" class="profile-photo-lg">
-                                    <?php } ?>
+                                        <img src="<?php echo getFotoProfilo($cid, $user);?>" alt="user" class="profile-photo-lg">
                                    
                                     <div class="col-md-7 col-sm-7">
                                         <h5><button type="button"  class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $user ?>'"> <?php echo(getNickname($cid, $user));?></button></h5>

@@ -90,6 +90,7 @@ ul {
 }
 
 .cancelbtn {
+    border-width: 0.3px;
     width: auto;
     margin-right: 7px;
     margin-top: 7px;
