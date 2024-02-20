@@ -3,7 +3,7 @@
 $hostname = 'localhost';
 $username = 'root';
 $password = '';
-$db = 'Minifacebbok4';
+$db = 'Minifacebook3';
 
 try {
     $cid = new mysqli($hostname,$username,$password,$db);
