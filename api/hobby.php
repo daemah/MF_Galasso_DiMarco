@@ -39,7 +39,7 @@ $hobbys = array();
 
 $utenti_hobbys_comuni = array();
 foreach($hobbys as $hobby){
-    $sql = "SELECT email FROM ha_hobby where nome = '$hobby'";
+    $sql = "SELECT email FROM ha_hobby where nome = '$hobby' and email<> '$email';";
     $res = $cid->query($sql);
         if ($res==null)
         {

@@ -5,6 +5,7 @@
 session_start();
 include_once "../common/connection.php";
 include_once "../common/funzioni.php";
+
 $email = $_SESSION["email"];
 if(isset($_SESSION['email'])){
 
@@ -29,7 +30,9 @@ if(isset($_SESSION['email'])){
                     }
 				}
 ?>
-<button type="button" class="cancelbtn" onclick="location.href='profile.php?utente=<?php echo $email?>'">X</button>
+
+
+
 <div class="container">
 
 <div class="row flex-lg-nowrap">
@@ -39,6 +42,10 @@ if(isset($_SESSION['email'])){
       <div class="col mb-3">
         <div class="card">
           <div class="card-body">
+          <div class="text-center text-sm-right">
+                    <div class="text-muted"><small>All is art ©</small></div>
+          </div>
+          <button type="button" class="cancelbtn" onclick="location.href='profile.php?utente=<?php echo $email?>'">X</button>
             <div class="e-profile">
               <div class="row">
                 <div class="col-12 col-sm-auto mb-3">
@@ -48,6 +55,7 @@ if(isset($_SESSION['email'])){
                     </div>
                   </div>
                 </div>
+            
                 <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                   <div class="text-center text-sm-left mb-2 mb-sm-0">
                     <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"><?php $nickname = getNickname($cid,$email); if ($nickname != null){print_r($nickname);}?></h4>
@@ -61,9 +69,7 @@ if(isset($_SESSION['email'])){
                   </form> 
           <form  method="POST" action="../backend/updateprofile-exe.php" autocomplete="off">
                   </div>
-                  <div class="text-center text-sm-right">
-                    <div class="text-muted"><small>All is art ©</small></div>
-                  </div>
+                  
                 </div>
               </div>
               <ul class="nav nav-tabs">

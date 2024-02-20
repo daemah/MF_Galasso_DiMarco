@@ -223,6 +223,15 @@ function getPostsFoto($cid){
 	return $foto;
 }
 
+function getAmministratore($cid, $utente)
+{
+	$sql = "SELECT amministratore from utente where email = '$utente' ;";
+	$res = $cid->query($sql);
+	$row = $res->fetch_assoc();
+	$amministratore = $row["amministratore"];
+	return $amministratore;
+}
+
 function getUtenteFromCodeFoto($cid, $codice)
 {
 	$sql = "SELECT email from foto where codice = '$codice';";
@@ -539,7 +548,7 @@ function controllaCampo($cid,$sql)
 
 function createLocation($country, $region, $city, $email)
 {
-	$sql = "INSERT INTO `città` (`regione`, `nome`, `stato`, `provincia`) VALUES ('$region', '$city', '$country', NULL);";
+	$sql = "INSERT INTO `città` (`regione`, `nome`, `stato`) VALUES ('$region', '$city', '$country');";
 	return $sql;
 }
 
@@ -732,7 +741,7 @@ $regionRes, $cityRes,$countryBir , $regionBir, $cityBir , $hobby,$currentpw,$cha
 			}
 		}
 
-		$sql = updateLuogo($regionRes,$cityRes,$countryRes , 'residenza',$email);
+		$sql = updateLuogo($regionRes,$cityRes,$countryRes , 'residenza', $email);
 		$ris_res= controllaCampo($cid,$sql);
 		array_push($risposte,$ris_res);
 
@@ -963,7 +972,11 @@ function signIn($cid,$email,$pwd, $nickname)
 	return $risultato;
 }
 
-
+function chiHaBloccato($cid, $email, $utente)
+{
+	$sql= "UPDATE `utente` SET `amministratore` = '$email' WHERE `utente`.`email` = '$utente';";
+	$res=$cid->query($sql);
+}
 
 function acceptRequest($cid, $utente_ricevente, $utente_richiedente)
 {
@@ -1171,8 +1184,9 @@ function insertText($cid, $codice_testo, $email, $testo)
 	}
 
 	if (getDataBlocco($cid, $email)!= 0){
+		$amministratore = getAmministratore($cid, $email);
 		$errore = true;
-		$msg .= "Non puoi pubblicare il testo perchè sei stato bloccato!</br>";
+		$msg .= "Non puoi pubblicare il testo perchè sei stato bloccato da".$amministratore."!</br>";
 	}	
 
 	if (getRispettabilità($cid, $email) <= -1){
@@ -1242,7 +1256,7 @@ function insertCommentFoto($cid, $email, $codice, $commento, $codice_foto, $emai
 
 	if (!$errore)
 	{
-		$sql= "INSERT INTO commenti(codice, email, testo, timestamp, progressivo, codice_foto, email_foto) VALUES('$codice', '$email','$commento',CURRENT_TIMESTAMP, 1, '$codice_foto', '$email_foto');";
+		$sql= "INSERT INTO commenti(codice, email, testo, timestamp, codice_foto, email_foto) VALUES('$codice', '$email','$commento',CURRENT_TIMESTAMP, '$codice_foto', '$email_foto');";
 		$res=$cid->query($sql);
 		if ($res==1)
 		{
@@ -1302,7 +1316,7 @@ function insertCommentTesto($cid, $email, $codice, $commento, $codice_testo, $em
 
 	if (!$errore)
 	{
-		$sql= "INSERT INTO commenti(codice, email, testo, timestamp, progressivo, codice_testo, email_testo) VALUES('$codice', '$email','$commento',CURRENT_TIMESTAMP, 1, '$codice_testo', '$email_testo');";
+		$sql= "INSERT INTO commenti(codice, email, testo, timestamp,  codice_testo, email_testo) VALUES('$codice', '$email','$commento',CURRENT_TIMESTAMP, '$codice_testo', '$email_testo');";
 		$res=$cid->query($sql);
 		if ($res==1)
 		{

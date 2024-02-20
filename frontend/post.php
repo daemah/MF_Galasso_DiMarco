@@ -120,10 +120,10 @@
                                             
                                                                 $codici_foto = getPostsFoto($cid); $codici_testo = getPostsTesto($cid); 
                                                                 foreach($codici_foto as $codice_foto){
-                                                                if (strpos($commento, '@'.$codice_foto)){ ?> 
+                                                                if (strpos($commento, '@'.$codice_foto)==true){ ?> 
                                                                 <button onclick= "popUp('<?php echo $codice_foto;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php header("location: ../backend/riferisceFoto-exe.php?codice_commento=".$codice_commento."&codice_foto=".$codice."&utente=".$nickname_commentatore);}}
                                                                 foreach($codici_testo as $codice_testo){ 
-                                                                if (strpos($commento, '@'.$codice_testo)){?> <button onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php }}?>
+                                                                if (strpos($commento, '@'.$codice_testo)==true){?> <button onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php }}?>
 
                                                                 <?php if ($nickname_commentatore == getNickname($cid,$email)){?>
                                                                 <br><button class="btn post-edit-btn" onclick= "location.href='../backend/deleteComment-exe.php?codice=<?php echo $codice_commento ?>'">Delete comment</button>
@@ -227,9 +227,9 @@
 
                                                             $codici_foto = getPostsFoto($cid); $codici_testo = getPostsTesto($cid); 
                                                             foreach($codici_foto as $codice_foto){ 
-                                                                if (strpos($commento, '@'.$codice_foto)){?><button onclick= "popUp('<?php echo $codice_foto;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php }}
+                                                                if (strpos($commento, '@'.$codice_foto)==true){?><button onclick= "popUp('<?php echo $codice_foto;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php }}
                                                             foreach($codici_testo as $codice_testo){ 
-                                                                if (strpos($commento, '@'.$codice_testo)){?> <button onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php }}?>
+                                                                if (strpos($commento, '@'.$codice_testo)==true){?> <button onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php }}?>
 
                                                             <?php if ($nickname_commentatore == getNickname($cid,$email)){?>
                                                                 <br><button class="btn post-edit-btn" onclick = "location.href='../backend/deleteComment-exe.php?codice=<?php echo $codice_commento ?>'">Delete comment</button>

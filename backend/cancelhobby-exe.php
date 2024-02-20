@@ -18,7 +18,7 @@ if ($ris["status"]=='ok')
     }
     else
     {	
-        header("location: ../frontend/serch.php?status=ko&msg=". urlencode($ris["msg"]));
+        header("location: ../frontend/search.php?status=ko&msg=". urlencode($ris["msg"]));
     }
     
 ?>

@@ -177,13 +177,15 @@ span{color: black;}
 
 .gallery {
     padding: 20px;
-    box-shadow: 0px 0px 0.5px black;
+    
     flex-wrap: wrap;
     margin: -1rem -1rem;
     padding-bottom: 3rem;
 }
 
 .gallery-item {
+    padding: 20px;
+    box-shadow: 0px 0px 0.5px black;
     position: relative;
     flex: 1 0 22rem;
     color: #fff;

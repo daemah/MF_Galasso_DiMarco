@@ -74,12 +74,12 @@ if(isset($_SESSION['email'])){
 
                 <div class="gallery">
                     <?php $codici = getCodiceFoto($cid, $email); foreach($codici as $codice){ ?>
-                    <div >  
+                 
                         <button class = "btn post-edit-btn" onclick="location.href='../backend/deleteFoto-exe.php?codice=<?php echo $codice ?>'"> Elimina Foto </button>
                         <p id = "luogo">
                             <?php echo getCitta($cid, $codice)." "; echo getStato($cid, $codice); ?>
                         </p>
-                    </div>
+                   
                     <div class="gallery-item" tabindex="0">
 
                         <img src=<?php echo getFoto($cid, $codice);?> class="gallery-image" alt="">
@@ -188,7 +188,7 @@ if(isset($_SESSION['email'])){
                 <?php } ?>
                 
                 </div>
-
+                <div>
                 </div>
                 <?php require "../common/footer.php"?>   
             </div>
@@ -278,11 +278,10 @@ if(isset($_SESSION['email'])){
 
                 <div class="gallery">
                     <?php $codici = getCodiceFoto($cid, $utente); foreach($codici as $codice){ ?>
-                    <div >  
+                 
                         <p id = "luogo">
                             <?php echo getCitta($cid, $codice)." "; echo getStato($cid, $codice); ?>
                         </p>
-                    </div>
                     <div class="gallery-item" tabindex="0">
 
                         <img src=<?php echo getFoto($cid, $codice);?> class="gallery-image" alt="">
@@ -403,9 +402,11 @@ if(isset($_SESSION['email'])){
                 <?php } ?>
                 </div>
                 </div>
+                </div>
                 <!-- End of gallery --> 
                 <?php require "../common/footer.php"?>                
             </div>
+                                        
         <?php } ?>
         </body>
     <?php

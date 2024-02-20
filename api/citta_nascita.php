@@ -36,7 +36,7 @@ $risultato= array("msg"=>"","status"=>"ok");
     
 
     $utenti_citta_comuni = array();
-    $sql = "SELECT email FROM utente where citta_nascita = '$cittab'";
+    $sql = "SELECT email FROM utente where citta_nascita = '$cittab' and email<>'$email'";
     $res = $cid->query($sql);
     if ($res==null)
     {

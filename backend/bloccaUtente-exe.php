@@ -2,11 +2,12 @@
 //session_start();
 include_once "../common/connection.php";
 include_once "../common/funzioni.php";
-
+session_start();
 $utente = $_GET["utente"];
-
+$email = $_SESSION["email"];
 $ris = bloccaUtente($cid, $utente);
-print_r($ris);
+
+$ris1 = chiHaBloccato($cid, $email, $utente);
 
 
 if ($ris["status"]=='ok')

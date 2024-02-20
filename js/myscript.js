@@ -85,20 +85,17 @@ function changeColorBlu1() {
 			{
 			let x = document.getElementsByClassName('container');
 			utenti = risposta.contenuto;
+			utenti=utenti.toLowerCase(); 
 			console.log(utenti);
-			for (j=0; j < utenti.length; j++)
-		  	{
-				utente = utenti[j]; 
 				for (i = 0; i < x.length; i++) { 
-					if (!x[i].innerHTML.toLowerCase().includes(utente)) { 
+					if (!x[i].innerHTML.toLowerCase().includes(utenti)) { 
+						console.log(x[i].innerHTML.toLowerCase().includes(utenti));
 						x[i].style.display="none"; 
 					} 
 					else { 
 						x[i].style.display="list-item";                  
 					} 
 				}
-				document.getElementById("comuni").innerHTML=utente;
-			}	
 			
 			}
 			else
