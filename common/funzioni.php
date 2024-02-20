@@ -57,14 +57,7 @@ function getNome($cid,$email)
 	$nome = $row["nome"];
 	return $nome;
 }
-function getPw($cid,$email)
-{
-	$sql = "SELECT `password` from `utente` where email = '$email';";
-	$res = $cid->query($sql);
-	$row = $res->fetch_assoc();
-	$pw = $row["password"];
-	return $pw;
-}
+
 function getCognome($cid,$email)
 {
 	$sql = "SELECT cognome from utente where email = '$email';";
@@ -488,6 +481,14 @@ function getDataBlocco($cid, $email)
 	}
 	return 0;
 }
+function getPw($cid,$email)
+{
+	$sql = "SELECT `password` FROM `utente` WHERE email = '$email';";
+	$res = $cid->query($sql);
+	$row = $res->fetch_assoc();
+	$pw = $row["password"];
+	return $pw;
+}
 
 function contaCommenti($cid, $email, $codice)
 {
@@ -520,6 +521,40 @@ function updateHobby($var,$email)
 		$sql = "INSERT INTO `ha_hobby` (`nome`, `email`) VALUES ('$var', '$email');";
 	}
 	return $sql;
+}
+function updatePhoto($cid,$email,$path,$name)
+{
+	$risultato = array("status"=>"ok","msg"=>"");
+	$errore = false;
+
+	if (!$errore)
+	{
+		$risposte = array();
+		$codice = generateCode();
+		$sql_foto = "INSERT INTO `foto` (`codice`, `email`, `regione`, `nome_citta`, `stato`, `descrizione`, `posizione`, `nome_file`, `timestamp`) VALUES ('$codice', '$email', NULL, NULL, NULL, NULL, '$path', '$name', CURRENT_TIMESTAMP);";
+		$ris_foto = controllaCampo($cid,$sql_foto);
+		array_push($risposte,$ris_foto);
+		$sql_utente = "UPDATE `utente` SET `foto_profilo` = '$codice' WHERE `utente`.`email` = '$email';";
+		$ris_utente = controllaCampo($cid,$sql_utente);
+		array_push($risposte,$ris_utente);
+
+		foreach ($risposte as $ris){
+			if ($ris["status"]=="ko"){
+				$risultato["status"]="ko";
+				$risultato["msg"] = $ris["msg"];
+			}else {
+				$risultato["status"]="ok";
+				$risultato["msg"] = $ris["msg"];
+			}
+		}
+
+	}
+	else{
+		$risultato["status"]="ko";
+		$risultato["msg"]=$msg;
+	}
+	return $risultato;
+	
 }
 
 function controllaCampo($cid,$sql)
@@ -621,17 +656,16 @@ function updateLuogo($region,$city,$country, $whichone ,$email)
 
 }
 
-function ControllaPW($cid, $email, $currentpw){
+function ControllaPW($cid, $email, $currentpw)
+{
 	$pw = getPw($cid,$email);
-	if ($pw == md5($currentpw)){
+	$currentmd5 = md5($currentpw);
+	if ($pw == $currentmd5){
 		return true;
 	}
 	else{
 		return false;
 	}
-
-	
-
 }
 
 /*
@@ -673,16 +707,25 @@ $regionRes, $cityRes,$countryBir , $regionBir, $cityBir , $hobby,$currentpw,$cha
 		$msg .= "Il cognome non può contenere alcun carattere speciale</br>";
 	}
 
-	/*if (ControllaPW($cid,$email,$currentpw)){
-		if ($changepw1 != $changepw2){
+	if (!empty($currentpw) && !empty($changepw1) && !empty($changepw2)) {
+		if (ControllaPW($cid,$email,$currentpw))
+		{
+		
+			if ($changepw1 != $changepw2)
+			{
+				
+				$errore = true;
+				$msg .= "Two changing passwords don't match";
+			}
+	
+		}else 
+		{
+
 			$errore = true;
-			$msg .= "Two changing passwords don't match";
+			$msg .= "Current password is not correct";
+			
 		}
-	}
-	else {
-		$errore = true;
-		$msg .= "Current password is not correct";
-	}*/
+}
 
 	if (!$errore){
 
@@ -707,10 +750,12 @@ $regionRes, $cityRes,$countryBir , $regionBir, $cityBir , $hobby,$currentpw,$cha
 		$ris_dateb= controllaCampo($cid,$sql);
 		array_push($risposte,$ris_dateb);
 
-		/*$md5Change = $changepw1;
-		$sql = updatecampo($md5Change,$email);
-		$ris_pw= controllaCampo($cid,$sql);
-		array_push($risposte,$ris_pw);*/
+		if (!empty($currentpw) && !empty($changepw1) && !empty($changepw2)) {
+			$md5Change = md5($changepw1);
+			$sql = updatecampo($md5Change,'password',$email);
+			$ris_pw= controllaCampo($cid,$sql);
+			array_push($risposte,$ris_pw);
+		}
 
 		if (!empty($hobby)){
 			if (!(in_array($hobby,getHobby($cid))))

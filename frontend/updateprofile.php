@@ -13,12 +13,13 @@ if(isset($_SESSION['email'])){
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css'>
 <link rel='stylesheet' href='../styles/updateprofile.css' >
+
 <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js'></script>
 <script src="../js/places.js"></script>
 </head>
 <?php
-	if (isset($_GET["status"])) {
-        if ($_GET["status"]=='ko')
+        if (isset($_GET["status"])) {
+            if ($_GET["status"]=='ko')
                     {
         
                         {
@@ -27,8 +28,18 @@ if(isset($_SESSION['email'])){
                             echo "</div>";
                         }
                     }
-				}
-?>
+                }
+        ?>
+         <?php if (isset($_GET["status"]))
+                {
+                    if ($_GET["status"]=='ok')
+                    {
+                        echo "<div class='alert-success'>\n";
+                        echo $_GET["msg"];
+                        echo "</div>";
+                    }
+                      
+                    }?>
 <button type="button" class="cancelbtn" onclick="location.href='profile.php?utente=<?php echo $email?>'">X</button>
 <div class="container">
 

@@ -4,25 +4,40 @@ include_once "../common/connection.php";
 include_once "../common/funzioni.php";
 
 $file_name= $_FILES['ImageToUpload']['name'];
+$file_path = "../images/".$file_name;
 $tmp_name =  $_FILES['ImageToUpload']['tmp_name'];
+$email = $_SESSION["email"];
+
+//rimozione degli spazi dal nome
+$file_name = str_replace(' ', '', $file_name);
+
 
 $position= strpos($file_name, ".");
 $fileextension= substr($file_name, $position + 1);
+
 $fileextension= strtolower($fileextension);
 
-$fileExtensionsAllowed = ['jpeg','jpg','png']; // These will be the only file extensions allowed 
+$fileExtensionsAllowed = ['jpeg','jpg','png'];
 
 
 $fileSize = $_FILES['ImageToUpload']['size'];
-$errore = false;
-if (! in_array($fileextension,$fileExtensionsAllowed)) {
+
+
+
+if (!in_array($fileextension,$fileExtensionsAllowed)) {
   $errore = true;
   $msg .= "L'estesione non è corretta</br>";
+  header('location: ../frontend/updateprofile.php?status=ko&msg='. urlencode($msg));
 }
 
 if (empty($file_name)){
     $msg .= "Non hai inserito alcun file</br>";
-    //header('location: ../frontend/updateprofile.php?status=ko&msg='. urlencode($msg));
+    header('location: ../frontend/updateprofile.php?status=ko&msg='. urlencode($msg));
+}
+
+if (strlen($file_name) > 39){
+  $msg .= "Nome del file troppo lungo</br>";
+  header('location: ../frontend/updateprofile.php?status=ko&msg='. urlencode($msg));
 }
 
 
@@ -32,31 +47,38 @@ if (isset($_POST['submit'])) {
 
   if ($fileSize > 4000000) {
       $errore = true;
-    $msg .= "Il file è troppo grande, supera i 4Mb</br>";
+      $msg .= "Il file è troppo grande, supera i 4Mb</br>";
+      header('location: ../frontend/updateprofile.php?status=ko&msg='. urlencode($msg));
   }
 
 
   if (!($errore)) {
-    echo("Move uploaded file " . $tmp_name . " uploadPath ". $file_name);
-      if(move_uploaded_file($tmp_name, $file_name)){
-        $msg .= "Upload successes</br>";
-        echo($file_name);
-        $base_path = "../images/". $file_name;
-        header('location: ../frontend/updateprofile.php?status=ok&msg='. urlencode($msg));
-        /*exit();*/
+    //echo("Move uploaded file " . $tmp_name . " uploadPath ". $file_name);
+      if(move_uploaded_file($tmp_name,$file_path)){
+      
+        $msg = "Upload successes</br>";
+        $base_path = "../images/". $file_name; 
+        $ris = updatePhoto($cid,$email,$base_path,$file_name);
+
+       
+        if ($ris["status"]=='ok')
+        {
+          header('location: ../frontend/updateprofile.php?status=ok&msg='. urlencode($msg)) . urlencode($ris["msg"]);
+        }
+        else
+        {	
+          header('location: ../frontend/updateprofile.php?status=ok&msg='. urlencode($msg)). urlencode($ris["msg"]);
+        }
+
       } else {
-        $msg .= "Upload fails</br>";
+        $msg = "<br>Upload fails</br>";
         echo("ERROR". $msg);
-        // print_r($_FILES);
-        // exit();
         header('location: ../frontend/updateprofile.php?status=ko&msg='. urlencode($msg));
     
       }
     } else {
-      foreach ($errors as $error) {
-        header('location: ../frontend/updateprofile.php?status=ko&msg='. urlencode($msg));
-        /*exit();*/
-      }
+      $msg .= "Errore nel caricamento</br>";
+      header('location: ../frontend/updateprofile.php?status=ko&msg='. urlencode($msg));
     }
 
 }
