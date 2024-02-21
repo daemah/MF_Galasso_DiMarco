@@ -70,11 +70,11 @@
                                             $data_accettazione = getDataAccettazione($cid, $utente, $email);
                                             if ($data_richiesta==0){
                                         ?>
-                                            <button class="btn post-edit-btn"  onclick="location.href='../backend/request_friendship-exe.php?utente=<?php echo $utente ?>'">Invia Richiesta</button>
+                                            <button class="btn post-edit-btn"  onclick="location.href='../backend/request_friendshipDaPost.php?utente=<?php echo $utente ?>'">Invia Richiesta</button>
                                         <?php } elseif (($data_richiesta!=0) && ($data_accettazione==0)) { ?>
-                                            <button class="btn post-edit-btn" onclick="location.href='../backend/eliminateRequest-exe.php?utente=<?php echo $utente ?>'">Richiesta Inviata</button>
+                                            <button class="btn post-edit-btn" onclick="location.href='../backend/eliminateRequestDaPost.php?utente=<?php echo $utente ?>'">Richiesta Inviata</button>
                                         <?php } else {?>
-                                            <button class="btn post-edit-btn"  onclick="location.href='../backend/unfollow-exe.php?utente=<?php echo $utente ?>'">Unfollow</button>
+                                            <button class="btn post-edit-btn"  onclick="location.href='../backend/unfollowDaPost.php?utente=<?php echo $utente ?>'">Unfollow</button>
                                         <?php }}?>
 
                                         <?php if (($utente != $email) & getAdmin($cid, $email)!=0){?>
@@ -98,12 +98,13 @@
 
                                             <img src=<?php echo getFoto($cid, $codice);?> class="gallery-image" alt="">
                                                 <div class="card-footer">
-                                                    
+                                                <?php if(getDescrizioneFoto($cid, $codice)!=0){ ?>
+                                                <strong> Descrizione foto: </strong>
                                                     <p>
                                                         <?php echo getDescrizioneFoto($cid, $codice); ?>
                                                     </p>
-
-                                                    <strong><?php echo(count(getCodiceCommentoFoto($cid, $codice)))?></strong> <span class="align-middle">Comments: </span>
+                                                    <?php } ?>
+                                                    <strong><?php echo(count(getCodiceCommentoFoto($cid, $codice)))?> Comments:</strong>
                                                     <?php
                                                         $codici_commento = getCodiceCommentoFoto($cid, $codice);
                                                        
@@ -119,10 +120,9 @@
                                                                 <?php $commento = (getCommento($cid, $codice_commento)[0]); echo($commento); 
                                             
                                                                 $codici_foto = getPostsFoto($cid); $codici_testo = getPostsTesto($cid); 
-                                                                foreach($codici_foto as $codice_foto){
-                                                                if (strpos($commento, '@'.$codice_foto)==true){ ?> 
-                                                                <button onclick= "popUp('<?php echo $codice_foto;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php header("location: ../backend/riferisceFoto-exe.php?codice_commento=".$codice_commento."&codice_foto=".$codice."&utente=".$nickname_commentatore);}}
-                                                                foreach($codici_testo as $codice_testo){ 
+                                                                foreach($codici_foto as $codice_foto){ 
+                                                                if (strpos($commento, '@'.$codice_foto)==true){?><button onclick= "popUp('<?php echo $codice_foto;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php }}
+																foreach($codici_testo as $codice_testo){ 
                                                                 if (strpos($commento, '@'.$codice_testo)==true){?> <button onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php }}?>
 
                                                                 <?php if ($nickname_commentatore == getNickname($cid,$email)){?>
@@ -138,7 +138,7 @@
                                                                 $somma = 0;
                                                                 if (!empty($gradimenti)){
                                                                     foreach ($gradimenti as $gradimento){$somma += $gradimento;}
-                                                                    echo("La media delle valutazioni di questo commento è (indice di gradimento): ". $somma/count($gradimenti));
+                                                                    echo("La media delle valutazioni di questo commento è (indice di gradimento): ". number_format(($somma/count($gradimenti)),1));
                                                                 }else{
                                                                     echo("Il commento non ha ricevuto valutazioni");
                                                                 }
@@ -147,15 +147,18 @@
                                                     ?>
                                                 </div>
                                             </div>
+                                           
+                                                <?php if ($utente != $email) {?>
                                                 <div class="card-footer">
                                                    
-                                                    <form method="POST" action="../backend/comment-exe_foto.php?utente=<?php echo $utente?>">
+                                                    <form method="POST" action="../backend/comment-exe_foto.php?utente=<?php echo $utente?>&codice_foto=<?php echo $codice?>">
                                                         <div class="container">
                                                             <input type="text" placeholder="Inserisci un commento" name="commento" >
                                                             <input class="btn profile-edit-btn" type="submit" value="invia">
                                                         </div>
                                                     </form>
                                                 </div>
+                                                <?php } ?>
                                                 <div class="text-muted small"><?php echo "Postato il giorno ", getTimeFoto($cid, $codice); ?></div>
                                                 <div class="text-muted small"><?php echo "Codice della foto: ". $codice; ?></div>
                                     </div>
@@ -189,11 +192,11 @@
                                                 $data_accettazione = getDataAccettazione($cid, $utente, $email);
                                             if ($data_richiesta==0){
                                             ?>
-                                                <button class="btn post-edit-btn"  onclick="location.href='../backend/request_friendship-exe.php?utente=<?php echo $utente ?>'">Invia Richiesta</button>
+                                                <button class="btn post-edit-btn"  onclick="location.href='../backend/request_friendshipDaPost.php?utente=<?php echo $utente ?>'">Invia Richiesta</button>
                                             <?php } elseif (($data_richiesta!=0) && ($data_accettazione==0)) { ?>
-                                                <button class="btn post-edit-btn" onclick="location.href='../backend/eliminateRequest-exe.php?utente=<?php echo $utente ?>'">Richiesta Inviata</button>
+                                                <button class="btn post-edit-btn" onclick="location.href='../backend/eliminateRequestDaPost.php?utente=<?php echo $utente ?>'">Richiesta Inviata</button>
                                             <?php } else {?>
-                                                <button class="btn post-edit-btn"  onclick="location.href='../backend/unfollow-exe.php?utente=<?php echo $utente ?>'">Unfollow</button>
+                                                <button class="btn post-edit-btn"  onclick="location.href='../backend/unfollowDaPost.php?utente=<?php echo $utente ?>'">Unfollow</button>
                                             <?php }}?>
 
                                             <?php if (($utente != $email) & getAdmin($cid, $email)!=0){?>
@@ -209,9 +212,9 @@
                                             </a>
                                             <div class="gallery-item" tabindex="0">
 
-                                                <p class="gallery-image" alt=""><?php echo getTesto($cid, $codice);?></p>
+                                                <p class="gallery-image" id = "messaggio_testo" alt=""><?php echo getTesto($cid, $codice);?></p>
                                                     <div class="card-footer">
-                                                        <strong><?php echo(count(getCodiceCommentoTesto($cid, $codice)))?></strong> <span class="align-middle">Comments: </span>
+                                                        <strong><?php echo(count(getCodiceCommentoTesto($cid, $codice)))?> Comments: </strong>
 
                                                         <?php
                                                         $codici_commento = getCodiceCommentoTesto($cid, $codice);
@@ -243,7 +246,7 @@
                                                                 $somma = 0;
                                                                 if (!empty($gradimenti)){
                                                                     foreach ($gradimenti as $gradimento){$somma += $gradimento;}
-                                                                    echo("La media delle valutazioni di questo commento è (indice di gradimento): ". $somma/count($gradimenti));
+                                                                    echo("La media delle valutazioni di questo commento è (indice di gradimento): ". number_format(($somma/count($gradimenti)),1));
                                                                 }else{
                                                                     echo("Il commento non ha ricevuto valutazioni");
                                                                 }
@@ -251,14 +254,16 @@
                                                         <?php } ?>
                                                     </div>
                                             </div>
+                                            <?php if ($utente != $email) {?>
                                                     <div class="card-footer">
-                                                    <form method="POST" action="../backend/comment-exe_testo.php?utente=<?php echo $utente ?>">
+                                                    <form method="POST" action="../backend/comment-exe_testo.php?utente=<?php echo $utente ?>&codice_testo=<?php echo $codice ?>">
                                                         <div class="container">
                                                             <input type="text" placeholder="Inserisci un commento" name="commento">
                                                             <input type="submit" value="invia">
                                                         </div>
                                                     </form>
                                                     </div>
+                                            <?php } ?>
                                                     <div class="text-muted small"><?php echo "Postato il giorno ", getTimeTesto($cid, $codice); ?></div>
                                                     <div class="text-muted small"><?php echo "Codice del testo: ". $codice; ?></div>
                                         </div>

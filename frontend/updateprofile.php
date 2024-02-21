@@ -18,6 +18,7 @@ if(isset($_SESSION['email'])){
 <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js'></script>
 <script src="../js/places.js"></script>
 </head>
+
 <?php
         if (isset($_GET["status"])) {
             if ($_GET["status"]=='ko')
@@ -64,8 +65,8 @@ if(isset($_SESSION['email'])){
                   <form  method="post" action="../backend/uploadfile-exe.php" enctype="multipart/form-data">
                                   <div class="mt-2">
                                     Profile photo
-                                    <input type="file" class="form-control" name="ImageToUpload" id="ImageToUpload" >
-                                    <input type="submit" class="form-control" value="Submit" name="submit">
+                                    <input type="file" class="form-control" name="ImageToUpload" id="ImageToUpload"  >
+                                    <input type="submit"  class="form-control" value="Submit" name="submit" >
                                   </div>
                   </form> 
           <form  method="POST" action="../backend/updateprofile-exe.php" autocomplete="off">

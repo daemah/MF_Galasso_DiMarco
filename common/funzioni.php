@@ -158,6 +158,7 @@ function getCittaResidenza($cid,$email)
 	$res = $cid->query($sql);
 	$row = $res->fetch_assoc();
 	$citta_residenza = $row["citta_residenza"];
+	$citta_residenza = $row["citta_residenza"];
 	return $citta_residenza;
 }
 function getStatoResidenza($cid,$email)
@@ -331,8 +332,11 @@ function getDescrizioneFoto($cid, $codice)
 	$sql = "SELECT descrizione from foto where codice = '$codice';";
 	$res = $cid->query($sql);
 	$row = $res->fetch_assoc();
-	$descrizione = $row["descrizione"]; 	
-	return $descrizione;
+	if($row != NULL){
+		$descrizione = $row["descrizione"];
+		return $descrizione;
+    } else {
+	return 0;}
 }
 
 function getCitta($cid, $codice)
@@ -402,6 +406,16 @@ function getFollowing($cid, $email)
 		$following[] = $row["utente_ricevente"];
 	}
 	return $following;
+}
+
+function getCodeFotoProfilo($cid, $email)
+{
+	$sql = "SELECT foto_profilo from utente where email = '$email';";
+	$res = $cid->query($sql);
+	$row = $res->fetch_assoc();
+	$foto_profilo = $row["foto_profilo"]; 
+	return $foto_profilo;
+
 }
 
 function getFotoProfilo($cid, $email)
@@ -1275,7 +1289,7 @@ function insertText($cid, $codice_testo, $email, $testo)
 	if (getDataBlocco($cid, $email)!= 0){
 		$amministratore = getAmministratore($cid, $email);
 		$errore = true;
-		$msg .= "Non puoi pubblicare il testo perchè sei stato bloccato da".$amministratore."!</br>";
+		$msg .= "Non puoi pubblicare il testo perchè sei stato bloccato da"." ".$amministratore."!</br>";
 	}	
 
 	if (getRispettabilità($cid, $email) <= -1){
@@ -1329,8 +1343,9 @@ function insertCommentFoto($cid, $email, $codice, $commento, $codice_foto, $emai
 	}
 
 	if (getDataBlocco($cid, $email)!= 0){
+		$amministratore = getAmministratore($cid, $email);
 		$errore = true;
-		$msg .= "Non puoi inserire il commento perchè sei stato bloccato!</br>";
+		$msg .= "Non puoi inserire il commento perchè sei stato bloccato da"." ".$amministratore."!</br>";
 	}
 
 	if (getRispettabilità($cid, $email) <= -1){
@@ -1345,7 +1360,8 @@ function insertCommentFoto($cid, $email, $codice, $commento, $codice_foto, $emai
 
 	if (!$errore)
 	{
-		$sql= "INSERT INTO commenti(codice, email, testo, timestamp, codice_foto, email_foto) VALUES('$codice', '$email','$commento',CURRENT_TIMESTAMP, '$codice_foto', '$email_foto');";
+		$commento_mod = str_replace("'", "\\'", $commento);
+		$sql= "INSERT INTO commenti(codice, email, testo, timestamp, codice_foto, email_foto) VALUES('$codice', '$email','$commento_mod',CURRENT_TIMESTAMP, '$codice_foto', '$email_foto');";
 		$res=$cid->query($sql);
 		if ($res==1)
 		{
@@ -1390,7 +1406,7 @@ function insertCommentTesto($cid, $email, $codice, $commento, $codice_testo, $em
 
 	if (getDataBlocco($cid, $email)!= 0){
 		$errore = true;
-		$msg .= "Non puoi inserire il commento perchè sei stato bloccato</br>";
+		$msg .= "Non puoi inserire il commento perchè sei stato bloccato da"." ".$amministratore."!</br>";
 	}
 
 	if (getRispettabilità($cid, $email) <= -1){
@@ -1405,7 +1421,8 @@ function insertCommentTesto($cid, $email, $codice, $commento, $codice_testo, $em
 
 	if (!$errore)
 	{
-		$sql= "INSERT INTO commenti(codice, email, testo, timestamp,  codice_testo, email_testo) VALUES('$codice', '$email','$commento',CURRENT_TIMESTAMP, '$codice_testo', '$email_testo');";
+		$commento_mod = str_replace("'", "\\'", $commento);
+		$sql= "INSERT INTO commenti(codice, email, testo, timestamp,  codice_testo, email_testo) VALUES('$codice', '$email','$commento_mod',CURRENT_TIMESTAMP, '$codice_testo', '$email_testo');";
 		$res=$cid->query($sql);
 		if ($res==1)
 		{
@@ -1528,7 +1545,7 @@ function deleteFoto($cid, $codice_foto, $email)
 	$msg="";
 	$errore=false;
 
-	if ($res["status"]=='ko')
+	if ($risultato["status"]=='ko')
 	{
 		$errore = true;
 		$msg .= "Problemi nella lettura dal database</br>";

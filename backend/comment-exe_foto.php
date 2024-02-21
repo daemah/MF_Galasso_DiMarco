@@ -7,7 +7,8 @@ include_once "../common/funzioni.php";
     $email = $_SESSION["email"];
     $codice = generateCode();
     $utente = $_GET["utente"];
-    $codice_foto = getCodiceFoto($cid, $utente)[0];
+    $codice_foto = $_GET["codice_foto"];
+	print_r($codice_foto);
 
     
 
