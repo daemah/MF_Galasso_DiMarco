@@ -30,18 +30,11 @@ if(isset($_SESSION['email'])){
                             echo "</div>";
                         }
                     }
-                }
-        ?>
-         <?php if (isset($_GET["status"]))
-                {
-                    if ($_GET["status"]=='ok')
-                    {
-                        echo "<div class='alert-success'>\n";
-                        echo $_GET["msg"];
-                        echo "</div>";
-                    }
-                      
-                    }?>
+				}
+?>
+
+
+
 <div class="container">
 
 <div class="row flex-lg-nowrap">
