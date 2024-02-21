@@ -48,7 +48,8 @@
             
             <?php $utenti = getUsers($cid); foreach($utenti as $utente){
                 $codici = getCodiceFoto($cid, $utente); foreach($codici as $codice){
-                    if ($codice != null){?> 
+					$codice_profilo = getCodeFotoProfilo($cid, $utente);
+                    if (($codice != null) and ($codice != $codice_profilo)){?> 
                         <div class="content"> 
                             <div class="row">
                                 <div class="col-lg-6">
@@ -120,10 +121,9 @@
                                                                 <?php $commento = (getCommento($cid, $codice_commento)[0]); echo($commento); 
                                             
                                                                 $codici_foto = getPostsFoto($cid); $codici_testo = getPostsTesto($cid); 
-                                                                foreach($codici_foto as $codice_foto){
-                                                                if (strpos($commento, '@'.$codice_foto)==true){ ?> 
-                                                                <button onclick= "popUp('<?php echo $codice_foto;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php header("location: ../backend/riferisceFoto-exe.php?codice_commento=".$codice_commento."&codice_foto=".$codice."&utente=".$nickname_commentatore);}}
-                                                                foreach($codici_testo as $codice_testo){ 
+                                                                foreach($codici_foto as $codice_foto){ 
+                                                                if (strpos($commento, '@'.$codice_foto)==true){?><button onclick= "popUp('<?php echo $codice_foto;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php }}
+																foreach($codici_testo as $codice_testo){ 
                                                                 if (strpos($commento, '@'.$codice_testo)==true){?> <button onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php }}?>
 
                                                                 <?php if ($nickname_commentatore == getNickname($cid,$email)){?>

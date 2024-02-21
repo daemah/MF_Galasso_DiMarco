@@ -72,8 +72,8 @@ if(isset($_SESSION['email'])){
                   <form  method="post" action="../backend/uploadfile-exe.php" enctype="multipart/form-data">
                                   <div class="mt-2">
                                     Profile photo
-                                    <input type="file" class="form-control" name="ImageToUpload" id="ImageToUpload" >
-                                    <input type="submit" class="form-control" value="Submit" name="submit">
+                                    <input type="file" class="form-control" name="ImageToUpload" id="ImageToUpload"  >
+                                    <input type="submit"  class="form-control" value="Submit" name="submit" >
                                   </div>
                   </form> 
           <form  method="POST" action="../backend/updateprofile-exe.php" autocomplete="off">

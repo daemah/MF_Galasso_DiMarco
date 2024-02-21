@@ -73,7 +73,9 @@ if(isset($_SESSION['email'])){
                 <div class="container">
 
                 <div class="gallery">
-                    <?php $codici = getCodiceFoto($cid, $email); foreach($codici as $codice){ ?>
+                    <?php $codici = getCodiceFoto($cid, $email); foreach($codici as $codice){ 
+					$codice_profilo = getCodeFotoProfilo($cid, $email);
+                    if (($codice != null) and ($codice != $codice_profilo)){?>
                         <div class="card-body">
                         
                    
@@ -136,7 +138,7 @@ if(isset($_SESSION['email'])){
                         <div class="text-muted small"><?php echo "Pubblicato il giorno ", getTimeFoto($cid, $codice); ?></div>
                         <div class="text-muted small codice"><?php echo "Codice della foto: ". $codice; ?></div>
                                             </div>
-                    <?php } ?>
+                    <?php }} ?>
                     </div>
                     </div>
                
@@ -287,7 +289,9 @@ if(isset($_SESSION['email'])){
 
                 <div class="gallery">
                
-                    <?php $codici = getCodiceFoto($cid, $utente); foreach($codici as $codice){ ?>
+                    <?php $codici = getCodiceFoto($cid, $utente); foreach($codici as $codice){
+					$codice_profilo = getCodeFotoProfilo($cid, $utente);
+                    if (($codice != null) and ($codice != $codice_profilo)){?>						
                         <div class="card-body">
                         
                     <div class="gallery-item" tabindex="0">
@@ -343,7 +347,7 @@ if(isset($_SESSION['email'])){
                                         echo("Il commento non ha ricevuto valutazioni");
                                     }
                                     ?><br></small>  
-                            <?php }?>
+					<?php }?>
                         </div>
                     
                     <div class="card-footer">
@@ -357,7 +361,7 @@ if(isset($_SESSION['email'])){
                     <div class="text-muted small"><?php echo "Foto pubblicata il giorno ", getTimeFoto($cid, $codice); ?></div>
                     <div class="text-muted small codice"><?php echo "Codice della foto: ". $codice; ?></div>
                                 </div>
-                    <?php } ?>
+                    <?php }} ?>
                     </div>
                  </div>
                 

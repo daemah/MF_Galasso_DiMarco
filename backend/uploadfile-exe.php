@@ -15,14 +15,15 @@ $file_name = str_replace(' ', '', $file_name);
 $position= strpos($file_name, ".");
 $fileextension= substr($file_name, $position + 1);
 
-$fileextension= strtolower($fileextension);
+$fileextension= strtolower($fileextension); print_r($fileextension);
+
 
 $fileExtensionsAllowed = ['jpeg','jpg','png'];
 
 
 $fileSize = $_FILES['ImageToUpload']['size'];
 
-
+$errore = false;
 
 if (!in_array($fileextension,$fileExtensionsAllowed)) {
   $errore = true;
@@ -31,11 +32,13 @@ if (!in_array($fileextension,$fileExtensionsAllowed)) {
 }
 
 if (empty($file_name)){
+	$errore = true;
     $msg .= "Non hai inserito alcun file</br>";
     header('location: ../frontend/updateprofile.php?status=ko&msg='. urlencode($msg));
 }
 
 if (strlen($file_name) > 39){
+	$errore = true;
   $msg .= "Nome del file troppo lungo</br>";
   header('location: ../frontend/updateprofile.php?status=ko&msg='. urlencode($msg));
 }
@@ -58,12 +61,16 @@ if (isset($_POST['submit'])) {
       
         $msg = "Upload successes</br>";
         $base_path = "../images/". $file_name; 
+		$codice_profilo = getCodeFotoProfilo($cid, $email); print_r($codice_profilo);
+		$delete = deleteFoto($cid, $codice_profilo, $email);
         $ris = updatePhoto($cid,$email,$base_path,$file_name);
+		
 
        
         if ($ris["status"]=='ok')
         {
           header('location: ../frontend/updateprofile.php?status=ok&msg='. urlencode($msg)) . urlencode($ris["msg"]);
+		  
         }
         else
         {	

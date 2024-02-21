@@ -158,6 +158,7 @@ function getCittaResidenza($cid,$email)
 	$res = $cid->query($sql);
 	$row = $res->fetch_assoc();
 	$citta_residenza = $row["citta_residenza"];
+	$citta_residenza = $row["citta_residenza"];
 	return $citta_residenza;
 }
 function getStatoResidenza($cid,$email)
@@ -405,6 +406,16 @@ function getFollowing($cid, $email)
 		$following[] = $row["utente_ricevente"];
 	}
 	return $following;
+}
+
+function getCodeFotoProfilo($cid, $email)
+{
+	$sql = "SELECT foto_profilo from utente where email = '$email';";
+	$res = $cid->query($sql);
+	$row = $res->fetch_assoc();
+	$foto_profilo = $row["foto_profilo"]; 
+	return $foto_profilo;
+
 }
 
 function getFotoProfilo($cid, $email)
@@ -1490,7 +1501,7 @@ function deleteFoto($cid, $codice_foto, $email)
 	$msg="";
 	$errore=false;
 
-	if ($res["status"]=='ko')
+	if ($risultato["status"]=='ko')
 	{
 		$errore = true;
 		$msg .= "Problemi nella lettura dal database</br>";
