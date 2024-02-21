@@ -7,7 +7,8 @@ include_once "../common/funzioni.php";
     $email = $_SESSION["email"];
     $codice = generateCode();
     $utente = $_GET["utente"];
-    $codice_testo = getCodiceTesto($cid, $utente)[0];
+	$codice_testo = $_GET["codice_testo"];
+	print_r($codice_testo);
     
 
 	$ris = insertCommentTesto($cid, $email, $codice, $commento, $codice_testo, $utente);

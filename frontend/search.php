@@ -92,7 +92,7 @@ if(isset($_SESSION['email'])){
                                 </div>
                                 <?php } else {?>
                                 <div class="col-md-3 col-sm-3">
-                                    <button class="btn post-edit-btn" onclick="location.href='../backend/unfollow-exe.php?utente=<?php echo $utente ?>'">Unfollow</button>
+                                    <button class="btn post-edit-btn" onclick="location.href='../backend/unfollowDaSearch.php?utente=<?php echo $utente ?>'">Unfollow</button>
                                     <div class="text-muted small"><?php echo "Richiesta inviata il: ", $data_richiesta, " e accettata il giorno: ", $data_accettazione ?></div>
                                 </div>    
                                 <?php }?>

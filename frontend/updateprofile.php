@@ -19,7 +19,6 @@ if(isset($_SESSION['email'])){
 <script src="../js/places.js"></script>
 </head>
 
-<button type="button" class="cancelbtn" onclick="location.href='profile.php?utente=<?php echo $email?>'">X</button>
 <?php
         if (isset($_GET["status"])) {
             if ($_GET["status"]=='ko')

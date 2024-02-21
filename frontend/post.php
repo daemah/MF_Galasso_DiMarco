@@ -98,12 +98,13 @@
 
                                             <img src=<?php echo getFoto($cid, $codice);?> class="gallery-image" alt="">
                                                 <div class="card-footer">
-                                                    
+                                                <?php if(getDescrizioneFoto($cid, $codice)!=0){ ?>
+                                                <strong> Descrizione foto: </strong>
                                                     <p>
                                                         <?php echo getDescrizioneFoto($cid, $codice); ?>
                                                     </p>
-
-                                                    <strong><?php echo(count(getCodiceCommentoFoto($cid, $codice)))?></strong> <span class="align-middle">Comments: </span>
+                                                    <?php } ?>
+                                                    <strong><?php echo(count(getCodiceCommentoFoto($cid, $codice)))?> Comments:</strong>
                                                     <?php
                                                         $codici_commento = getCodiceCommentoFoto($cid, $codice);
                                                        
@@ -138,7 +139,7 @@
                                                                 $somma = 0;
                                                                 if (!empty($gradimenti)){
                                                                     foreach ($gradimenti as $gradimento){$somma += $gradimento;}
-                                                                    echo("La media delle valutazioni di questo commento è (indice di gradimento): ". $somma/count($gradimenti));
+                                                                    echo("La media delle valutazioni di questo commento è (indice di gradimento): ". number_format(($somma/count($gradimenti)),1));
                                                                 }else{
                                                                     echo("Il commento non ha ricevuto valutazioni");
                                                                 }
@@ -151,7 +152,7 @@
                                                 <?php if ($utente != $email) {?>
                                                 <div class="card-footer">
                                                    
-                                                    <form method="POST" action="../backend/comment-exe_foto.php?utente=<?php echo $utente?>">
+                                                    <form method="POST" action="../backend/comment-exe_foto.php?utente=<?php echo $utente?>&codice_foto=<?php echo $codice?>">
                                                         <div class="container">
                                                             <input type="text" placeholder="Inserisci un commento" name="commento" >
                                                             <input class="btn profile-edit-btn" type="submit" value="invia">
@@ -212,9 +213,9 @@
                                             </a>
                                             <div class="gallery-item" tabindex="0">
 
-                                                <p class="gallery-image" alt=""><?php echo getTesto($cid, $codice);?></p>
+                                                <p class="gallery-image" id = "messaggio_testo" alt=""><?php echo getTesto($cid, $codice);?></p>
                                                     <div class="card-footer">
-                                                        <strong><?php echo(count(getCodiceCommentoTesto($cid, $codice)))?></strong> <span class="align-middle">Comments: </span>
+                                                        <strong><?php echo(count(getCodiceCommentoTesto($cid, $codice)))?> Comments: </strong>
 
                                                         <?php
                                                         $codici_commento = getCodiceCommentoTesto($cid, $codice);
@@ -246,7 +247,7 @@
                                                                 $somma = 0;
                                                                 if (!empty($gradimenti)){
                                                                     foreach ($gradimenti as $gradimento){$somma += $gradimento;}
-                                                                    echo("La media delle valutazioni di questo commento è (indice di gradimento): ". $somma/count($gradimenti));
+                                                                    echo("La media delle valutazioni di questo commento è (indice di gradimento): ". number_format(($somma/count($gradimenti)),1));
                                                                 }else{
                                                                     echo("Il commento non ha ricevuto valutazioni");
                                                                 }
@@ -256,7 +257,7 @@
                                             </div>
                                             <?php if ($utente != $email) {?>
                                                     <div class="card-footer">
-                                                    <form method="POST" action="../backend/comment-exe_testo.php?utente=<?php echo $utente ?>">
+                                                    <form method="POST" action="../backend/comment-exe_testo.php?utente=<?php echo $utente ?>&codice_testo=<?php echo $codice ?>">
                                                         <div class="container">
                                                             <input type="text" placeholder="Inserisci un commento" name="commento">
                                                             <input type="submit" value="invia">

@@ -118,6 +118,7 @@ function sameHobbies() {
 				console.log(utenti)
 				userListItems.forEach((item, index) => {
 					const user = utenti[index];
+					console.log(user);
 					if (user) {
 						item.style.display = 'list-item'; // Mostra l'elemento se esiste un utente corrispondente
 					} else {

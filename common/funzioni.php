@@ -331,8 +331,11 @@ function getDescrizioneFoto($cid, $codice)
 	$sql = "SELECT descrizione from foto where codice = '$codice';";
 	$res = $cid->query($sql);
 	$row = $res->fetch_assoc();
-	$descrizione = $row["descrizione"]; 	
-	return $descrizione;
+	if($row != NULL){
+		$descrizione = $row["descrizione"];
+		return $descrizione;
+    } else {
+	return 0;}
 }
 
 function getCitta($cid, $codice)
@@ -1302,7 +1305,8 @@ function insertCommentFoto($cid, $email, $codice, $commento, $codice_foto, $emai
 
 	if (!$errore)
 	{
-		$sql= "INSERT INTO commenti(codice, email, testo, timestamp, codice_foto, email_foto) VALUES('$codice', '$email','$commento',CURRENT_TIMESTAMP, '$codice_foto', '$email_foto');";
+		$commento_mod = str_replace("'", "\\'", $commento);
+		$sql= "INSERT INTO commenti(codice, email, testo, timestamp, codice_foto, email_foto) VALUES('$codice', '$email','$commento_mod',CURRENT_TIMESTAMP, '$codice_foto', '$email_foto');";
 		$res=$cid->query($sql);
 		if ($res==1)
 		{
@@ -1362,7 +1366,8 @@ function insertCommentTesto($cid, $email, $codice, $commento, $codice_testo, $em
 
 	if (!$errore)
 	{
-		$sql= "INSERT INTO commenti(codice, email, testo, timestamp,  codice_testo, email_testo) VALUES('$codice', '$email','$commento',CURRENT_TIMESTAMP, '$codice_testo', '$email_testo');";
+		$commento_mod = str_replace("'", "\\'", $commento);
+		$sql= "INSERT INTO commenti(codice, email, testo, timestamp,  codice_testo, email_testo) VALUES('$codice', '$email','$commento_mod',CURRENT_TIMESTAMP, '$codice_testo', '$email_testo');";
 		$res=$cid->query($sql);
 		if ($res==1)
 		{

@@ -42,5 +42,15 @@
         margin-top: 25px;
     
     }
+
+    .cancelbtn {
+        border-width: 0.3px;
+        width: auto;
+        margin-right: 7px;
+        margin-top: 7px;
+        padding: 10px 18px;
+        color: rgb(0, 0, 0);
+        float: right;
+    }
     
  
