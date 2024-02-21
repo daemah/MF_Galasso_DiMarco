@@ -421,6 +421,18 @@ function getFotoProfilo($cid, $email)
 	return $defaul_path;
 }
 
+function getFotoRecente($cid, $email)
+{
+
+	$sql = "SELECT posizione , timestamp from foto where email = 'carmilla.galasso@gmail.com' order by timestamp desc LIMIT 1;";
+	$res = $cid->query($sql);
+	$row = $res->fetch_assoc();
+
+	if($row != NULL){
+		return $posizione_foto_profilo = $row["posizione"]; 
+	}
+}
+
 function getDataAccettazione($cid, $utente, $email)
 {
 	$sql = "SELECT data_accettazione FROM chiede_amicizia WHERE utente_ricevente = '$utente' and utente_richiedente = '$email';";
@@ -547,6 +559,38 @@ function updatePhoto($cid,$email,$path,$name)
 		$ris_utente = controllaCampo($cid,$sql_utente);
 		array_push($risposte,$ris_utente);
 
+		foreach ($risposte as $ris){
+			if ($ris["status"]=="ko"){
+				$risultato["status"]="ko";
+				$risultato["msg"] = $ris["msg"];
+			}else {
+				$risultato["status"]="ok";
+				$risultato["msg"] = $ris["msg"];
+			}
+		}
+
+	}
+	else{
+		$risultato["status"]="ko";
+		$risultato["msg"]=$msg;
+	}
+	return $risultato;
+	
+}
+
+function uploadPhoto($cid,$email,$path,$name)
+{
+	$risultato = array("status"=>"ok","msg"=>"");
+	$errore = false;
+
+	if (!$errore)
+	{
+		$risposte = array();
+		$codice = generateCode();
+		$sql_foto = "INSERT INTO `foto` (`codice`, `email`, `regione`, `nome_citta`, `stato`, `descrizione`, `posizione`, `nome_file`, `timestamp`) VALUES ('$codice', '$email', NULL, NULL, NULL, NULL, '$path', '$name', CURRENT_TIMESTAMP);";
+		$ris_foto = controllaCampo($cid,$sql_foto);
+		array_push($risposte,$ris_foto);
+		
 		foreach ($risposte as $ris){
 			if ($ris["status"]=="ko"){
 				$risultato["status"]="ko";

@@ -29,27 +29,11 @@ if(isset($_SESSION['email'])){
                             echo "</div>";
                         }
                     }
-<<<<<<< HEAD
 				}
 ?>
 
 
 
-=======
-                }
-        ?>
-         <?php if (isset($_GET["status"]))
-                {
-                    if ($_GET["status"]=='ok')
-                    {
-                        echo "<div class='alert-success'>\n";
-                        echo $_GET["msg"];
-                        echo "</div>";
-                    }
-                      
-                    }?>
-<button type="button" class="cancelbtn" onclick="location.href='profile.php?utente=<?php echo $email?>'">X</button>
->>>>>>> a2b06d638a92c523a9c86ad8a04d99b73703987c
 <div class="container">
 
 <div class="row flex-lg-nowrap">

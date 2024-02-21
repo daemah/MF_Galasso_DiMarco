@@ -48,7 +48,7 @@
             
             <?php $utenti = getUsers($cid); foreach($utenti as $utente){
                 $codici = getCodiceFoto($cid, $utente); foreach($codici as $codice){
-                    if ($codice != null){?> 
+                    if ($codice != null && $codice != print_r(getFotoProfilo($cid,$utente))){?> 
                         <div class="content"> 
                             <div class="row">
                                 <div class="col-lg-6">
