@@ -95,7 +95,7 @@ if(isset($_SESSION['email'])){
                             </p>
                         <?php } ?>
                             <strong><?php echo(count(getCodiceCommentoFoto($cid, $codice)))?> Comments </strong>
-                            <button onclick = " MostraNascondiCommenti('<?php echo $codice ?>');" > Show/Hide Comments </button>
+                            <button class = "long-button" onclick = " MostraNascondiCommenti('<?php echo $codice ?>');" > Show/Hide Comments </button>
                             <div id="comments_container<?php echo $codice ?>" style="display:none;">
                                     <?php
                                     $codici_commento = getCodiceCommentoFoto($cid, $codice);
@@ -113,9 +113,9 @@ if(isset($_SESSION['email'])){
                                         <?php $codici_foto = getPostsFoto($cid); $codici_testo = getPostsTesto($cid); 
                                             foreach($codici_foto as $codice_foto){
                                             if (strpos($commento, '@'.$codice_foto)){ ?> 
-                                            <button onclick= "popUp('<?php echo $codice_foto;?>');"> ➔ Click here to go to the reported message </button> <?php }}
+                                            <button class = "very-long-button" onclick= "popUp('<?php echo $codice_foto;?>');"> ➔ Click here to go to the reported message </button> <?php }}
                                             foreach($codici_testo as $codice_testo){ 
-                                            if (strpos($commento, '@'.$codice_testo)){?> <button onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Click here to go to the reported message </button> <?php }}?>
+                                            if (strpos($commento, '@'.$codice_testo)){?> <button class = "very-long-button" onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Click here to go to the reported message </button> <?php }}?>
 
                                         <?php if ($nickname_commentatore == getNickname($cid,$email)){?><br>
                                             <button  class = "btn post-edit-btn" onclick= "location.href='../backend/deleteCommentDaProfile.php?codice=<?php echo $codice_commento ?>&utente=<?php echo $email ?>'">Delete comment</button>
@@ -158,7 +158,7 @@ if(isset($_SESSION['email'])){
                         <div class="card-footer">
                                 
                                 <strong><?php echo(count(getCodiceCommentoTesto($cid, $codice_t)))?> Comments </strong>
-                                <button onclick = " MostraNascondiCommenti('<?php echo $codice_t ?>');" > Show/Hide Comments </button>
+                                <button class = "long-button" onclick = " MostraNascondiCommenti('<?php echo $codice_t ?>');" > Show/Hide Comments </button>
                                 <div id="comments_container<?php echo $codice_t ?>" style="display:none;">
                                     <?php
                                     $codici_commento = getCodiceCommentoTesto($cid, $codice_t);
@@ -176,9 +176,9 @@ if(isset($_SESSION['email'])){
                                         <?php $codici_foto = getPostsFoto($cid); $codici_testo = getPostsTesto($cid); 
                                             foreach($codici_foto as $codice_foto){
                                             if (strpos($commento, '@'.$codice_foto)){ ?> 
-                                            <button onclick= "popUp('<?php echo $codice_foto;?>');"> ➔ Click here to go to the reported message </button> <?php }}
+                                            <button class = "very-long-button" onclick= "popUp('<?php echo $codice_foto;?>');"> ➔ Click here to go to the reported message </button> <?php }}
                                             foreach($codici_testo as $codice_testo){ 
-                                            if (strpos($commento, '@'.$codice_testo)){?> <button onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Click here to go to the reported message </button> <?php }}?>
+                                            if (strpos($commento, '@'.$codice_testo)){?> <button class = "very-long-button" onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Click here to go to the reported message </button> <?php }}?>
 
                                         <?php if ($nickname_commentatore == getNickname($cid,$email)){?><br>
                                             <br><button  class = "btn post-edit-btn" onclick= "location.href='../backend/deleteCommentDaProfile.php?codice=<?php echo $codice_commento ?>&utente=<?php echo $email ?>'">Delete comment</button>
@@ -322,7 +322,7 @@ if(isset($_SESSION['email'])){
                             <?php } ?>
                            
                             <strong><?php echo(count(getCodiceCommentoFoto($cid, $codice)))?> Comments </strong>
-                            <button onclick = " MostraNascondiCommenti('<?php echo $codice ?>');" > Show/Hide Comments </button>
+                            <button class = "long-button" onclick = " MostraNascondiCommenti('<?php echo $codice ?>');" > Show/Hide Comments </button>
                             <div id="comments_container<?php echo $codice ?>" style="display:none;">
                             <?php
                                 $codici_commento = getCodiceCommentoFoto($cid, $codice);
@@ -340,9 +340,9 @@ if(isset($_SESSION['email'])){
                                 <?php $codici_foto = getPostsFoto($cid); $codici_testo = getPostsTesto($cid); 
                                             foreach($codici_foto as $codice_foto){
                                             if (strpos($commento, '@'.$codice_foto)){ ?> 
-                                            <button onclick= "popUp('<?php echo $codice_foto;?>');"> ➔  Click here to go to the reported message </button> <?php }}
+                                            <button class = "very-long-button" onclick= "popUp('<?php echo $codice_foto;?>');"> ➔  Click here to go to the reported message </button> <?php }}
                                             foreach($codici_testo as $codice_testo){ 
-                                            if (strpos($commento, '@'.$codice_testo)){?> <button onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Click here to go to the reported message </button> <?php }}?>
+                                            if (strpos($commento, '@'.$codice_testo)){?> <button class = "very-long-button" onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Click here to go to the reported message </button> <?php }}?>
 
                                 <?php if ($nickname_commentatore == getNickname($cid,$email)){?>
                                     <br><button class = "btn post-edit-btn" onclick= "location.href='../backend/deleteCommentDaProfile.php?codice=<?php echo $codice_commento ?>&utente=<?php echo $utente ?>'">Delete comment</button>
@@ -387,7 +387,7 @@ if(isset($_SESSION['email'])){
                 <div class="card-body">
                         <div class="card-footer">
                         <strong><?php echo(count(getCodiceCommentoTesto($cid, $codice_t)))?> Comments </strong>
-                        <button onclick = " MostraNascondiCommenti('<?php echo $codice_t ?>');" > Show/Hide Comments </button>
+                        <button class = "long-button" onclick = " MostraNascondiCommenti('<?php echo $codice_t ?>');" > Show/Hide Comments </button>
                         <div id="comments_container<?php echo $codice_t ?>" style="display:none;">
                                 <?php
                                     $codici_commento = getCodiceCommentoTesto($cid, $codice_t);
@@ -404,9 +404,9 @@ if(isset($_SESSION['email'])){
                                         <?php $codici_foto = getPostsFoto($cid); $codici_testo = getPostsTesto($cid); 
                                             foreach($codici_foto as $codice_foto){
                                             if (strpos($commento, '@'.$codice_foto)){ ?> 
-                                            <button onclick= "popUp('<?php echo $codice_foto;?>');"> ➔ Click here to go to the reported message </button> <?php }}
+                                            <button class = "very-long-button" onclick= "popUp('<?php echo $codice_foto;?>');"> ➔ Click here to go to the reported message </button> <?php }}
                                             foreach($codici_testo as $codice_testo){ 
-                                            if (strpos($commento, '@'.$codice_testo)){?> <button onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Click here to go to the reported message</button> <?php }}?>
+                                            if (strpos($commento, '@'.$codice_testo)){?> <button class = "very-long-button" onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Click here to go to the reported message</button> <?php }}?>
 
                                         <?php if ($nickname_commentatore == getNickname($cid,$email)){?>
                                             <br><button  class = "btn post-edit-btn" onclick= "location.href='../backend/deleteCommentDaProfile.php?codice=<?php echo $codice_commento ?>&utente=<?php echo $utente ?>'">Delete comment</button>
