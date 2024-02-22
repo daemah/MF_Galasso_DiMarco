@@ -75,6 +75,11 @@
     border: 1px solid rgba(24,28,33,0.06);
 }
 
+#comments_container
+{
+    display: none;
+}
+
 .d-block{
     width:fit-content;
 }

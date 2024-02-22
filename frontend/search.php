@@ -41,18 +41,18 @@ if(isset($_SESSION['email'])){
              <div class="text-center text-sm-right">
                 <div class="text-muted"><small>All is art ©</small></div>
             </div>
-            <h2> Cerca i tuoi futuri amici: </h2>
+            <h2> Search for your future friends:</h2>
             <div>
                 <form class="modulo-ricerca">
-                    <input id="search" type="text" placeholder="Cerca un amico" onkeyup="search_profile();" required>
+                    <input id="search" type="text" placeholder="look for a friend" onkeyup="search_profile();" required>
                 </form>
             </div>  
             <div>
                 <form class="modulo-ricerca">
-                    <p> Cerca un amico in base a: </p>
-                    <button class = "btn post-edit-btn" type="button" id = "ricerca1" onclick = "sameHobbies();" style="background-color:white;"> hobby </button>
-                    <button class = "btn post-edit-btn" type="button" id = "ricerca2" onclick = "sameCityBir(); " style="background-color:white;"> città nascita </button>
-                    <button class = "btn post-edit-btn" type="button" id = "ricerca3" onclick = "sameCityRes(); " style="background-color:white;"> città residenza </button>
+                    <p> Search for a friend based on:</p>
+                    <button class = "btn post-edit-btn" type="button" id = "ricerca1" onclick = "sameHobbies();" style="background-color:white;"> hobbies </button>
+                    <button class = "btn post-edit-btn" type="button" id = "ricerca2" onclick = "sameCityBir(); " style="background-color:white;"> city ​​of birth </button>
+                    <button class = "btn post-edit-btn" type="button" id = "ricerca3" onclick = "sameCityRes(); " style="background-color:white;"> city ​​of residence </button>
                 </form>
             </div>
             <link href="../styles/request.css" rel="stylesheet">
@@ -83,17 +83,17 @@ if(isset($_SESSION['email'])){
                                 if ($data_richiesta==0) {
                                 ?>
                                 <div class="col-md-3 col-sm-3">
-                                    <button class="btn post-edit-btn"  onclick="location.href='../backend/request_friendshipDaSearch.php?utente=<?php echo $utente ?>'">Invia Richiesta</button>
+                                    <button class="btn post-edit-btn"  onclick="location.href='../backend/request_friendshipDaSearch.php?utente=<?php echo $utente ?>'">Send request</button>
                                 </div>
                                 <?php } elseif (($data_richiesta!=0) && ($data_accettazione==0)) { ?>
                                 <div class="col-md-3 col-sm-3">
-                                    <button class="btn post-edit-btn" onclick="location.href='../backend/eliminateRequest-exe.php?utente=<?php echo $utente ?>'">Richiesta Inviata</button>
-                                    <div class="text-muted small"><?php echo "Richiesta inviata il: ", $data_richiesta ?></div>
+                                    <button class="btn post-edit-btn" onclick="location.href='../backend/eliminateRequest-exe.php?utente=<?php echo $utente ?>'">Request sent</button>
+                                    <div class="text-muted small"><?php echo "Request sent on: ", $data_richiesta ?></div>
                                 </div>
                                 <?php } else {?>
                                 <div class="col-md-3 col-sm-3">
                                     <button class="btn post-edit-btn" onclick="location.href='../backend/unfollowDaSearch.php?utente=<?php echo $utente ?>'">Unfollow</button>
-                                    <div class="text-muted small"><?php echo "Richiesta inviata il: ", $data_richiesta, " e accettata il giorno: ", $data_accettazione ?></div>
+                                    <div class="text-muted small"><?php echo "Request sent on: ", $data_richiesta, " and accepted on: ", $data_accettazione ?></div>
                                 </div>    
                                 <?php }?>
                                 

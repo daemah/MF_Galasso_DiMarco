@@ -1,6 +1,6 @@
 <div class="footer">
   <div class="container">
-        <p class="text-muted">Carmilla Galasso e Filippo Di Marco. Gestione di All is Art. Tutti i diritti riservati</p>
+        <p class="text-muted">Carmilla Galasso and Filippo Di Marco. Management of All is Art. All rights reserved</p>
       </div>
     </div>
 

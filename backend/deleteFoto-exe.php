@@ -13,11 +13,11 @@ print_r($ris);
 
 if ($ris["status"]=='ok')
 {
-    header("location: ../frontend/post.php?status=ok&msg=" . urlencode($ris["msg"]));
+    header("location: ../frontend/profile.php?utente=$email&status=ok&msg=" . urlencode($ris["msg"]));
 }
 else
 {
-    header("location: ../frontend/post.php?status=ko&msg=". urlencode($ris["msg"]));	
+    header("location: ../frontend/profile.php?utente=$email&status=ko&msg=". urlencode($ris["msg"]));	
 }
 
 ?>

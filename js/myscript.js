@@ -44,6 +44,17 @@ function updateNotificationCount() {
 	xttp.send();
 }
 
+function MostraNascondiCommenti(codice)
+{
+	console.log("comments_container"+codice);
+	console.log(document.getElementById("comments_container"+codice).style.display=="none");
+	if (document.getElementById("comments_container"+codice).style.display=="none"){
+		document.getElementById("comments_container"+codice).style.display="block"
+	} else {
+	document.getElementById("comments_container"+codice).style.display = "none";
+	}
+}
+
 
 
 function ValutaCommento(codice_commento, utente_commentato, $cid) {
@@ -116,7 +127,16 @@ function sameHobbies() {
 				console.log(userListItems);
 				utenti = risposta.contenuto;
 				console.log(utenti)
-				userListItems.forEach((item, index) => {
+				for (i=0 ; i<userListItems.length; i++) {
+					user = utenti[i];
+					if (user) {
+						item.style.display = 'list-item'; // Mostra l'elemento se esiste un utente corrispondente
+					} else {
+						item.style.display = 'none'; // Nasconde l'elemento se non esiste un utente corrispondente
+					}
+
+				}
+				/*userListItems.forEach((item, index) => {
 					const user = utenti[index];
 					console.log(user);
 					if (user) {
@@ -124,7 +144,7 @@ function sameHobbies() {
 					} else {
 						item.style.display = 'none'; // Nasconde l'elemento se non esiste un utente corrispondente
 					}
-				});
+				});*/
 				
 				}
 				else

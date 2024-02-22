@@ -42,7 +42,7 @@
                             }
                       
             }?>
-                        <h2> Posts suggested for you </h2>
+                        <h2> Messagges suggested for you </h2>
                        
             </div>
             
@@ -71,20 +71,20 @@
                                             $data_accettazione = getDataAccettazione($cid, $utente, $email);
                                             if ($data_richiesta==0){
                                         ?>
-                                            <button class="btn post-edit-btn"  onclick="location.href='../backend/request_friendshipDaPost.php?utente=<?php echo $utente ?>'">Invia Richiesta</button>
+                                            <button class="btn post-edit-btn"  onclick="location.href='../backend/request_friendshipDaPost.php?utente=<?php echo $utente ?>'">Send request</button>
                                         <?php } elseif (($data_richiesta!=0) && ($data_accettazione==0)) { ?>
-                                            <button class="btn post-edit-btn" onclick="location.href='../backend/eliminateRequestDaPost.php?utente=<?php echo $utente ?>'">Richiesta Inviata</button>
+                                            <button class="btn post-edit-btn" onclick="location.href='../backend/eliminateRequestDaPost.php?utente=<?php echo $utente ?>'">Request sent</button>
                                         <?php } else {?>
                                             <button class="btn post-edit-btn"  onclick="location.href='../backend/unfollowDaPost.php?utente=<?php echo $utente ?>'">Unfollow</button>
                                         <?php }}?>
 
                                         <?php if (($utente != $email) & getAdmin($cid, $email)!=0){?>
                                             <?php if (getDataBlocco($cid, $utente) == 0){?>
-                                                <button class="btn post-edit-btn" onclick="location.href='../backend/bloccaUtente-exe.php?utente=<?php echo $utente ?>'">Blocca utente</button>
+                                                <button class="btn post-edit-btn" onclick="location.href='../backend/bloccaUtente-exe.php?utente=<?php echo $utente ?>'">Block User</button>
                                             <?php } else { ?>
-                                                <button class="btn post-edit-btn" onclick="location.href='../backend/sbloccaUtente-exe.php?utente=<?php echo $utente ?>'">Sblocca utente</button>
+                                                <button class="btn post-edit-btn" onclick="location.href='../backend/sbloccaUtente-exe.php?utente=<?php echo $utente ?>'">Unlock User</button>
                                             <?php } ?>                                            
-                                            <button class="btn post-edit-btn" onclick="location.href='../backend/deleteUtente-exe.php?utente=<?php echo $utente ?>'">Elimina utente</button>
+                                            <button class="btn post-edit-btn" onclick="location.href='../backend/deleteUtente-exe.php?utente=<?php echo $utente ?>'">Delete User</button>
                                         <?php } ?>
                                         
                                         </span>
@@ -104,9 +104,12 @@
                                                     <p>
                                                         <?php echo getDescrizioneFoto($cid, $codice); ?>
                                                     </p>
-                                                    <?php } ?>
-                                                    <strong><?php echo(count(getCodiceCommentoFoto($cid, $codice)))?> Comments:</strong>
+                                                <?php } ?>
+                                                    <strong><?php echo(count(getCodiceCommentoFoto($cid, $codice)))?> Comments</strong>
+                                                    <button  onclick = " MostraNascondiCommenti('<?php echo $codice ?>');" >Show/Hide Comments</button>
+                                                    <div id="comments_container<?php echo $codice ?>" style="display: none;">
                                                     <?php
+                                                    
                                                         $codici_commento = getCodiceCommentoFoto($cid, $codice);
                                                        
                                                         foreach($codici_commento as $codice_commento){
@@ -122,30 +125,31 @@
                                             
                                                                 $codici_foto = getPostsFoto($cid); $codici_testo = getPostsTesto($cid); 
                                                                 foreach($codici_foto as $codice_foto){ 
-                                                                if (strpos($commento, '@'.$codice_foto)==true){?><button onclick= "popUp('<?php echo $codice_foto;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php }}
+                                                                if (strpos($commento, '@'.$codice_foto)==true){?><button onclick= "popUp('<?php echo $codice_foto;?>');"> ➔ Click here to go to the reported message </button> <?php }}
 																foreach($codici_testo as $codice_testo){ 
-                                                                if (strpos($commento, '@'.$codice_testo)==true){?> <button onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php }}?>
+                                                                if (strpos($commento, '@'.$codice_testo)==true){?> <button onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Click here to go to the reported message </button> <?php }}?>
 
                                                                 <?php if ($nickname_commentatore == getNickname($cid,$email)){?>
-                                                                <br><button class="btn post-edit-btn" onclick= "location.href='../backend/deleteComment-exe.php?codice=<?php echo $codice_commento ?>'">Delete comment</button>
+                                                                <br><button class="btn post-edit-btn" onclick= "location.href='../backend/deleteComment-exe.php?codice=<?php echo $codice_commento ?>'">Delete Comment</button>
                                                                 <?php }elseif (getValutazione($cid, $email, $codice_commento)!=0) { ?>
-                                                                <br><button class="btn post-edit-btn" onclick= "location.href='../backend/deleteValutazione-exe.php?codice=<?php echo $codice_commento ?>&utente=<?php echo $email_commentatore?>'">Delete valutazione</button>
+                                                                <br><button class="btn post-edit-btn" onclick= "location.href='../backend/deleteValutazione-exe.php?codice=<?php echo $codice_commento ?>&utente=<?php echo $email_commentatore?>'">Delete Rating</button>
                                                                 <?php } ?>
                                                                 <br><small>
-                                                                <br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?> 
+                                                                <br><?php echo("Comment written on: "); echo(getTimeCommento($cid, $codice_commento));?> 
                                                                 <br>
                                                                 <?php  
                                                                 $gradimenti = getIndGradimento($cid, $codice_commento);
                                                                 $somma = 0;
                                                                 if (!empty($gradimenti)){
                                                                     foreach ($gradimenti as $gradimento){$somma += $gradimento;}
-                                                                    echo("La media delle valutazioni di questo commento è (indice di gradimento): ". number_format(($somma/count($gradimenti)),1));
+                                                                    echo("The approval rating for this comment is (average rating): ". number_format(($somma/count($gradimenti)),1));
                                                                 }else{
-                                                                    echo("Il commento non ha ricevuto valutazioni");
+                                                                    echo("The comment has not received any ratings");
                                                                 }
                                                                 ?><br></small>
                                                         <?php }
                                                     ?>
+                                                </div>
                                                 </div>
                                             </div>
                                            
@@ -154,14 +158,14 @@
                                                    
                                                     <form method="POST" action="../backend/comment-exe_foto.php?utente=<?php echo $utente?>&codice_foto=<?php echo $codice?>">
                                                         <div class="container">
-                                                            <input type="text" placeholder="Inserisci un commento" name="commento" >
-                                                            <input class="btn profile-edit-btn" type="submit" value="invia">
+                                                            <input type="text" placeholder="Enter a comment" name="commento" >
+                                                            <input class="btn profile-edit-btn" type="submit" value="send">
                                                         </div>
                                                     </form>
                                                 </div>
                                                 <?php } ?>
-                                                <div class="text-muted small"><?php echo "Postato il giorno ", getTimeFoto($cid, $codice); ?></div>
-                                                <div class="text-muted small"><?php echo "Codice della foto: ". $codice; ?></div>
+                                                <div class="text-muted small"><?php echo "Message published on: ", getTimeFoto($cid, $codice); ?></div>
+                                                <div class="text-muted small"><?php echo "Photo code: ". $codice; ?></div>
                                     </div>
                                     </div>
                                 </div>
@@ -193,20 +197,20 @@
                                                 $data_accettazione = getDataAccettazione($cid, $utente, $email);
                                             if ($data_richiesta==0){
                                             ?>
-                                                <button class="btn post-edit-btn"  onclick="location.href='../backend/request_friendshipDaPost.php?utente=<?php echo $utente ?>'">Invia Richiesta</button>
+                                                <button class="btn post-edit-btn"  onclick="location.href='../backend/request_friendshipDaPost.php?utente=<?php echo $utente ?>'">Send request</button>
                                             <?php } elseif (($data_richiesta!=0) && ($data_accettazione==0)) { ?>
-                                                <button class="btn post-edit-btn" onclick="location.href='../backend/eliminateRequestDaPost.php?utente=<?php echo $utente ?>'">Richiesta Inviata</button>
+                                                <button class="btn post-edit-btn" onclick="location.href='../backend/eliminateRequestDaPost.php?utente=<?php echo $utente ?>'">Request sent</button>
                                             <?php } else {?>
                                                 <button class="btn post-edit-btn"  onclick="location.href='../backend/unfollowDaPost.php?utente=<?php echo $utente ?>'">Unfollow</button>
                                             <?php }}?>
 
                                             <?php if (($utente != $email) & getAdmin($cid, $email)!=0){?>
                                                 <?php if (getDataBlocco($cid, $utente) == 0){?>
-                                                    <button class="btn post-edit-btn" onclick="location.href='../backend/bloccaUtente-exe.php?utente=<?php echo $utente ?>'">Blocca utente</button>
+                                                    <button class="btn post-edit-btn" onclick="location.href='../backend/bloccaUtente-exe.php?utente=<?php echo $utente ?>'">Block User</button>
                                                 <?php } else { ?>
-                                                    <button class="btn post-edit-btn" onclick="location.href='../backend/sbloccaUtente-exe.php?utente=<?php echo $utente ?>'">Sblocca utente</button>
+                                                    <button class="btn post-edit-btn" onclick="location.href='../backend/sbloccaUtente-exe.php?utente=<?php echo $utente ?>'">Unlock User</button>
                                                 <?php } ?>
-                                                <button class="btn post-edit-btn" onclick="location.href='../backend/deleteUtente-exe.php?utente=<?php echo $utente ?>'">Elimina utente</button>
+                                                <button class="btn post-edit-btn" onclick="location.href='../backend/deleteUtente-exe.php?utente=<?php echo $utente ?>'">Delete User</button>
                                                 <?php } ?>
                                             </span>
                                             </div>
@@ -215,7 +219,11 @@
 
                                                 <p class="gallery-image" id = "messaggio_testo" alt=""><?php echo getTesto($cid, $codice);?></p>
                                                     <div class="card-footer">
-                                                        <strong><?php echo(count(getCodiceCommentoTesto($cid, $codice)))?> Comments: </strong>
+                                                    
+                                                        <strong><?php echo(count(getCodiceCommentoTesto($cid, $codice)))?> Comments </strong>
+                                                        <button onclick = " MostraNascondiCommenti('<?php echo $codice ?>');" > Show/Hide Comments </button>
+                                                        <div id="comments_container<?php echo $codice ?>" style="display:none;">
+                                                        
 
                                                         <?php
                                                         $codici_commento = getCodiceCommentoTesto($cid, $codice);
@@ -231,42 +239,43 @@
 
                                                             $codici_foto = getPostsFoto($cid); $codici_testo = getPostsTesto($cid); 
                                                             foreach($codici_foto as $codice_foto){ 
-                                                                if (strpos($commento, '@'.$codice_foto)==true){?><button onclick= "popUp('<?php echo $codice_foto;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php }}
+                                                                if (strpos($commento, '@'.$codice_foto)==true){?><button onclick= "popUp('<?php echo $codice_foto;?>');"> ➔ Click here to go to the reported message </button> <?php }}
                                                             foreach($codici_testo as $codice_testo){ 
-                                                                if (strpos($commento, '@'.$codice_testo)==true){?> <button onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Clicca qui per andare al messaggio riferito </button> <?php }}?>
+                                                                if (strpos($commento, '@'.$codice_testo)==true){?> <button onclick= "popUp('<?php echo $codice_testo;?>');"> ➔ Click here to go to the reported message </button> <?php }}?>
 
                                                             <?php if ($nickname_commentatore == getNickname($cid,$email)){?>
-                                                                <br><button class="btn post-edit-btn" onclick = "location.href='../backend/deleteComment-exe.php?codice=<?php echo $codice_commento ?>'">Delete comment</button>
+                                                                <br><button class="btn post-edit-btn" onclick = "location.href='../backend/deleteComment-exe.php?codice=<?php echo $codice_commento ?>'">Delete Comment</button>
                                                             <?php }elseif (getValutazione($cid, $email, $codice_commento)!=0) { ?>
-                                                                <br><button class="btn post-edit-btn" onclick= "location.href='../backend/deleteValutazione-exe.php?codice=<?php echo $codice_commento ?>&utente=<?php echo $email_commentatore?>'">Delete valutazione</button>
+                                                                <br><button class="btn post-edit-btn" onclick= "location.href='../backend/deleteValutazione-exe.php?codice=<?php echo $codice_commento ?>&utente=<?php echo $email_commentatore?>'">Delete Rating</button>
                                                             <?php } ?>
-                                                            <small><br><br><?php echo("commento scritto il: "); echo(getTimeCommento($cid, $codice_commento));?>
+                                                            <small><br><br><?php echo("Comment written on: "); echo(getTimeCommento($cid, $codice_commento));?>
                                                             <br>
                                                                 <?php  
                                                                 $gradimenti = getIndGradimento($cid, $codice_commento);
                                                                 $somma = 0;
                                                                 if (!empty($gradimenti)){
                                                                     foreach ($gradimenti as $gradimento){$somma += $gradimento;}
-                                                                    echo("La media delle valutazioni di questo commento è (indice di gradimento): ". number_format(($somma/count($gradimenti)),1));
+                                                                    echo("The approval rating for this comment is (average rating): ". number_format(($somma/count($gradimenti)),1));
                                                                 }else{
-                                                                    echo("Il commento non ha ricevuto valutazioni");
+                                                                    echo("The comment has not received any ratings");
                                                                 }
                                                                 ?><br></small>  
                                                         <?php } ?>
                                                     </div>
+                                                </div>
                                             </div>
                                             <?php if ($utente != $email) {?>
                                                     <div class="card-footer">
                                                     <form method="POST" action="../backend/comment-exe_testo.php?utente=<?php echo $utente ?>&codice_testo=<?php echo $codice ?>">
                                                         <div class="container">
-                                                            <input type="text" placeholder="Inserisci un commento" name="commento">
-                                                            <input type="submit" value="invia">
+                                                            <input type="text" placeholder="Enter a comment" name="commento">
+                                                            <input type="submit" value="send">
                                                         </div>
                                                     </form>
                                                     </div>
                                             <?php } ?>
-                                                    <div class="text-muted small"><?php echo "Postato il giorno ", getTimeTesto($cid, $codice); ?></div>
-                                                    <div class="text-muted small"><?php echo "Codice del testo: ". $codice; ?></div>
+                                                    <div class="text-muted small"><?php echo "Message published on: ", getTimeTesto($cid, $codice); ?></div>
+                                                    <div class="text-muted small"><?php echo "Text code: ". $codice; ?></div>
                                         </div>
                                         </div>
                                     </div>

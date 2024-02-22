@@ -54,12 +54,12 @@ if(isset($_SESSION['email'])){
                                         if (empty($data_accettazione)){
                                         ?>
                                         <div class="col-md-3 col-sm-3">
-                                            <button class="btn post-edit-btn"  onclick="location.href='../backend/acceptRequest-exe.php?utente=<?php echo $richiesta ?>'" >Accetta Richiesta</button>
+                                            <button class="btn post-edit-btn"  onclick="location.href='../backend/acceptRequest-exe.php?utente=<?php echo $richiesta ?>'" >Accept request</button>
                                         </div>
                                         <?php } else { ?>
                                         <div class="col-md-3 col-sm-3">
-                                            <button class="btn post-edit-btn" onclick="location.href='../backend/deleteAccettazione-exe.php?utente=<?php echo $richiesta ?>'" >Richiesta Accettata</button>
-                                            <div class="text-muted small"><?php echo "Richiesta accettata il: ", $data_accettazione ?></div>
+                                            <button class="btn post-edit-btn" onclick="location.href='../backend/deleteAccettazione-exe.php?utente=<?php echo $richiesta ?>'" >Request accepted</button>
+                                            <div class="text-muted small"><?php echo "Request accepted on: ", $data_accettazione ?></div>
                                         </div>
                                         <?php }?>
 

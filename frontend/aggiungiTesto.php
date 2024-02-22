@@ -57,7 +57,7 @@
                     <div class="col">
                     <div class="form-group">
                     <form  method="POST" action="../backend/insertText-exe.php" autocomplete="off">
-                      <label>Insert a text of maximum 100 caratteri</label>
+                      <label>Enter a text of up to 100 characters</label>
                       <textarea id= "testo" name="testo" rows="5" cols="40"  class='insertText' > </textarea> </div>
                       <button type="submit" class="btn btn-primary btn-block">
                         <i class="icon-upload icon-white"></i> Post 

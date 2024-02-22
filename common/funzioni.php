@@ -1289,8 +1289,8 @@ function insertText($cid, $codice_testo, $email, $testo)
 	if (getDataBlocco($cid, $email)!= 0){
 		$amministratore = getAmministratore($cid, $email);
 		$errore = true;
-		$msg .= "Non puoi pubblicare il testo perchè sei stato bloccato da"." ".$amministratore."!</br>";
-	}	
+		$msg .= "Non puoi inserire il commento perchè sei stato bloccato da ".$amministratore."!</br>";
+	}
 
 	if (getRispettabilità($cid, $email) <= -1){
 		$errore = true;
@@ -1345,7 +1345,7 @@ function insertCommentFoto($cid, $email, $codice, $commento, $codice_foto, $emai
 	if (getDataBlocco($cid, $email)!= 0){
 		$amministratore = getAmministratore($cid, $email);
 		$errore = true;
-		$msg .= "Non puoi inserire il commento perchè sei stato bloccato da"." ".$amministratore."!</br>";
+		$msg .= "Non puoi inserire il commento perchè sei stato bloccato da ".$amministratore."!</br>";
 	}
 
 	if (getRispettabilità($cid, $email) <= -1){
@@ -1405,8 +1405,9 @@ function insertCommentTesto($cid, $email, $codice, $commento, $codice_testo, $em
 	}
 
 	if (getDataBlocco($cid, $email)!= 0){
+		$amministratore = getAmministratore($cid, $email);
 		$errore = true;
-		$msg .= "Non puoi inserire il commento perchè sei stato bloccato da"." ".$amministratore."!</br>";
+		$msg .= "Non puoi inserire il commento perchè sei stato bloccato da ".$amministratore."!</br>";
 	}
 
 	if (getRispettabilità($cid, $email) <= -1){
@@ -1463,6 +1464,10 @@ function insertIndGradimento($cid, $codice_commento, $email_valutatore, $gradime
 		$msg .= "Problemi nella lettura dal database</br>";
 	}
 	
+	if (($gradimento > 3) or ($gradimento < -3)){
+		$errore = true;
+		$msg .= "Puoi inserire solo valutazioni tra -3 e 3!</br>";
+	}
 
 	if (!$errore)
 	{

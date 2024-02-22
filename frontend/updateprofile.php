@@ -186,7 +186,7 @@ if(isset($_SESSION['email'])){
                           <div class="row">
                             <div class="col">
                               <div class="form-group">
-                                <label>Hobby</label>
+                                <label>Hobbies</label>
                                 <input class="form-control" id="Hobby" type="text" name="hobby" placeholder="Write your hobby">
                               </div>
                             </div>
@@ -202,7 +202,7 @@ if(isset($_SESSION['email'])){
                                   </div>
                                   <div class="col">
                                     <div class="form-group">
-                                    <button class="btn profile-edit-btn"  onclick="location.href='../backend/cancelhobby-exe.php?nome=<?php echo $hobby ?>'">Cancella</button>
+                                    <button class="btn profile-edit-btn"  onclick="location.href='../backend/cancelhobby-exe.php?nome=<?php echo $hobby ?>'">Delete</button>
                                     </div>
                                   </div>
                                 </div>

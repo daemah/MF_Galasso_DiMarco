@@ -54,14 +54,16 @@
 
         <div class="box">
                 <div class="info-utenti">
-                <b> Numero di Foto e Testi pubblicati dagli utenti: </b>
+                <b> Number of Photos and Texts published by users: </b>
             <?php foreach ($utenti as $utente)
                 {
                 $foto_utente = count(getCodiceFoto($cid, $utente)); 
-                if ($foto_utente != 0){?>
-                    <br><br> <?php echo "- ". (getNickname($cid, $utente) . " ha inserito " . $foto_utente ." foto"); 
+                if ($foto_utente == 1){?>
+                    <br><br> <?php echo "- ".(getNickname($cid, $utente) . " has entered 1 photo");
+                } elseif ($foto_utente > 1){ ?>
+                    <br><br> <?php echo "- ". (getNickname($cid, $utente) . " has entered " . $foto_utente ." photos"); 
                 } else { ?>
-                    <br><br><?php echo "- ".(getNickname($cid, $utente) . " non ha inserito foto"); 
+                    <br><br><?php echo "- ".(getNickname($cid, $utente) . " hasn't entered any photo"); 
                 }
                 } 
 
@@ -69,14 +71,15 @@
                 {
                 $testo_utente = count(getCodiceTesto($cid, $utente)); 
                 if ($testo_utente == 1){?>
-                    <br><br> <?php echo "- ".(getNickname($cid, $utente) . " ha inserito 1 testo");
+                    <br><br> <?php echo "- ".(getNickname($cid, $utente) . " has entered 1 text");
                 } elseif ($testo_utente > 1){ ?>
-                    <br><br> <?php echo ("- ".getNickname($cid, $utente) . " ha inserito ".$testo_utente." testi"); 
+                    <br><br> <?php echo ("- ".getNickname($cid, $utente) . " has entered ".$testo_utente." texts"); 
                 } else { ?>
-                    <br><br> <?php echo ("- ".getNickname($cid, $utente) . " non ha inserito testi");
+                    <br><br> <?php echo ("- ".getNickname($cid, $utente) . " hasn't entered any text");
                 }} ?>
                 
                     </div>
+                    <?php require "../common/footer.php"?>
                     </div>
                 </div>
 
@@ -107,7 +110,7 @@
             // Disegna l'intestazione
             ctx.fillStyle = 'black';
             ctx.font = 'bold 16px Arial';
-            ctx.fillText('I '+ categories.length + ' utenti con indici di gradimento più alti', 5, 15);
+            ctx.fillText('The '+ categories.length + ' users with the highest approval ratings', 5, 15);
 
             for (var i = 0; i < values.length; i++) {
                 endAngle = startAngle + (values[i] / total) * (2 * Math.PI);
