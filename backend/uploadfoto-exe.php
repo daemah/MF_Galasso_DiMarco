@@ -30,44 +30,42 @@ if (!in_array($fileextension,$fileExtensionsAllowed)) {
   header('location: ../frontend/aggiungiFoto.php?status=ko&msg='. urlencode($msg));
 }
 
-if (empty($file_name)){
+elseif (empty($file_name)){
     $msg .= "Non hai inserito alcun file</br>";
     header('location: ../frontend/aggiungiFoto.php?status=ko&msg='. urlencode($msg));
 }
 
-if (strlen($file_name) > 39){
+elseif (strlen($file_name) > 39){
   $msg .= "Nome del file troppo lungo</br>";
   header('location: ../frontend/aggiungiFoto.php?status=ko&msg='. urlencode($msg));
 }
 
+elseif ($fileSize > 4000000) {
+  $errore = true;
+  $msg .= "Il file è troppo grande, supera i 4Mb</br>";
+  header('location: ../frontend/aggiungiFoto.php?status=ko&msg='. urlencode($msg));
+}
 
 if (isset($_POST['submit'])) {
-
-
-
-  if ($fileSize > 4000000) {
-      $errore = true;
-      $msg .= "Il file è troppo grande, supera i 4Mb</br>";
-      header('location: ../frontend/aggiungiFoto.php?status=ko&msg='. urlencode($msg));
-  }
 
 
   if (!($errore)) {
     //echo("Move uploaded file " . $tmp_name . " uploadPath ". $file_name);
       if(move_uploaded_file($tmp_name,$file_path)){
       
-        $msg = "Upload successes</br>";
         $base_path = "../images/". $file_name; 
         $ris = uploadPhoto($cid,$email,$base_path,$file_name);
 
        
         if ($ris["status"]=='ok')
         {
+          $msg = "Upload successes</br>";
           header('location: ../frontend/aggiungiFoto.php?status=ok&msg='. urlencode($msg)) . urlencode($ris["msg"]);
         }
         else
         {	
-          header('location: ../frontend/aggiungiFoto.php?status=ok&msg='. urlencode($msg)). urlencode($ris["msg"]);
+          $msg = "Upload failed</br>";
+          header('location: ../frontend/aggiungiFoto.php?status=ko&msg='. urlencode($msg)). urlencode($ris["msg"]);
         }
 
       } else {
@@ -77,8 +75,8 @@ if (isset($_POST['submit'])) {
     
       }
     } else {
-      $msg .= "Errore nel caricamento</br>";
-      header('location: ../frontend/updatepaggiungiFotorofile.php?status=ko&msg='. urlencode($msg));
+
+      header('location: ../frontend/aggiungiFoto.php?status=ko&msg='. urlencode($msg));
     }
 
 }

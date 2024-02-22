@@ -3,6 +3,7 @@ session_start();
 include_once "../common/connection.php";
 include_once "../common/funzioni.php";
 
+
 $file_name= $_FILES['ImageToUpload']['name'];
 $file_path = "../images/".$file_name;
 $tmp_name =  $_FILES['ImageToUpload']['tmp_name'];

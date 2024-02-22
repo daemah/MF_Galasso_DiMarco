@@ -9,6 +9,29 @@
     if(isset($_SESSION['email'])){
     /* sdfsdhgghgggsf */ 
     ?>
+    <?php
+                if (isset($_GET["status"])) {
+                    if ($_GET["status"]=='ko')
+                            {
+                
+                                {
+                                    echo "<div class='alert-warning'>\n";
+                                    echo $_GET["msg"];
+                                    echo "</div>";
+                                }
+                            }
+                        }
+                ?>
+                <?php if (isset($_GET["status"]))
+                        {
+                            if ($_GET["status"]=='ok')
+                            {
+                                echo "<div class='alert-success'>\n";
+                                echo $_GET["msg"];
+                                echo "</div>";
+                            }
+                      
+            }?>
 
 
         <body>
@@ -16,7 +39,7 @@
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css'>
         <script src="../js/myscript.js"></script>
         <script src="../js/places.js"></script>
-        <button type="button" class="cancelbtn" onclick="location.href='profile.php?utente=<?php echo $email?>'; ">X</button>
+        <button type="button" class="cancelbtn" onclick="location.href='profile.php?utente=<?php echo $email;?>'; <?php $photo = $_SESSION['photoRecente']; if ($photo != NULL){removePhoto($cid,$email,$photo);}?> ">X</button>
         <div class = "content">
         <article id="main-content" role="main">  
             <section class="container">
@@ -51,7 +74,7 @@
                     <div class="box">
                     <form  method="post" action="../backend/uploadfoto-exe.php" class="text-center" enctype="multipart/form-data">
                         <div class="margin-bottom-20"> 
-                        <img src=<?php echo(getFotoRecente($cid, $email));?> class="avatar" alt="Avatar">
+                        <img src="<?php echo(getFotoRecente($cid, $email));?>" class="avatar" alt="Avatar">
                         </div>
                    
                     
