@@ -9,7 +9,7 @@ include_once "../common/funzioni.php";
 $email = $_SESSION["email"];
 $utente = $_GET["utente"];
 if (isset($_GET["photo"])){
-    $photo = $_GET["photo"];
+$photo = $_GET["photo"];
 } else {
     $photo = NULL;
 }
