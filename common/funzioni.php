@@ -1,6 +1,26 @@
 <?php
 /* Funzioni relative alla gestione degli utenti */
 
+function inizializePhoto(){
+	$_SESSION["photoRecente"] = NULL;
+}
+
+function removePhoto($cid,$email,$codice){
+	$sql = "DELETE FROM foto WHERE codice = '$codice' and email = '$email';";
+	$res = $cid->query($sql);
+
+}
+
+function makePost($cid,$email,$codice,$desc,$country,$region,$city)
+{
+	if (empty($desc)){
+		$sql = "UPDATE `foto` set `descrizione` = NULL , `nome_citta` = '$city' , `regione` = '$region' , `stato` = '$country' where `email` = '$email' and `codice` = '$codice';";
+	}else{
+	$sql = "UPDATE `foto` set `descrizione` = '$desc' , `nome_citta` = '$city' , `regione` = '$region' , `stato` = '$country' where `email` = '$email' and `codice` = '$codice';";
+	}
+	$res = $cid->query($sql);
+	return $res;
+}
 function generateCode() {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $code = '';
@@ -8,6 +28,7 @@ function generateCode() {
     for ($i = 0; $i < 10; $i++) {
         $code .= $characters[rand(0, strlen($characters) - 1)];
     }
+	
 
     return $code;
 }
@@ -48,6 +69,7 @@ function isUser($cid,$email,$pwd)
 	}
     return $risultato;
 }
+
 ############ GET FUNCTIONS #################
 function getNome($cid,$email)
 {
@@ -438,13 +460,16 @@ function getFotoProfilo($cid, $email)
 function getFotoRecente($cid, $email)
 {
 
-	$sql = "SELECT posizione , timestamp from foto where email = 'carmilla.galasso@gmail.com' order by timestamp desc LIMIT 1;";
+	$codice = $_SESSION["photoRecente"];
+	$sql = "SELECT posizione from foto where email = '$email' AND codice = '$codice';";
 	$res = $cid->query($sql);
 	$row = $res->fetch_assoc();
+	$posizione_foto_profilo = $row["posizione"]; 
 
 	if($row != NULL){
-		return $posizione_foto_profilo = $row["posizione"]; 
+		return $posizione_foto_profilo ;
 	}
+	
 }
 
 function getDataAccettazione($cid, $utente, $email)
@@ -607,10 +632,16 @@ function uploadPhoto($cid,$email,$path,$name)
 		
 		foreach ($risposte as $ris){
 			if ($ris["status"]=="ko"){
+				$_SESSION["photoRecente"] = NULL;
 				$risultato["status"]="ko";
 				$risultato["msg"] = $ris["msg"];
 			}else {
+				
+				$_SESSION["photoRecente"] = $codice;
+	
+
 				$risultato["status"]="ok";
+				
 				$risultato["msg"] = $ris["msg"];
 			}
 		}

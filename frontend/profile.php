@@ -8,6 +8,8 @@ include_once "../common/connection.php";
 include_once "../common/funzioni.php";
 $email = $_SESSION["email"];
 $utente = $_GET["utente"];
+$photo = $_GET["photo"];
+
 if(isset($_SESSION['email'])){
 ?>
 <div><?php require "../common/navbar.php"?></div> 
@@ -32,6 +34,7 @@ if(isset($_SESSION['email'])){
         }
                    
         ?>
+<?php if ($photo != null){removePhoto($cid,$email,$photo);}?>
         <div class="container">
                 <div class="profile">
                     <div class="profile-image">
@@ -47,9 +50,15 @@ if(isset($_SESSION['email'])){
                         <h1 class="profile-user-name"><?php echo(getNickname($cid, $email)); ?></h1>
 
                         <button class="btn profile-edit-btn"  onclick="location.href='updateprofile.php'">Edit Profile</button>
+<<<<<<< HEAD
                         <br><span>Add Photo </span> <button class="btn add-message-btn"  onclick="location.href='aggiungiFoto.php'">+</button> 
                         <br><span>Add Text</span> <button class="btn add-message-btn"  onclick="location.href='aggiungiTesto.php'">+</button> 
                         <br><br>Index of respectability: <?php echo(getRispettabilità($cid, $email)); ?>
+=======
+                        <br><span>Aggiungi foto </span> <button class="btn add-message-btn"  onclick="location.href='aggiungiFoto.php' ; <?php inizializePhoto();?>">+</button> 
+                        <br><span>Aggiungi testo</span> <button class="btn add-message-btn"  onclick="location.href='aggiungiTesto.php'">+</button> 
+                        <br><br>Indice di rispettabilità: <?php echo(getRispettabilità($cid, $email)); ?>
+>>>>>>> a13cd3fb2d88ae33152bf2d0aff5a0fb40b55d08
                         
                     </div>
 
