@@ -47,9 +47,9 @@ if(isset($_SESSION['email'])){
                         <h1 class="profile-user-name"><?php echo(getNickname($cid, $email)); ?></h1>
 
                         <button class="btn profile-edit-btn"  onclick="location.href='updateprofile.php'">Edit Profile</button>
-                        <br><span>Aggiungi foto </span> <button class="btn add-message-btn"  onclick="location.href='aggiungiFoto.php'">+</button> 
-                        <br><span>Aggiungi testo</span> <button class="btn add-message-btn"  onclick="location.href='aggiungiTesto.php'">+</button> 
-                        <br><br>Indice di rispettabilità: <?php echo(getRispettabilità($cid, $email)); ?>
+                        <br><span>Add Photo </span> <button class="btn add-message-btn"  onclick="location.href='aggiungiFoto.php'">+</button> 
+                        <br><span>Add Text</span> <button class="btn add-message-btn"  onclick="location.href='aggiungiTesto.php'">+</button> 
+                        <br><br>Index of respectability: <?php echo(getRispettabilità($cid, $email)); ?>
                         
                     </div>
 
@@ -273,7 +273,7 @@ if(isset($_SESSION['email'])){
                             <?php } ?>                                            
                                 <button class="btn profile-edit-btn" onclick="location.href='../backend/deleteUtente-exe.php?utente=<?php echo $utente ?>'">Delete User</button>
                             <?php } ?> </span>
-                        <br><br>Indice di rispettabilità: <?php echo(getRispettabilità($cid, $utente)); ?>
+                        <br><br>Index of respectability: <?php echo(getRispettabilità($cid, $utente)); ?>
                         
                     </div>
 

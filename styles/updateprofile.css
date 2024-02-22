@@ -25,6 +25,14 @@
         
     }
 
+    .footer{
+        width:100%;
+        position: fixed;
+        font-size: 9px;
+        bottom: 0;
+        background:#ffffff;
+    }
+
     .alert-success{
         padding: 5px;
         background-color: rgba(0, 128, 0, 0.677);

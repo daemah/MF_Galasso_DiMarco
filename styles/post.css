@@ -28,7 +28,7 @@
 #messaggio_testo{
     background-color: #e3e3e366;
     padding: 20px;
-    box-shadow: 0px 0px 1px black;
+    box-shadow: 0px 0px 1.5px black;
 }
 
 #name{
@@ -38,7 +38,7 @@
 
 #luogo{
     text-align: center;
-    box-shadow: 0px 0px 1px black;
+    box-shadow: 0px 0px 1.5px black;
 }
 
 .default-style .ui-bordered {
@@ -87,7 +87,7 @@
 .card-body{
     border-radius: 0.8rem;
     padding: 30px;
-    box-shadow: 0px 0px 1px black;
+    box-shadow: 0px 0px 2px black;
     margin-bottom: 40px;
 }
 

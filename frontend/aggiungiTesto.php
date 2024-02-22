@@ -68,6 +68,7 @@
                 </section>
               </article>
         </div>
+        <?php require "../common/footer.php"?>   
     </body>
     <?php
     }

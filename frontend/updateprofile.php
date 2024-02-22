@@ -19,6 +19,8 @@ if(isset($_SESSION['email'])){
 <script src="../js/places.js"></script>
 </head>
 
+<body>
+
 <?php
         if (isset($_GET["status"])) {
             if ($_GET["status"]=='ko')
@@ -264,7 +266,8 @@ if(isset($_SESSION['email'])){
 </div>
 </div>
 </form>
-
+<?php require "../common/footer.php"?>   
+</body>
 <?php
     }
     else{

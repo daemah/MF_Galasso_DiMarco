@@ -76,7 +76,7 @@ span{color: black;}
 
 #luogo{
     text-align: center;
-    box-shadow: 0px 0px 0.5px black;
+    box-shadow: 0px 0px 1px black;
 }
 
 .profile-user-settings,
@@ -187,7 +187,7 @@ span{color: black;}
     border-radius: 0.8rem;
     margin-bottom:  40px;
     padding: 30px;
-    box-shadow: 0px 0px 1px black;
+    box-shadow: 0px 0px 2px black;
     position: relative;
     flex: 1 0 22rem;
     color: #fff;
@@ -223,7 +223,7 @@ small{
 #messaggio_testo{
     background-color: #e3e3e366;
     padding: 20px;
-    box-shadow: 0px 0px 1px black;
+    box-shadow: 0px 0px 1.5px black;
 }
   
 
