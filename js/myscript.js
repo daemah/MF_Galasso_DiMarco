@@ -123,28 +123,22 @@ function sameHobbies() {
 
 				if (risposta.status == "ok")		  
 				{
-				const userListItems = document.querySelectorAll('.container');
+				const userListItems = document.querySelectorAll('.container');	
+				const userListName = document.querySelectorAll('#nickname');			
 				console.log(userListItems);
 				utenti = risposta.contenuto;
 				console.log(utenti)
 				for (i=0 ; i<userListItems.length; i++) {
 					user = utenti[i];
+					console.log(user);
 					if (user) {
-						item.style.display = 'list-item'; // Mostra l'elemento se esiste un utente corrispondente
+						userListName[i].innerHTML = user;
+						userListItems[i].style.display = 'list-item'; // Mostra l'elemento se esiste un utente corrispondente
 					} else {
-						item.style.display = 'none'; // Nasconde l'elemento se non esiste un utente corrispondente
+						userListItems[i].style.display = 'none'; // Nasconde l'elemento se non esiste un utente corrispondente
 					}
 
 				}
-				/*userListItems.forEach((item, index) => {
-					const user = utenti[index];
-					console.log(user);
-					if (user) {
-						item.style.display = 'list-item'; // Mostra l'elemento se esiste un utente corrispondente
-					} else {
-						item.style.display = 'none'; // Nasconde l'elemento se non esiste un utente corrispondente
-					}
-				});*/
 				
 				}
 				else
@@ -187,27 +181,31 @@ function sameCityBir() {
 
 			if (risposta.status == "ok")		  
 			{
-				const userListItems = document.querySelectorAll('.container');;
+				const userListItems = document.querySelectorAll('.container');	
+				const userListName = document.querySelectorAll('#nickname');			
 				console.log(userListItems);
 				utenti = risposta.contenuto;
 				console.log(utenti)
-				userListItems.forEach((item, index) => {
-					const user = utenti[index];
+				for (i=0 ; i<userListItems.length; i++) {
+					user = utenti[i];
+					console.log(user);
 					if (user) {
-						item.style.display = 'list-item'; // Mostra l'elemento se esiste un utente corrispondente
+						userListName[i].innerHTML = user;
+						userListItems[i].style.display = 'list-item'; // Mostra l'elemento se esiste un utente corrispondente
 					} else {
-						item.style.display = 'none'; // Nasconde l'elemento se non esiste un utente corrispondente
+						userListItems[i].style.display = 'none'; // Nasconde l'elemento se non esiste un utente corrispondente
 					}
-				});
+
+				}
 				
 				}
 				else
 				{
 					alert(risposta.msg);
 				}
-				
-		}		    
-    };
+					
+			}		    
+		};
 		} else {
 			document.getElementById("ricerca2").style.backgroundColor = "white";
 			
@@ -240,27 +238,31 @@ function sameCityRes() {
 
 			if (risposta.status == "ok")		  
 			{
-				const userListItems = document.querySelectorAll('.container');;
+				const userListItems = document.querySelectorAll('.container');	
+				const userListName = document.querySelectorAll('#nickname');			
 				console.log(userListItems);
 				utenti = risposta.contenuto;
 				console.log(utenti)
-				userListItems.forEach((item, index) => {
-					const user = utenti[index];
+				for (i=0 ; i<userListItems.length; i++) {
+					user = utenti[i];
+					console.log(user);
 					if (user) {
-						item.style.display = 'list-item'; // Mostra l'elemento se esiste un utente corrispondente
+						userListName[i].innerHTML = user;
+						userListItems[i].style.display = 'list-item'; // Mostra l'elemento se esiste un utente corrispondente
 					} else {
-						item.style.display = 'none'; // Nasconde l'elemento se non esiste un utente corrispondente
+						userListItems[i].style.display = 'none'; // Nasconde l'elemento se non esiste un utente corrispondente
 					}
-				});
+
+				}
 				
 				}
 				else
 				{
 					alert(risposta.msg);
 				}
-				
-		}		    
-    };
+					
+			}		    
+		};
 	} else {
 	document.getElementById("ricerca3").style.backgroundColor = "white";
 	

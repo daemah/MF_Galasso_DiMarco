@@ -72,7 +72,7 @@ if(isset($_SESSION['email'])){
                                 </div>
                                
                                 <div class="col-md-7 col-sm-7" >
-                                    <h5> <button type="button" class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $utente ?>'"> <?php echo(getNickname($cid, $utente));?></button></h5>
+                                    <p id ="nickname" class="goToProfile"  > <button   type="button" class="goToProfile" onclick="location.href='profile.php?utente=<?php echo $utente ?>'"> <?php echo(getNickname($cid, $utente));?></button></p>
                                 </div>
 
                                 <?php

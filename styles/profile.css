@@ -270,6 +270,10 @@ small{
         margin-top: 1rem;
     }
 
+    .profile-edit-btn:hover {
+        opacity: 0.5;
+      }
+
     .profile-edit-btn {
         margin-left: 0;
     }
