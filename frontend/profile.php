@@ -8,6 +8,8 @@ include_once "../common/connection.php";
 include_once "../common/funzioni.php";
 $email = $_SESSION["email"];
 $utente = $_GET["utente"];
+$photo = $_GET["photo"];
+
 if(isset($_SESSION['email'])){
 ?>
 <div><?php require "../common/navbar.php"?></div> 
@@ -32,6 +34,7 @@ if(isset($_SESSION['email'])){
         }
                    
         ?>
+<?php if ($photo != null){removePhoto($cid,$email,$photo);}?>
         <div class="container">
                 <div class="profile">
                     <div class="profile-image">

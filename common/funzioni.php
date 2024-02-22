@@ -10,6 +10,17 @@ function removePhoto($cid,$email,$codice){
 	$res = $cid->query($sql);
 
 }
+
+function makePost($cid,$email,$codice,$desc,$country,$region,$city)
+{
+	if (empty($desc)){
+		$sql = "UPDATE `foto` set `descrizione` = NULL , `nome_citta` = '$city' , `regione` = '$region' , `stato` = '$country' where `email` = '$email' and `codice` = '$codice';";
+	}else{
+	$sql = "UPDATE `foto` set `descrizione` = '$desc' , `nome_citta` = '$city' , `regione` = '$region' , `stato` = '$country' where `email` = '$email' and `codice` = '$codice';";
+	}
+	$res = $cid->query($sql);
+	return $res;
+}
 function generateCode() {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $code = '';
@@ -621,11 +632,14 @@ function uploadPhoto($cid,$email,$path,$name)
 		
 		foreach ($risposte as $ris){
 			if ($ris["status"]=="ko"){
+				$_SESSION["photoRecente"] = NULL;
 				$risultato["status"]="ko";
 				$risultato["msg"] = $ris["msg"];
 			}else {
 				
 				$_SESSION["photoRecente"] = $codice;
+	
+
 				$risultato["status"]="ok";
 				
 				$risultato["msg"] = $ris["msg"];
