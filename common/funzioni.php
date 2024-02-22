@@ -253,8 +253,13 @@ function getUtenteFromCodeFoto($cid, $codice)
 	$sql = "SELECT email from foto where codice = '$codice';";
 	$res = $cid->query($sql);
 	$row = $res->fetch_assoc();
-	$utente = $row["email"];
-	return $utente;
+	if ($row != NULL){
+		$utente = $row["email"];
+		return $utente;
+	} else {
+		$utente = 0;
+		return $utente;
+	}
 }
 
 function getUtenteFromCodeTesto($cid, $codice)
@@ -460,14 +465,22 @@ function getFotoProfilo($cid, $email)
 function getFotoRecente($cid, $email)
 {
 
+	if (isset($_SESSION["photoRecente"])) {
 	$codice = $_SESSION["photoRecente"];
 	$sql = "SELECT posizione from foto where email = '$email' AND codice = '$codice';";
 	$res = $cid->query($sql);
 	$row = $res->fetch_assoc();
 	$posizione_foto_profilo = $row["posizione"]; 
-
+	}
+	else{
+		$default = "../images/filenoimage.jpeg";
+		return $default;
+	}
 	if($row != NULL){
 		return $posizione_foto_profilo ;
+	}else{
+			$default = "../images/filenoimage.jpeg";
+			return $default;
 	}
 	
 }

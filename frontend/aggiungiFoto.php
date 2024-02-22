@@ -6,6 +6,9 @@
     include_once "../common/funzioni.php";
     require "../common/header.php";
     $email = $_SESSION["email"];
+    
+    if (isset($_SESSION['photoRecente'])){$photo_recente = $_SESSION['photoRecente'];}
+    else{$photo_recente = NULL;}
     if(isset($_SESSION['email'])){
 
     ?>
@@ -39,7 +42,7 @@
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css'>
         <script src="../js/myscript.js"></script>
         <script src="../js/places.js"></script>
-        <button type="button" class="cancelbtn" onclick="location.href='profile.php?utente=<?php echo $email;?>&photo=<?php echo $_SESSION['photoRecente'];?>'">X</button>
+        <button type="button" class="cancelbtn" onclick="location.href='profile.php?utente=<?php echo $email;?>&photo=<?php echo $photo_recente?>'">X</button>
         <div class = "content">
         <article id="main-content" role="main">  
             <section class="container">

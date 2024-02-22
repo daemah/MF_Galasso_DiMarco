@@ -8,7 +8,11 @@ include_once "../common/connection.php";
 include_once "../common/funzioni.php";
 $email = $_SESSION["email"];
 $utente = $_GET["utente"];
-$photo = $_GET["photo"];
+if (isset($_GET["photo"])){
+    $photo = $_GET["photo"];
+} else {
+    $photo = NULL;
+}
 
 if(isset($_SESSION['email'])){
 ?>
@@ -50,7 +54,7 @@ if(isset($_SESSION['email'])){
                         <h1 class="profile-user-name"><?php echo(getNickname($cid, $email)); ?></h1>
 
                         <button class="btn profile-edit-btn"  onclick="location.href='updateprofile.php'">Edit Profile</button>
-                        <br><span>Add Photo </span> <button class="btn add-message-btn"  onclick="location.href='aggiungiFoto.php'">+</button> 
+                        <br><span>Add Photo </span> <button class="btn add-message-btn"  onclick="location.href='aggiungiFoto.php'; <?php inizializePhoto(); ?>">+</button> 
                         <br><span>Add Text</span> <button class="btn add-message-btn"  onclick="location.href='aggiungiTesto.php'">+</button> 
                         <br><br>Index of respectability: <?php echo(getRispettabilità($cid, $email)); ?>
                         

@@ -10,7 +10,7 @@ if(isset($_SESSION['email'])){
 <?php require "../common/header.php";
 $codice = $_GET["codice"];
 $utente = getUtenteFromCodeFoto($cid, $codice);
-if ($utente == null) {
+if ($utente == 0) {
     $utente = getUtenteFromCodeTesto($cid, $codice);
 }
 $email = $_SESSION["email"];?>
@@ -36,7 +36,7 @@ $email = $_SESSION["email"];?>
                 
                 </div>
                 <!-- End of container -->
-                <?php if (getUtenteFromCodeFoto($cid, $codice)!= null) { ?>
+                <?php if (getUtenteFromCodeFoto($cid, $codice)!= 0) { ?>
                 <main>
 
                 <div class="container">
